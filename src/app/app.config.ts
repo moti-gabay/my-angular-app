@@ -1,13 +1,21 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { withInterceptorsFromDi, HTTP_INTERCEPTORS } from '@angular/common/http'; // ייבוא נכון
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { provideHttpClient } from '@angular/common/http';
+import { AuthService } from './services/auth';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideHttpClient(withInterceptorsFromDi()),
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    provideRouter(routes), provideClientHydration(withEventReplay())
-  ]
+    provideRouter(routes),
+    provideClientHydration(withEventReplay()),
+    provideHttpClient(),   // ← זה פותר את הבעיה
+    AuthService
+  ],
+
 };

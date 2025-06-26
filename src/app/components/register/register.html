@@ -1,0 +1,30 @@
+<div class="container mt-5" style="max-width: 400px;">
+  <h3>הרשמה</h3>
+  <form (ngSubmit)="onSubmit()" #registerForm="ngForm" novalidate>
+    <div class="mb-3">
+      <label for="name" class="form-label">שם מלא</label>
+      <input type="text" id="name" class="form-control" required [(ngModel)]="name" name="name" #nameInput="ngModel">
+      <div class="text-danger" *ngIf="nameInput.invalid && nameInput.touched">
+        יש להזין שם
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">אימייל</label>
+      <input type="email" id="emailSignup" class="form-control" required [(ngModel)]="email" name="email" #emailInput="ngModel">
+      <div class="text-danger" *ngIf="emailInput.invalid && emailInput.touched">
+        יש להזין אימייל תקין
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">סיסמה</label>
+      <input type="password" id="passwordSignUp" class="form-control" required minlength="6" [(ngModel)]="password" name="password" #passwordInput="ngModel">
+      <div class="text-danger" *ngIf="passwordInput.invalid && passwordInput.touched">
+        הסיסמה חייבת להכיל לפחות 6 תווים
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="registerForm.invalid">הרשם</button>
+  </form>
+</div>

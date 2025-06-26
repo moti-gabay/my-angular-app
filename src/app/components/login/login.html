@@ -1,0 +1,22 @@
+<div class="container mt-5" style="max-width: 400px;">
+  <h3>התחברות</h3>
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm" novalidate>
+    <div class="mb-3">
+      <label for="email" class="form-label">אימייל</label>
+      <input type="email" id="emailLogin" class="form-control" required [(ngModel)]="email" name="email" #emailInput="ngModel">
+      <div class="text-danger" *ngIf="emailInput.invalid && emailInput.touched">
+        יש להזין אימייל תקין
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">סיסמה</label>
+      <input type="password" id="passwordLogin" class="form-control" required minlength="6" [(ngModel)]="password" name="password" #passwordInput="ngModel">
+      <div class="text-danger" *ngIf="passwordInput.invalid && passwordInput.touched">
+        הסיסמה חייבת להכיל לפחות 6 תווים
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">התחבר</button>
+  </form>
+</div>
