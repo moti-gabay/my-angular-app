@@ -2,7 +2,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../services/auth';
-import { map, take, switchMap, catchError } from 'rxjs/operators'; // הוספת catchError
+import { take, switchMap, catchError } from 'rxjs/operators'; // הוספת catchError
 import { of } from 'rxjs'; // הוספת of
 
 export const roleGuard: CanActivateFn = (
@@ -21,14 +21,12 @@ export const roleGuard: CanActivateFn = (
     switchMap(user => {
       // אם user הוא null אחרי ה-take(1) (כלומר, הבדיקה הראשונית הסתיימה ואין משתמש מחובר)
       if (!user) {
-        console.log('RoleGuard: No user found, redirecting to login.');
         router.navigate(['/login']);
         return of(false); // החזר Observable של false
       }
 
       // יש משתמש, עכשיו בדוק את התפקיד
       if (requiredRoles.includes(user.role)) {
-        console.log(`RoleGuard: User role '${user.role}' grants access to ${route.url.join('/')}.`);
         return of(true); // למשתמש יש את התפקיד הנדרש
       } else {
         console.warn(`RoleGuard: Access denied. User role '${user.role}' is not in required roles: ${requiredRoles.join(', ')}`);

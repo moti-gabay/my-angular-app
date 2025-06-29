@@ -1,0 +1,138 @@
+/* src/app/sidebar-nav/sidebar-nav.component.css */
+
+/* Outer container for sidebar content */
+.sidebar-content {
+    padding: 1rem; /* p-4 */
+    display: flex; /* flex */
+    flex-direction: column; /* flex-col */
+    width:10rem; /* w-full */
+}
+
+/* System Title in Sidebar */
+.sidebar-title {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: 700; /* font-bold */
+    margin-bottom: 2rem; /* mb-8 */
+    text-align: center; /* text-center */
+    color: inherit; /* inherit color from parent (white) */
+    text-decoration: none; /* remove underline for links */
+}
+
+/* Navigation List (ul) */
+.nav-list {
+    display: flex; /* flex */
+    flex-direction: column; /* flex-col */
+    gap: 0.75rem; /* space-y-3 */
+    flex-grow: 1; /* flex-grow */
+    list-style: none; /* remove default list bullets */
+    padding: 0; /* remove default padding */
+    margin: 0; /* remove default margin */
+}
+
+/* Navigation Link (a) common styles */
+.nav-link {
+    display: flex; /* flex */
+    align-items: center; /* items-center */
+    padding: 0.75rem; /* p-3 */
+    border-radius: 0.5rem; /* rounded-lg */
+    transition-property: background-color; /* transition */
+    transition-duration: 200ms; /* duration-200 */
+    color: inherit; /* inherit color from parent (white) */
+    text-decoration: none; /* remove underline */
+}
+
+.nav-link:hover {
+    background-color: #4b5563; /* hover:bg-gray-700 */
+}
+
+/* Icon inside navigation link */
+.nav-icon {
+    width: 1rem; /* w-4 */
+    height: 1rem; /* h-4 */
+    margin-right: 0.75rem; /* mr-3 (for LTR, will be ml-3 in RTL) */
+    /* for RTL: ensure the margin is on the left side of the icon */
+    /* if parent has dir="rtl", it will handle this automatically. If not, you might need: */
+    /* margin-right: 0; */
+    /* margin-left: 0.75rem; */
+}
+
+/* Login/Logout Buttons Container */
+.auth-buttons-container {
+    margin-top: 1rem; /* mt-auto pt-4 */
+    padding-top: 1rem;
+    border-top: 1px solid #4b5563; /* border-t border-gray-700 */
+}
+
+/* Common button styles for logout/login */
+.auth-button {
+    width: 100%; /* w-full */
+    display: flex; /* flex */
+    align-items: center; /* items-center */
+    justify-content: center; /* justify-center */
+    padding: 0.75rem; /* p-3 */
+    border-radius: 0.5rem; /* rounded-lg */
+    transition-property: background-color; /* transition */
+    transition-duration: 200ms; /* duration-200 */
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 700; /* font-bold */
+    color: #ffffff; /* text-white */
+    border: none; /* remove default button border */
+    cursor: pointer;
+    text-decoration: none; /* for anchor tags */
+}
+
+/* Logout Button specific styles */
+.logout-button {
+    background-color: #ef4444; /* bg-red-500 */
+}
+
+.logout-button:hover {
+    background-color: #dc2626; /* hover:bg-red-600 */
+}
+
+/* Login/Register Button specific styles */
+.login-register-button {
+    background-color: #3b82f6; /* bg-blue-500 */
+    margin-top: 0.75rem; /* Added margin-top for spacing if needed between buttons */
+}
+
+.login-register-button:hover {
+    background-color: #2563eb; /* hover:bg-blue-600 */
+}
+
+/* Icon inside login/logout buttons */
+.auth-icon {
+    width: 1rem; /* w-4 */
+    height: 1rem; /* h-4 */
+    margin-right: 0.5rem; /* mr-2 (for LTR, will be ml-2 in RTL) */
+    /* for RTL: ensure the margin is on the left side of the icon */
+    /* margin-right: 0; */
+    /* margin-left: 0.5rem; */
+}
+
+/* RTL Adjustments (Important!) */
+/* If the parent div has dir="rtl", many flexbox properties like `flex`, `justify-between`, `items-center`
+   will automatically reverse their behavior.
+   However, explicit margins like `mr-3` need to be set to `ml-3` or use logical properties if available.
+   Since we're translating Tailwind, we'll keep it explicit. */
+
+/* When dir="rtl" is applied, flex-direction: row-reverse; is implied for flex containers. */
+/* Explicitly override margin for RTL. */
+:host-context([dir="rtl"]) .nav-icon {
+  margin-left: 0.75rem;
+  margin-right: 0;
+}
+
+:host-context([dir="rtl"]) .auth-icon {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+/* Ensure text alignment in the sidebar title if needed */
+:host-context([dir="rtl"]) .sidebar-title {
+  text-align: center; /* still center */
+}
+
+/* For overall layout in AppComponent, flex-direction will also reverse with dir="rtl" */
+/* This ensures the sidebar goes to the right automatically */
+

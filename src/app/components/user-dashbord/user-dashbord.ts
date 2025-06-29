@@ -3,11 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth';
 import { Observable } from 'rxjs';
+import { ImageGalleryComponent } from '../../image-gallery/image-gallery';
+import { EventListComponent } from '../../event-list/event-list';
 
 @Component({
   selector: 'app-user-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ImageGalleryComponent,EventListComponent],
   template: `
     <div class="container mt-8 p-6 bg-white rounded-lg shadow-xl max-w-lg mx-auto font-inter text-center">
       <h2 class="text-3xl font-bold text-gray-800 mb-6">ברוך הבא למרחב האישי שלך!</h2>
@@ -42,6 +44,8 @@ import { Observable } from 'rxjs';
       <button (click)="authService.logout()" class="mt-8 bg-red-500 hover:bg-red-700  font-bold py-2 px-6 rounded-full focus:outline-none focus:shadow-outline transition duration-300 ease-in-out">
         התנתק
       </button>
+      <app-image-gallery></app-image-gallery>
+      <app-event-list></app-event-list>
     </div>
   `
 })

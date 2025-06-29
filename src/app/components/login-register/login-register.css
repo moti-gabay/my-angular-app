@@ -1,0 +1,132 @@
+/* login-register.component.css */
+
+/* .container (הקונטיינר הראשי לטופס) */
+.login-register-container {
+    margin-top: 2rem; /* mt-8 = 2rem */
+    padding: 1rem; /* p-4 = 1rem */
+    background-color: #f3f4f6; /* bg-gray-100 */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+    max-width: 24rem; /* max-w-sm = 24rem */
+    margin-left: auto; /* mx-auto */
+    margin-right: auto; /* mx-auto */
+    font-family: 'Inter', sans-serif; /* font-inter (assuming Inter font is imported globally) */
+}
+
+/* h2 (כותרת הטופס) */
+.login-register-container h2 {
+    font-size: 1.5rem; /* text-2xl = 1.5rem */
+    font-weight: 700; /* font-bold */
+    color: #1f2937; /* text-gray-800 */
+    margin-bottom: 1.5rem; /* mb-6 = 1.5rem */
+    text-align: center; /* text-center */
+}
+
+/* .input-fields-container (ה-div שמכיל את שדות הקלט) */
+.input-fields-container {
+    margin-bottom: 1rem; /* mb-4 */
+    /* ה-bg-blue-500 שהיה כאן, אם הוא נועד להיות רקע לכל ה-div, אז אפשר להחזיר אותו לכאן: */
+    /* background-color: #3b82f6; */
+}
+
+/* label (לייבלים של שדות הקלט) */
+.input-fields-container label {
+    display: block; /* block */
+    color: #374151; /* text-gray-700 */
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 700; /* font-bold */
+    margin-bottom: 0.5rem; /* mb-2 */
+}
+
+/* .input-field (שדות קלט כלליים) */
+.input-field {
+    /* H-50 לא קלאס סטנדרטי ב-Tailwind. אם זה 50 פיקסלים אז: */
+    /* height: 50px; */
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow */
+    appearance: none; /* appearance-none */
+    border-width: 1px; /* border */
+    border-color: #d1d5db; /* border-gray-300 (נא לבדוק אם זה התאים לקלאס "border" המקורי) */
+    border-radius: 0.25rem; /* rounded */
+    width: 100%; /* w-full */
+    padding-top: 0.5rem; /* py-2 */
+    padding-bottom: 0.5rem; /* py-2 */
+    padding-left: 0.75rem; /* px-3 */
+    padding-right: 0.75rem; /* px-3 */
+    color: #374151; /* text-gray-700 */
+    line-height: 1.25; /* leading-tight */
+    outline: none; /* focus:outline-none */
+    margin-bottom: 0.5rem; /* mb-2 */
+    /* סטייל לפוקוס - פשוט שיניתי את הצל כדי שיתאים לטיילוינד המקורי */
+    transition: box-shadow 0.15s ease-in-out;
+}
+
+.input-field:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); /* focus:shadow-outline with blue-500 emphasis */
+    border-color: #3b82f6; /* Optional: border color on focus */
+}
+
+
+/* .last-input-field (לשדה הסיסמה האחרון) */
+.last-input-field {
+    margin-bottom: 1rem; /* mb-4 */
+}
+
+/* .login-register-button (כפתור ההתחברות/הרשמה) */
+.login-register-button {
+    width: 100%; /* w-full */
+    background-color: #0b0e12; /* bg-blue-500 */
+    color: #ffffff; /* text-white */
+    font-weight: 700; /* font-bold */
+    padding-top: 0.5rem; /* py-2 */
+    padding-bottom: 0.5rem; /* py-2 */
+    padding-left: 1rem; /* px-4 */
+    padding-right: 1rem; /* px-4 */
+    border-radius: 9999px; /* rounded-full */
+    outline: none; /* focus:outline-none */
+    border: none; /* לוודא שאין גבולות ברירת מחדל */
+    cursor: pointer; /* כדי לציין שהוא לחיץ */
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter; /* transition */
+    transition-duration: 300ms; /* duration-300 */
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* ease-in-out */
+    box-shadow: 0 0 0 3px rgba(62, 81, 112, 0.5); /* focus:shadow-outline (approximate for blue-500) */
+    margin-top: 0.5rem; /* רווח מהשדה שלפניו */
+}
+
+.login-register-button:hover {
+    background-color: #3e4359; /* hover:bg-blue-700 */
+}
+
+/* .toggle-mode-text (טקסט החלפת מצב) */
+.toggle-mode-text {
+    text-align: center; /* text-center */
+    font-size: 0.875rem; /* text-sm */
+    color: #4b5563; /* text-gray-600 */
+    margin-top: 1rem; /* mt-4 */
+    cursor: pointer; /* cursor-pointer */
+}
+
+.toggle-mode-text:hover {
+    color: #3b82f6; /* hover:text-blue-500 */
+}
+
+/* .error-message / .success-message (הודעות שגיאה/הצלחה) */
+.error-message {
+    color: #ef4444; /* text-red-500 */
+    text-align: center; /* text-center */
+    margin-top: 0.75rem; /* mt-3 */
+}
+
+.success-message {
+    color: #22c55e; /* text-green-500 */
+    text-align: center; /* text-center */
+    margin-top: 0.75rem; /* mt-3 */
+}
+
+/* אם היית רוצה את ה-div הפנימי עם רקע כחול כפי שהיה בתחילה (bg-blue-500) */
+/*
+.input-fields-container.blue-background {
+    background-color: #3b82f6;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+*/

@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 
 import { FileUploadFormComponent } from '../file-upload-form/file-upload-form';
 import { FileListDisplayComponent } from '../file-list-display/file-list-display';
+import { ImageUploaderComponent } from '../image-uploader/image-uploader';
+import { ImageGalleryComponent } from '../image-gallery/image-gallery';
 
 @Component({
   selector: 'app-file-manager',
@@ -23,6 +25,7 @@ import { FileListDisplayComponent } from '../file-list-display/file-list-display
         [allFiles]="allFiles" 
         (fileDeleted)="onFileDeleted($event)"
       ></app-file-list-display>
+      <hr class="my-8 border-gray-300">
     </div>
   `
 })
@@ -41,10 +44,9 @@ export class FileManagerComponent implements OnInit {
     this.http.get<any[]>(url, { withCredentials: true }).subscribe({
       next: (res) => {
         this.allFiles = res.map(file => ({
-            ...file,
-            upload_date: file.upload_date ? new Date(file.upload_date) : null
+          ...file,
+          upload_date: file.upload_date ? new Date(file.upload_date) : null
         }));
-        console.log('כל רשימת הקבצים נטענה בהצלחה בקומפוננטת האב:', this.allFiles);
       },
       error: (err) => {
         console.error('שגיאה בטעינת רשימת הקבצים בקומפוננטת האב:', err);

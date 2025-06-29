@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
-interface UserData {
+export interface UserData {
   id: number;
   email: string;
   full_name: string;
@@ -36,7 +36,6 @@ export class AuthService {
       tap((user: UserData) => {
         this._isLoggedIn.next(true);
         this._currentUser.next(user); // שמור את פרטי המשתמש כולל התפקיד
-        console.log('Login status checked. User:', user);
       }),
       catchError((error) => {
         this._isLoggedIn.next(false);
@@ -77,14 +76,13 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    console.log('Logout button clicked!');
     return this.http.post(`${this.apiUrl}/logout`, {}, { withCredentials: true }).pipe(
       tap(() => {
         console.log('Logout successful.');
+        this.router.navigate(['/login']);
 
         this._isLoggedIn.next(false);
         this._currentUser.next(null); // נקה פרטי משתמש בעת התנתקות
-        this.router.navigate(['/login']);
       }),
       catchError(error => {
         console.error('Logout failed', error);
