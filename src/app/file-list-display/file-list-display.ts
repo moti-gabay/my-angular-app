@@ -7,91 +7,10 @@ import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-file-list-display',
-  standalone: true,
+  // standalone: true,
   imports: [CommonModule, HttpClientModule, FormsModule],
-  template: `
-    <div class="p-4  rounded-lg shadow-md">
-      <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">סינון ומיון קבצים</h3>
-      <div class="flex flex-col sm:flex-row gap-4 mb-6">
-        <div class="flex-grow">
-          <label for="filterCategoryInput" class="block text-gray-700 text-sm font-bold mb-2">סנן לפי קטגוריה:</label>
-          <input type="text" id="filterCategoryInput" [(ngModel)]="filterCategory"
-                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                 placeholder="כל הקטגוריות">
-        </div>
-        <div class="flex-grow">
-          <label for="filterYearInput" class="block text-gray-700 text-sm font-bold mb-2">סנן לפי שנה:</label>
-          <input type="number" id="filterYearInput" [(ngModel)]="filterYear"
-                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                 placeholder="כל השנים">
-        </div>
-        <button class="mt-auto bg-purple-500 hover:bg-purple-700  font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline transition duration-300 ease-in-out sm:w-auto w-full"
-                (click)="applyFilters()">
-          סנן
-        </button>
-        <button class="mt-auto bg-gray-500 hover:bg-gray-700  font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline transition duration-300 ease-in-out sm:w-auto w-full"
-                (click)="clearFilters()">
-          נקה סינון
-        </button>
-      </div>
-
-      <!-- אפשרויות מיון -->
-      <div class="mb-6 flex flex-col sm:flex-row gap-4 items-center">
-        <div class="flex-grow">
-          <label for="sortColumn" class="block text-gray-700 text-sm font-bold mb-2">מיין לפי:</label>
-          <select id="sortColumn" [(ngModel)]="sortColumn"
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            <option value="upload_date">תאריך העלאה</option>
-            <option value="filename">שם קובץ</option>
-            <option value="category">קטגוריה</option>
-            <option value="year">שנה</option>
-          </select>
-        </div>
-        <div class="flex-grow">
-          <label for="sortDirection" class="block text-gray-700 text-sm font-bold mb-2">כיוון מיון:</label>
-          <select id="sortDirection" [(ngModel)]="sortDirection"
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            <option value="asc">עולה (A-Z, 1-9)</option>
-            <option value="desc">יורד (Z-A, 9-1)</option>
-          </select>
-        </div>
-        <button class="mt-auto bg-blue-500 hover:bg-blue-700  font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline transition duration-300 ease-in-out sm:w-auto w-full"
-                (click)="applySort()">
-          מיין
-        </button>
-      </div>
-
-      <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">רשימת קבצים</h3>
-      <ul class="list-group">
-        <li *ngFor="let file of getFilteredAndSortedFiles()"
-            class="list-group-item  p-4 mb-2 rounded-lg shadow-sm flex justify-between items-center border border-gray-200">
-          
-          <div class="flex flex-col flex-grow truncate mr-4">
-            <a class="text-blue-600 hover:text-blue-800 text-lg font-medium truncate"
-               [href]="'http://localhost:5000/files/' + file.filename" target="_blank">
-              <span>{{ file.filename }}</span>
-            </a>
-            <div class="flex flex-wrap text-sm text-gray-600 mt-1">
-              <span *ngIf="file.category" class="mr-2">קטגוריה: {{ file.category }}</span> |
-              <span *ngIf="file.year" class="mr-2">שנה: {{ file.year }}</span> |
-              <span *ngIf="file.upload_date" class="ml-2 font-bold"> תאריך העלאה: {{ file.upload_date | date:'yyyy-MM-dd' }}</span>
-            </div>
-          </div>
-          
-          <div class="flex-shrink-0 flex space-x-2">
-            <a class="btn bg-green-500 hover:bg-green-600 font-bold py-1 px-3 rounded-full text-xs transition duration-300 ease-in-out"
-               [href]="'http://localhost:5000/files/' + file.filename" target="_blank">צפה</a>
-           <button *ngIf="isAdmin"
-                    class="btn bg-red-500 hover:bg-red-600  font-bold py-1 px-3 rounded-full text-xs transition duration-300 ease-in-out"
-                    (click)="deleteFile(file.id)">מחק</button>
-          </div>
-        </li>
-        <li *ngIf="getFilteredAndSortedFiles().length === 0" class="text-center text-gray-500 p-4">
-          אין קבצים להצגה התואמים לסינון.
-        </li>
-      </ul>
-    </div>
-  `
+  templateUrl:"./file-list-display.html",
+  styleUrl:"./file-list-display.css"
 })
 export class FileListDisplayComponent {
   @Input() allFiles: any[] = []; // קבלת כל הקבצים מקומפוננטת ההורה

@@ -1,19 +1,21 @@
 // src/app/sidebar-nav/sidebar-nav.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserData } from '../services/auth'; // ייבוא ממשק UserData
 
 @Component({
   selector: 'app-sidebar-nav', // <--- ודא שהסלקטור נכון
-  //   standalone: true,
+//   standalone: true,
   imports: [
     CommonModule,
-    RouterLink
+    RouterLink,
+    RouterLinkActive,
+    
   ],
   templateUrl: './sidebar-nav.html',
-  styleUrls: ['./sidebar-nav.css'] // <--- וודא שזה קיים
+    styleUrls: ['./sidebar-nav.css'] // <--- וודא שזה קיים
 
 })
 export class SidebarNavComponent {

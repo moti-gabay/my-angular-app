@@ -11,23 +11,15 @@ import { ImageGalleryComponent } from '../image-gallery/image-gallery';
 
 @Component({
   selector: 'app-file-manager',
-  standalone: true,
+  // standalone: true,
   imports: [
     CommonModule,
     FileUploadFormComponent,
     FileListDisplayComponent
   ],
-  template: `
-    <div class="container mt-4 p-4 bg-gray-100 rounded-lg shadow-md max-w-lg mx-auto font-inter">
-      <app-file-upload-form (uploadSuccess)="onUploadSuccess()"></app-file-upload-form>
-      <hr class="my-8 border-gray-300">
-      <app-file-list-display 
-        [allFiles]="allFiles" 
-        (fileDeleted)="onFileDeleted($event)"
-      ></app-file-list-display>
-      <hr class="my-8 border-gray-300">
-    </div>
-  `
+  templateUrl:"./file-manager.html",
+  styleUrls: ['./file-manager.css']
+
 })
 export class FileManagerComponent implements OnInit {
   allFiles: any[] = [];

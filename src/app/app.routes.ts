@@ -2,11 +2,13 @@
 import { Routes } from '@angular/router';
 import { LoginRegisterComponent } from './components/login-register/login-register';
 import { FileManagerComponent } from './file-manager/file-manager';
-import { UserDashboardComponent } from './components/user-dashbord/user-dashbord'; // ייבוא הקומפוננטה החדשה
+import { UserDashboardComponent } from './components/user-dashbord/user-dashbord'; // ייבוא הקומפוננטה
 import { roleGuard } from './auth/role.guard'; // ייבוא ה-RoleGuard
-import { ImageGalleryComponent } from './image-gallery/image-gallery';
-import { EventListComponent } from './event-list/event-list';
-import { EventEditorComponent } from './event-editor/event-editor';
+import { HomePage } from './components/home-page/home-page';
+import { News } from './components/news/news';
+import { Tradition } from './components/tradition/tradition';
+import { Events } from './components/events/events';
+import { Contact } from './components/contact/contact';
 
 export const routes: Routes = [
   { path: 'login', component: LoginRegisterComponent },
@@ -22,22 +24,36 @@ export const routes: Routes = [
     canActivate: [roleGuard],
     data: { roles: ['user'] } // רק משתמש רגיל יכול לגשת למסך זה
   },
+  // ניתובים חדשים עבור משתמשים רגילים
   {
-    path: 'images',
-    component: ImageGalleryComponent,
-    canActivate: [roleGuard]
+    path: 'homepage', // נתיב עבור "מי אנחנו"
+    component: HomePage, // placeholder component
+    canActivate: [roleGuard],
+    data: { roles: ['user'] }
   },
   {
-    path: 'events', // נתיב לצפייה באירועים (לכל המשתמשים המאומתים)
-    component: EventListComponent,
+    path: 'news', // נתיב עבור "חדשות ופרסומים"
+    component: News, // placeholder component
     canActivate: [roleGuard],
-    data: { roles: ['admin', 'member', 'user'] } // כל התפקידים יכולים לצפות
+    data: { roles: ['user'] }
   },
   {
-    path: 'events/admin', // נתיב לניהול אירועים (רשימת עריכה/מחיקה)
-    component: EventEditorComponent,
+    path: 'tradition', // נתיב עבור "המסורת היהודית"
+    component: Tradition, // placeholder component
     canActivate: [roleGuard],
-    data: { roles: ['admin'] } // רק מנהלים יכולים לנהל אירועים
+    data: { roles: ['user'] }
+  },
+  {
+    path: 'events', // נתיב עבור "ארועים" (אם זהו נתיב נפרד מניהול אירועים לאדמין)
+    component: Events, // placeholder component
+    canActivate: [roleGuard],
+    data: { roles: ['user'] }
+  },
+  {
+    path: 'contact', // נתיב עבור "צור קשר"
+    component: Contact, // placeholder component
+    canActivate: [roleGuard],
+    data: { roles: ['user'] }
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // ברירת מחדל: הפנה ללוגין
   { path: '**', redirectTo: '/login' } // לכל נתיב לא ידוע

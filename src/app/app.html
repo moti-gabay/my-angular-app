@@ -1,30 +1,17 @@
- <div class="flex h-screen bg-gray-100 font-inter">
-      <!-- Sidebar Container -->
-      <div [class.w-56]="isSidebarOpen" [class.w-0]="!isSidebarOpen"
-           class="fixed inset-y-0 left-0 bg-gray-800 text-white overflow-y-auto 
-                  transition-all duration-300 ease-in-out z-30 flex-shrink-0
-                  md:relative md:w-56 md:flex">
-        
-        <!-- Use the new SidebarNavComponent -->
-        <app-sidebar-nav 
-          [isLoggedInStatus$]="authService.isLoggedIn$"
-          [currentUser$]="authService.currentUser$"
-          [isSidebarOpen]="isSidebarOpen"
-          (logout)="onLogout()"
-          (toggleSidebar)="toggleSidebar()"
-        ></app-sidebar-nav>
-      </div>
+<div style="display: flex; height: 100vh;">
+  <!-- Sidebar Container -->
 
-      <!-- Content Area -->
-      <div class="flex-grow flex flex-col">
-        <!-- Hamburger Icon for Mobile -->
-       
-        <main class="p-4 flex-grow overflow-y-auto">
-          <router-outlet></router-outlet>
-        </main>
-      </div>
+<div
 
-      <!-- Overlay for mobile sidebar -->
-      <div *ngIf="isSidebarOpen" (click)="toggleSidebar()"
-           class="fixed inset-0 bg-black opacity-50 z-20 md:hidden"></div>
-    </div>
+    style="width: 200px; background: #f0f0f0; height: 100vh; position: relative; z-index: 1000;">
+    <app-sidebar-nav [isLoggedInStatus$]="authService.isLoggedIn$" [currentUser$]="authService.currentUser$"
+      [isSidebarOpen]="isSidebarOpen" (logout)="onLogout()" (toggleSidebar)="toggleSidebar()"></app-sidebar-nav>
+  </div>
+  <!-- Use the new SidebarNavComponent -->
+
+  <!-- Content Area -->
+
+  <div class="content-container"  >
+    <router-outlet></router-outlet>
+  </div>
+</div>

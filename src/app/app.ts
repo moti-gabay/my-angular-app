@@ -16,7 +16,8 @@ import { SidebarNavComponent } from './sidebar-nav/sidebar-nav'; // ייבוא �
     CommonModule,
     SidebarNavComponent // הוספת הקומפוננטה החדשה לייבוא
   ],
-  templateUrl:"./app.html"
+  templateUrl:"./app.html",
+  styleUrl:"./app.css"
 })
 export class AppComponent implements OnInit {
   title = 'file-manager-app';

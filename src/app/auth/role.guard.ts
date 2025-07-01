@@ -12,7 +12,7 @@ export const roleGuard: CanActivateFn = (
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  const requiredRoles = route.data['roles'] as ('admin' | 'member' | 'user')[];
+  const requiredRoles = route.data['roles'] as string[]; // הורדת את התפקידים הנדרשים מהנתיב
 
   // וודא שה-AuthService סיים לבדוק את מצב ההתחברות
   // לפני קבלת החלטה על תפקיד.

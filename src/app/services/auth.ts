@@ -1,17 +1,17 @@
 // src/app/auth/auth.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, Observable, throwError, of } from 'rxjs'; // ייבוא 'of'
+import { catchError, tap, switchMap, map } from 'rxjs/operators'; // ייבוא 'switchMap' ו-'map'
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
 
 export interface UserData {
   id: number;
-  email: string;
   full_name: string;
   tz: string;
+  email: string;
   address: string;
-  role: 'admin' | 'member' | 'user'; // הגדרת סוגי התפקידים
+  role: string; // 'admin', 'member', 'user'
 }
 
 @Injectable({
@@ -19,88 +19,81 @@ export interface UserData {
 })
 export class AuthService {
   private apiUrl = 'http://localhost:5000/auth';
+  private currentUserSubject: BehaviorSubject<UserData | null> = new BehaviorSubject<UserData | null>(null);
+  public currentUser$: Observable<UserData | null> = this.currentUserSubject.asObservable();
 
-  private _isLoggedIn = new BehaviorSubject<boolean>(false);
-  isLoggedIn$ = this._isLoggedIn.asObservable();
-
-  // BehaviorSubject לאחסון פרטי המשתמש
-  private _currentUser = new BehaviorSubject<UserData | null>(null);
-  currentUser$ = this._currentUser.asObservable(); // Observable עבור פרטי המשתמש
+  private _isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public isLoggedIn$: Observable<boolean> = this._isLoggedIn.asObservable();
 
   constructor(private http: HttpClient, private router: Router) {
-    this.checkLoginStatus();
+    this.checkInitialAuthStatus().subscribe(); // הפעל את הבדיקה הראשונית ב-constructor
   }
 
-  private checkLoginStatus(): void {
-    this.http.get<UserData>(`${this.apiUrl}/me`, { withCredentials: true }).pipe(
-      tap((user: UserData) => {
+  // שינוי: הפונקציה תחזיר Observable<UserData | null>
+  private checkInitialAuthStatus(): Observable<UserData | null> {
+    return this.http.get<UserData>(`${this.apiUrl}/me`, { withCredentials: true }).pipe(
+      tap(user => {
+        console.log('AuthService: Initial auth check - User data received', user);
+        this.currentUserSubject.next(user);
         this._isLoggedIn.next(true);
-        this._currentUser.next(user); // שמור את פרטי המשתמש כולל התפקיד
       }),
-      catchError((error) => {
+      catchError((error: HttpErrorResponse) => {
+        console.log('AuthService: Initial auth check - Not logged in or token invalid', error);
+        this.currentUserSubject.next(null);
         this._isLoggedIn.next(false);
-        this._currentUser.next(null); // נקה פרטי משתמש אם לא מחובר
-        console.warn('Login status check failed:', error.error?.message || error.message);
-        return throwError(error);
+        // נתב לדף ההתחברות רק אם שגיאת 401/403 ורק אם לא נמצאים כבר בדף ההתחברות
+        if ((error.status === 401 || error.status === 403) && this.router.url !== '/login') {
+          this.router.navigate(['/login']);
+        }
+        return of(null); // החזר Observable של null כדי שהשרשרת תמשיך
       })
-    ).subscribe();
+    );
   }
 
-  login(credentials: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, credentials, { withCredentials: true }).pipe(
-      tap(() => {
-        // לאחר התחברות מוצלחת, אנו מבצעים שוב בדיקת סטטוס כדי לקבל את פרטי המשתמש המלאים מהשרת
-        this.checkLoginStatus();
-        // הניתוב ייעשה לאחר ש-checkLoginStatus יסיים ויעדכן את currentUser
+  login(userData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/login`, userData, { withCredentials: true }).pipe(
+      tap(response => console.log('AuthService: Login API response received', response)),
+      // השתמש ב-switchMap כדי להחליף ל-Observable של checkInitialAuthStatus
+      // זה מבטיח ש-checkInitialAuthStatus תסתיים לפני שה-Observable של login יסתיים.
+      switchMap(() => {
+        console.log('AuthService: Login successful, now calling /me to update user state.');
+        return this.checkInitialAuthStatus(); // זה יעדכן את currentUserSubject ו-isLoggedInSubject
       }),
-      catchError(error => {
-        console.error('Login failed', error);
-        this._isLoggedIn.next(false);
-        this._currentUser.next(null);
-        return throwError(error);
-      })
+      map(user => { // map את התוצאה הסופית של השרשרת
+        console.log('AuthService: Login process complete, user state updated:', user);
+        return user; // החזר את פרטי המשתמש או כל דבר אחר שתרצה
+      }),
+      catchError(this.handleError)
     );
   }
 
   register(userData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, userData).pipe(
-      tap(() => {
-        console.log('Registration successful, please log in.');
-        this.router.navigate(['/login']);
-      }),
-      catchError(error => {
-        console.error('Registration failed', error);
-        return throwError(error);
-      })
+    return this.http.post<any>(`${this.apiUrl}/register`, userData, { withCredentials: true }).pipe(
+      tap(response => console.log('AuthService: Register response:', response)),
+      catchError(this.handleError)
     );
   }
 
   logout(): Observable<any> {
-    return this.http.post(`${this.apiUrl}/logout`, {}, { withCredentials: true }).pipe(
+    return this.http.post<any>(`${this.apiUrl}/logout`, {}, { withCredentials: true }).pipe(
       tap(() => {
-        console.log('Logout successful.');
-        this.router.navigate(['/login']);
-
+        console.log('AuthService: Logged out successfully.');
+        this.currentUserSubject.next(null);
         this._isLoggedIn.next(false);
-        this._currentUser.next(null); // נקה פרטי משתמש בעת התנתקות
+        this.router.navigate(['/login']);
       }),
-      catchError(error => {
-        console.error('Logout failed', error);
-        return throwError(error);
-      })
+      catchError(this.handleError)
     );
   }
 
-  isLoggedIn(): boolean {
-    return this._isLoggedIn.value;
-  }
-
-  // מתודה חדשה לבדיקת תפקיד
-  hasRole(requiredRoles: ('admin' | 'member' | 'user')[]): boolean {
-    const user = this._currentUser.value;
-    if (!user) {
-      return false; // אין משתמש מחובר
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    let errorMessage = 'An unknown error occurred!';
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.error?.message || error.statusText}`;
     }
-    return requiredRoles.includes(user.role);
+    console.error('AuthService: HTTP Error:', errorMessage, error);
+    return throwError(() => new Error(errorMessage));
   }
 }
