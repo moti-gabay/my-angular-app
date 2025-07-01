@@ -9,6 +9,7 @@ import { News } from './components/news/news';
 import { Tradition } from './components/tradition/tradition';
 import { Events } from './components/events/events';
 import { Contact } from './components/contact/contact';
+import { ImageGalleryComponent } from './image-gallery/image-gallery';
 
 export const routes: Routes = [
   { path: 'login', component: LoginRegisterComponent },
@@ -17,6 +18,18 @@ export const routes: Routes = [
     component: FileManagerComponent,
     canActivate: [roleGuard],
     data: { roles: ['admin', 'member'] } // רק אדמין וחבר יכולים לגשת למסך הקבצים
+  },
+  {
+    path: 'images',
+    component: ImageGalleryComponent,
+    canActivate: [roleGuard],
+    data: { roles: ['admin', 'member'] } // רק אדמין וחבר יכולים לגשת למסך הקבצים
+  },
+   {
+    path: 'admin-events', // נתיב עבור "ארועים" (אם זהו נתיב נפרד מניהול אירועים לאדמין)
+    component: Events, // placeholder component
+    canActivate: [roleGuard],
+    data: { roles: ['admin'] }
   },
   {
     path: 'dashboard',

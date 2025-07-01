@@ -41,7 +41,7 @@ export class LoginRegisterComponent implements OnInit {
             if (user.role === 'admin' || user.role === 'member') {
               this.router.navigate(['/files']);
             } else if (user.role === 'user') {
-              this.router.navigate(['/dashboard']);
+              this.router.navigate(['/homepage']);
             }
           } else {
             console.log('LoginRegisterComponent: ngOnInit - User is logged in but currentUser is null. This should not happen.');
@@ -75,7 +75,7 @@ export class LoginRegisterComponent implements OnInit {
             if (user.role === 'admin' || user.role === 'member') {
               this.router.navigate(['/files']);
             } else if (user.role === 'user') {
-              this.router.navigate(['/dashboard']);
+              this.router.navigate(['/homepage']);
             }
           } else {
             console.log('LoginRegisterComponent: User is null after login. Staying on login page.');

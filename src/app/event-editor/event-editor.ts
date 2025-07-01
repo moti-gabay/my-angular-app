@@ -12,7 +12,7 @@ import { of } from 'rxjs'; // לייבוא of
   // standalone: true,
   imports: [CommonModule, FormsModule, RouterLink, DatePipe],
   templateUrl:"./event-editor.html",
-  styleUrl:"./event-editor.css"
+  styleUrls:["./event-editor.css"]
 })
 export class EventEditorComponent implements OnInit {
   event: EventRecord = {

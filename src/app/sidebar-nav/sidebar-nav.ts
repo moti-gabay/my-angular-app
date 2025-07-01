@@ -4,18 +4,21 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserData } from '../services/auth'; // ייבוא ממשק UserData
+import { MatIconModule } from '@angular/material/icon'; // ודא שזה מיובא
 
 @Component({
   selector: 'app-sidebar-nav', // <--- ודא שהסלקטור נכון
-//   standalone: true,
+  //   standalone: true,
   imports: [
     CommonModule,
     RouterLink,
     RouterLinkActive,
-    
+    MatIconModule,
+
+
   ],
   templateUrl: './sidebar-nav.html',
-    styleUrls: ['./sidebar-nav.css'] // <--- וודא שזה קיים
+  styleUrls: ['./sidebar-nav.css'] // <--- וודא שזה קיים
 
 })
 export class SidebarNavComponent {

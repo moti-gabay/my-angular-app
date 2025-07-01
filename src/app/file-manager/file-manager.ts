@@ -15,7 +15,8 @@ import { ImageGalleryComponent } from '../image-gallery/image-gallery';
   imports: [
     CommonModule,
     FileUploadFormComponent,
-    FileListDisplayComponent
+    FileListDisplayComponent,
+    ImageUploaderComponent
   ],
   templateUrl:"./file-manager.html",
   styleUrls: ['./file-manager.css']

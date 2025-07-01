@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { ImageListComponent } from '../image-list/image-list';
 
 @Component({
   selector: 'app-home-page',
-  imports: [],
+  imports: [ImageListComponent],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css'
 })

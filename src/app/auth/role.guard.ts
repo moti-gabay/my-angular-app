@@ -33,7 +33,7 @@ export const roleGuard: CanActivateFn = (
         
         // הפניה מחדש לדף מתאים אם אין גישה
         if (user.role === 'user') {
-          router.navigate(['/dashboard']); // אם זה משתמש רגיל, הפנה לדאשבורד שלו
+          router.navigate(['/homepage']); // אם זה משתמש רגיל, הפנה לדאשבורד שלו
         } else if (user.role === 'admin' || user.role === 'member') {
           // אם זה אדמין/ממבר שלא יכול לגשת למסך ספציפי (לדוגמה, אם נותנים להם גישה רק ל-files)
           // וודא שהניתוב ברירת מחדל שלהם תקין

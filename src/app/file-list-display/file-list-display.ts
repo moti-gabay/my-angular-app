@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { CommonModule, DatePipe } from '@angular/common'; // הוספת DatePipe
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth';
@@ -8,9 +8,9 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-file-list-display',
   // standalone: true,
-  imports: [CommonModule, HttpClientModule, FormsModule],
-  templateUrl:"./file-list-display.html",
-  styleUrl:"./file-list-display.css"
+  imports: [CommonModule, FormsModule],
+  templateUrl: "./file-list-display.html",
+  styleUrl: "./file-list-display.css"
 })
 export class FileListDisplayComponent {
   @Input() allFiles: any[] = []; // קבלת כל הקבצים מקומפוננטת ההורה
@@ -37,12 +37,12 @@ export class FileListDisplayComponent {
     let filteredFiles = [...this.allFiles];
 
     if (this.filterCategory) {
-      filteredFiles = filteredFiles.filter(file => 
+      filteredFiles = filteredFiles.filter(file =>
         file.category && file.category.toLowerCase().includes(this.filterCategory.toLowerCase())
       );
     }
     if (this.filterYear !== undefined && this.filterYear !== null) {
-      filteredFiles = filteredFiles.filter(file => 
+      filteredFiles = filteredFiles.filter(file =>
         file.year && file.year === this.filterYear
       );
     }

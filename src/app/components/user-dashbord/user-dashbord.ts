@@ -10,7 +10,9 @@ import { EventListComponent } from '../../event-list/event-list';
   selector: 'app-user-dashboard',
   // standalone: true,
   imports: [CommonModule,ImageGalleryComponent,EventListComponent],
-  templateUrl:"./user-dashbord.html"
+  templateUrl:"./user-dashbord.html",
+  styleUrls: ['./user-dashbord.css']
+
 })
 export class UserDashboardComponent implements OnInit {
   currentUser$: Observable<any | null>;
