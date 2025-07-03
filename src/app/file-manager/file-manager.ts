@@ -8,6 +8,7 @@ import { FileUploadFormComponent } from '../file-upload-form/file-upload-form';
 import { FileListDisplayComponent } from '../file-list-display/file-list-display';
 import { ImageUploaderComponent } from '../image-uploader/image-uploader';
 import { ImageGalleryComponent } from '../image-gallery/image-gallery';
+import { API_URL } from '../services/url';
 
 @Component({
   selector: 'app-file-manager',
@@ -32,7 +33,7 @@ export class FileManagerComponent implements OnInit {
   }
 
   fetchFiles() {
-    const url = 'http://localhost:5000/files'; // פונה ל-endpoint שמחזיר את כל הקבצים
+    const url = `${API_URL}/files`; // פונה ל-endpoint שמחזיר את כל הקבצים
 
     this.http.get<any[]>(url, { withCredentials: true }).subscribe({
       next: (res) => {

@@ -2,6 +2,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { API_URL } from '../services/url';
 
 @Component({
   selector: 'app-image-uploader',
@@ -38,10 +39,10 @@ export class ImageUploaderComponent {
     const formData = new FormData();
     formData.append('file', this.selectedFile, this.selectedFile.name);
 
-    this.http.post<any>('http://localhost:5000/images', formData, { withCredentials: true }).subscribe({
+    this.http.post<any>(`${API_URL}/images`, formData, { withCredentials: true }).subscribe({
       next: (res) => {
         this.uploading = false;
-        this.uploadedImageUrl = `http://localhost:5000${res.url}`; 
+        this.uploadedImageUrl = `${API_URL}${res.url}`; 
         this.imageUploaded.emit({ url: this.uploadedImageUrl, id: res.id, filename: res.filename }); 
         console.log('Image uploaded successfully:', res);
         this.selectedFile = undefined;

@@ -1,26 +1,48 @@
 <!-- events.component.html -->
 <div class="events-container">
-    <h2>לוח ארועים</h2>
 
-  <div *ngIf="loading" class="loading-message">טוען אירועים...</div>
-  <div *ngIf="error" class="error-message">{{ error }}</div>
+  <div *ngIf="loading" class="loading-message">
+    טוען אירועים...
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
 
   <div *ngIf="events.length > 0" class="events-list">
-    <div *ngFor="let event of events" class="event-item">
-      <h3>{{ event.title }}</h3>
-      <p>
-        <span>תאריך:</span> {{ event.date | date:'medium' }}
+    <div *ngFor="let event of events" class="event-card">
+
+
+      <h3 class="event-title">{{ event.title }}</h3>
+
+      <p class="event-info">
+        <span class="label">תאריך:</span> {{ event.date | date:'medium' }}
       </p>
-      <p *ngIf="event.location">
-        <span>מיקום:</span> {{ event.location }}
+
+      <p *ngIf="event.location" class="event-info">
+        <span class="label">מיקום:</span> {{ event.location }}
       </p>
-      <p class="description">{{ event.description }}</p>
-      
-      <div class="view-details-container">
-        <a [routerLink]="['/events', event.id]" class="view-details-button">
+
+      <p class="event-description">
+        {{ event.description }}
+      </p>
+
+      <div class="event-actions">
+        <!-- <a [routerLink]="['/events', event.id]" class="view-details-button">
           צפה בפרטים
-        </a>
+        </a> -->
+
+        <button *ngIf="currentUser?.role === 'admin' && !event.is_approved" (click)="approveEvent(event.id!)"
+          class="approve-button">
+          אשר אירוע
+        </button>
+        <button *ngIf="currentUser?.role === 'admin' && event.is_approved" (click)="unapproveEvent(event.id!)"
+          class="unapprove-button">
+          בטל אישור
+        </button>
+
       </div>
+
     </div>
   </div>
 

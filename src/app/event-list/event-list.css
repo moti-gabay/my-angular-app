@@ -1,122 +1,98 @@
-/* events-list.component.css */
-
-/* Main container for the events section */
 .events-container {
-    margin-top: 2rem; /* mt-8 */
-    padding: 1.5rem; /* p-6 */
-    /* background-color: #ffffff; bg-white */
-    border-radius: 0.5rem; /* rounded-lg */
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-xl */
-    max-width: 42rem; /* max-w-2xl */
-    margin-left: auto; /* mx-auto */
-    margin-right: auto; /* mx-auto */
-    font-family: 'Inter', sans-serif; /* font-inter (assuming Inter font is imported globally) */
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* Heading for "Upcoming Events" */
-.events-container h2 {
-    font-size: 1.875rem; /* text-3xl */
-    font-weight: 700; /* font-bold */
-    color: #1f2937; /* text-gray-800 */
-    margin-bottom: 1.5rem; /* mb-6 */
-    text-align: center; /* text-center */
+.events-title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
 }
 
-/* Loading message */
-.loading-message {
-    text-align: center; /* text-center */
-    color: #4b5563; /* text-gray-600 */
+.event-card {
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Error message */
-.error-message {
-    text-align: center; /* text-center */
-    color: #ef4444; /* text-red-500 */
-    margin-bottom: 1rem; /* mb-4 */
+.event-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
-/* Container for individual event items */
-.events-list {
+.event-info {
+    margin: 4px 0;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.event-description {
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.event-actions {
+    margin-top: 15px;
     display: flex;
-    flex-direction: column;
-    gap: 1rem; /* space-y-4 */
+    justify-content: flex-end;
+    gap: 10px;
 }
 
-/* Individual event item */
-.event-item {
-    background-color: #eff6ff; /* bg-blue-50 */
-    padding: 1rem; /* p-4 */
-    border-radius: 0.5rem; /* rounded-lg */
-    border: 1px solid #bfdbfe; /* border border-blue-200 */
-    transition-property: background-color; /* transition */
-    transition-duration: 200ms; /* duration-200 */
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* ease-in-out */
-}
-
-.event-item:hover {
-    background-color: #dbeafe; /* hover:bg-blue-100 */
-}
-
-/* Event title */
-.event-item h3 {
-    font-size: 1.25rem; /* text-xl */
-    font-weight: 600; /* font-semibold */
-    color: #1e40af; /* text-blue-800 */
-}
-
-/* Event date and location paragraphs */
-.event-item p {
-    color: #374151; /* text-gray-700 */
-    font-size: 0.875rem; /* text-sm */
-    margin-top: 0.25rem; /* mt-1 */
-}
-
-.event-item p span {
-    font-weight: 500; /* font-medium */
-}
-
-/* Event description */
-.event-item .description {
-    color: #4b5563; /* text-gray-600 */
-    margin-top: 0.5rem; /* mt-2 */
-    text-align: justify; /* text-justify */
-    /* line-clamp-3 - requires JavaScript or a specific CSS property not natively supported by all browsers */
-    /* For basic CSS, you can simulate with: */
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* "View Details" link container */
-.view-details-container {
-    margin-top: 0.75rem; /* mt-3 */
-    text-align: right; /* text-right */
-}
-
-/* "View Details" link button */
 .view-details-button {
-    display: inline-flex; /* inline-flex */
-    align-items: center; /* items-center */
-    padding: 0.25rem 0.75rem; /* px-3 py-1 */
-    background-color: #2563eb; /* bg-blue-600 */
-    color: #ffffff; /* text-white */
-    font-size: 0.875rem; /* text-sm */
-    font-weight: 500; /* font-medium */
-    border-radius: 9999px; /* rounded-full */
-    transition-property: background-color; /* transition */
-    transition-duration: 200ms; /* duration-200 */
-    text-decoration: none; /* remove underline */
+    background-color: #007bff;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
 }
 
 .view-details-button:hover {
-    background-color: #1d4ed8; /* hover:bg-blue-700 */
+    background-color: #0056b3;
 }
 
-/* Message when no events are found */
+.approve-button {
+    background-color: #28a745;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.approve-button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.loading-message,
+.error-message,
 .no-events-message {
-    text-align: center; /* text-center */
-    color: #6b7280; /* text-gray-500 */
-    padding: 1rem; /* p-4 */
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.unapprove-button {
+    background-color: #f44336;
+    /* אדום */
+     color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.unapprove-button:hover {
+    background-color: #d32f2f;
 }

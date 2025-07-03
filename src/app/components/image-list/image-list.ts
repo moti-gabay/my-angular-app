@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-
+import { API_URL } from '../../services/url';
+import { ChangeDetectorRef } from '@angular/core';
 
 interface ImageData {
   id: number;
   filename: string;
   uploaded_at: string;
   uploaded_by: number;
-  url: string;
+  url: string; // ודא שתמיד מגיע מהשרת
 }
 
 @Component({
@@ -18,20 +19,45 @@ interface ImageData {
   templateUrl: './image-list.html',
   styleUrls: ['./image-list.css']
 })
-
 export class ImageListComponent implements OnInit {
 
   images: ImageData[] = [];
   currentIndex = 0;
+  loading = true;
+  error = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) { }
 
- ngOnInit() {
+  ngOnInit() {
     this.loadImages();
-    this.autoSlide();
   }
 
-    nextImage() {
+  loadImages() {
+    this.http.get<ImageData[]>(`${API_URL}/images`)
+      .subscribe({
+        next: (data) => {
+          this.images = data;
+          this.loading = false;
+          if (this.images.length > 0) {
+            this.startAutoSlide();  // תתחיל אוטומציה רק אחרי שיש תמונות
+          }
+          // גרום לאנגולר לבדוק שוב את השינויים אחרי טעינה
+          this.cdr.detectChanges();
+        },
+        error: (err) => console.error('Error loading images', err)
+      });
+  }
+
+
+  startAutoSlide() {
+    setInterval(() => {
+      if (this.images.length > 0) {
+        this.nextImage();
+      }
+    }, 3000);
+  }
+
+  nextImage() {
     this.currentIndex = (this.currentIndex + 1) % this.images.length;
   }
 
@@ -39,24 +65,7 @@ export class ImageListComponent implements OnInit {
     this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
   }
 
-  autoSlide() {
-    setInterval(() => {
-      if (this.images.length > 0) {
-        this.nextImage();
-      }
-    }, 3000); // כל 3 שניות
-  }
-  loadImages() {
-    this.http.get<ImageData[]>('http://localhost:5000/images') // תחליף לכתובת השרת שלך
-      .subscribe({
-        next: (data) => {
-          this.images = data 
-          console.log('הצג תמונות', this.images)},
-        error: (err) => console.error('שגיאה בטעינת תמונות', err)
-      });
-  }
   getFullImageUrl(relativeUrl: string): string {
-  return `http://localhost:5000${relativeUrl}`; // תעדכן לכתובת השרת שלך
-}
-
+    return `${API_URL}${relativeUrl}`;
+  }
 }

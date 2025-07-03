@@ -4,6 +4,7 @@ import { CommonModule, DatePipe } from '@angular/common'; // הוספת DatePipe
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth';
 import { map } from 'rxjs/operators';
+import { API_URL } from '../services/url';
 
 @Component({
   selector: 'app-file-list-display',
@@ -100,7 +101,7 @@ export class FileListDisplayComponent {
       return;
     }
 
-    this.http.delete(`http://localhost:5000/files/${fileId}`, { withCredentials: true }).subscribe({
+    this.http.delete(`${API_URL}/files/${fileId}`, { withCredentials: true }).subscribe({
       next: () => {
         console.log('הקובץ נמחק בהצלחה!');
         this.fileDeleted.emit(fileId); // יידוע ההורה על מחיקה

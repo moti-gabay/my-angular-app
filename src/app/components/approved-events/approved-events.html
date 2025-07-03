@@ -1,0 +1,39 @@
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>לוח אירועים</h2>
+
+        <div *ngFor="let event of approvedEvents" class="event-item" (click)="selectEvent(event)"
+            [ngClass]="{'approved-event-card': true, 'active': selectedEvent?.id === event.id}">
+            
+            <strong>{{ event.title }}</strong>
+            <span>{{ event.location }}</span>
+            <span>{{ event.time }} {{ event.date | date: 'shortDate' }}</span>
+        </div>
+    </div>
+
+    <!-- Chat Box -->
+
+    <div class="chat-box" *ngIf="selectedEvent">
+        <div class="chat-message">
+            האם אתה מאשר הגעה לאירוע {{ selectedEvent.title }} בתאריך {{ selectedEvent.date | date: 'shortDate' }}
+            בשעה {{ selectedEvent.time }}?
+            <br />
+            <p>רשומים נכון לרגע זה {{ selectedEvent.registered_users?.length || 0 }} /
+                {{selectedEvent.needed_volunteers}} </p>
+        </div>
+
+        <div class="response-buttons">
+            <button (click)="unregisterToEvent(selectedEvent!.id)">לא אוכל להגיע</button>
+            <button>אעדכן בהמשך</button>
+            <button (click)="registerToEvent(selectedEvent!.id)">אני אגיע!</button>
+        </div>
+
+        <div class="confirmation" *ngIf="confirmationMessage">
+            הרשמתך התקבלה, תודה. לעדכונים <a href="#">לחץ כאן</a>.
+        </div>
+
+        <div class="footer-icon">📅</div>
+    </div>
+
+</div>

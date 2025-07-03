@@ -6,6 +6,7 @@ import { AuthService } from './services/auth';
 import { SidebarNavComponent } from './sidebar-nav/sidebar-nav'; // ייבוא הקומפוננטה החדשה
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Footer } from './components/footer/footer';
+import { ContactComponent } from './components/contact/contact';
 
 @Component({
   selector: 'app-root',

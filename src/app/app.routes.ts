@@ -8,8 +8,11 @@ import { HomePage } from './components/home-page/home-page';
 import { News } from './components/news/news';
 import { Tradition } from './components/tradition/tradition';
 import { Events } from './components/events/events';
-import { Contact } from './components/contact/contact';
+import { ContactComponent } from './components/contact/contact';
 import { ImageGalleryComponent } from './image-gallery/image-gallery';
+import { Donation } from './components/donation/donation';
+import { ApprovedEventsComponent } from './components/approved-events/approved-events';
+import { EventListComponent } from './event-list/event-list';
 
 export const routes: Routes = [
   { path: 'login', component: LoginRegisterComponent },
@@ -27,7 +30,7 @@ export const routes: Routes = [
   },
    {
     path: 'admin-events', // נתיב עבור "ארועים" (אם זהו נתיב נפרד מניהול אירועים לאדמין)
-    component: Events, // placeholder component
+    component: EventListComponent, // placeholder component
     canActivate: [roleGuard],
     data: { roles: ['admin'] }
   },
@@ -57,14 +60,20 @@ export const routes: Routes = [
     data: { roles: ['user'] }
   },
   {
-    path: 'events', // נתיב עבור "ארועים" (אם זהו נתיב נפרד מניהול אירועים לאדמין)
-    component: Events, // placeholder component
+    path: 'events', 
+    component: ApprovedEventsComponent, // placeholder component
     canActivate: [roleGuard],
     data: { roles: ['user'] }
   },
   {
-    path: 'contact', // נתיב עבור "צור קשר"
-    component: Contact, // placeholder component
+    path: 'contact', 
+    component: ContactComponent, // placeholder component
+    canActivate: [roleGuard],
+    data: { roles: ['user'] }
+  },
+  {
+    path: 'donation', 
+    component: Donation, // placeholder component
     canActivate: [roleGuard],
     data: { roles: ['user'] }
   },

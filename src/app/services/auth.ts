@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError, of } from 'rxjs'; // ייבוא 'of'
 import { catchError, tap, switchMap, map } from 'rxjs/operators'; // ייבוא 'switchMap' ו-'map'
 import { Router } from '@angular/router';
+import { API_URL } from './url';
 
 export interface UserData {
   id: number;
@@ -18,7 +19,7 @@ export interface UserData {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5000/auth';
+  private apiUrl = API_URL + '/auth';
   private currentUserSubject: BehaviorSubject<UserData | null> = new BehaviorSubject<UserData | null>(null);
   public currentUser$: Observable<UserData | null> = this.currentUserSubject.asObservable();
 

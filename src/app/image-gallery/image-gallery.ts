@@ -1,36 +1,38 @@
-// src/app/image-gallery/image-gallery.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ImageService, ImageRecord } from '../services/image';
-import { AuthService } from '../services/auth'; // ייבוא AuthService
-import { map } from 'rxjs/operators'; // ייבוא map
+import { AuthService } from '../services/auth';
+import { map } from 'rxjs/operators';
+import { ChangeDetectorRef } from '@angular/core';
+import { API_URL } from '../services/url';
+import { ImageUploaderComponent } from '../image-uploader/image-uploader';
 
 @Component({
   selector: 'app-image-gallery',
-  // standalone: true,
-  imports: [CommonModule],
-  templateUrl:"./image-gallery.html",
-  styleUrls:["./image-gallery.css"]
+  imports: [CommonModule,ImageUploaderComponent],
+  templateUrl: './image-gallery.html',
+  styleUrls: ['./image-gallery.css']
 })
 export class ImageGalleryComponent implements OnInit {
   images: ImageRecord[] = [];
   loading: boolean = true;
   error: string = '';
-  isAdmin: boolean = false; // מאפיין לשליטה בתצוגת כפתור המחיקה
+  isAdmin: boolean = false;
 
   constructor(
     private imageService: ImageService,
-    private authService: AuthService // הזרקת AuthService
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef
+
   ) { }
 
   ngOnInit(): void {
     this.fetchImages();
 
-    // הרשמה למצב המשתמש הנוכחי כדי לקבוע אם המשתמש הוא אדמין
     this.authService.currentUser$.pipe(
-      map(user => user?.role === 'admin' || user?.role === "member") // המר את המשתמש לערך בוליאני true אם הוא אדמין
+      map(user => user?.role === 'admin' || user?.role === "member")
     ).subscribe(isAdmin => {
-      this.isAdmin = isAdmin; // עדכן את המאפיין isAdmin
+      this.isAdmin = isAdmin;
     });
   }
 
@@ -40,31 +42,40 @@ export class ImageGalleryComponent implements OnInit {
     this.imageService.getUploadedImages().subscribe({
       next: (data) => {
         this.images = data;
+        this.preloadImages(); // קריאה לטעינה מוקדמת
         this.loading = false;
+        this.cdr.detectChanges(); // לגרום לאנגולר לעדכן מיידית
+
       },
       error: (err) => {
         this.error = 'שגיאה בטעינת התמונות.';
         this.loading = false;
         console.error('Error fetching images:', err);
+        this.cdr.detectChanges(); // לגרום לאנגולר לעדכן מיידית
+
       }
     });
   }
 
-  // פונקציית עזר לבניית URL מלא לתמונה
+  // בניית URL מלא
   getFullImageUrl(relativePath: string): string {
-    return `http://localhost:5000${relativePath}`;
+    return `${API_URL}${relativePath}`;
   }
 
-  /**
-   * מוחק רשומת תמונה וגם את הקובץ הפיזי מהשרת.
-   * פעולה זו מוגנת בצד השרת (admin_required).
-   */
+  // טעינה מוקדמת (חשוב)
+  preloadImages(): void {
+    this.images.forEach(img => {
+      const preloadImage = new Image();
+      preloadImage.src = this.getFullImageUrl(img.url);
+    });
+  }
+
   deleteImage(imageId: number): void {
     if (confirm('האם אתה בטוח שברצונך למחוק תמונה זו? פעולה זו בלתי הפיכה!')) {
       this.imageService.deleteImageRecord(imageId).subscribe({
         next: () => {
           console.log(`Image ${imageId} deleted successfully.`);
-          this.fetchImages(); // רענן את הגלריה כדי להסיר את התמונה שנמחקה
+          this.fetchImages();
         },
         error: (err) => {
           this.error = err.error?.message || 'שגיאה במחיקת התמונה.';

@@ -1,12 +1,12 @@
 <div class="image-gallery-container">
-  <h2 class="gallery-title">גלריית תמונות שהועלו</h2>
+  <h2 class="gallery-title">גלריית תמונות </h2>
 
   <div *ngIf="loading" class="loading-message">טוען תמונות...</div>
   <div *ngIf="error" class="error-message">{{ error }}</div>
 
-  <div *ngIf="images.length > 0" class="image-grid">
+  <div class="image-grid">
     <div *ngFor="let img of images" class="image-card">
-      <img [src]="getFullImageUrl(img.url)" [alt]="img.filename" class="image-preview">
+      <img  [src]="getFullImageUrl(img.url)" [alt]="img.filename" class="image-preview">
       <div class="image-info">
         {{ img.filename }}<br>
         <span class="upload-date">{{ img.uploaded_at | date:'short' }}</span>
@@ -20,4 +20,5 @@
   <div *ngIf="!loading && images.length === 0" class="empty-message">
     עדיין לא הועלו תמונות.
   </div>
+  <app-image-uploader></app-image-uploader>
 </div>

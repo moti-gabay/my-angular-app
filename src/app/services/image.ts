@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { API, API_URL } from './url';
 
 // הגדרת ממשק (interface) לתמונה, כפי שחוזר מהשרת
 export interface ImageRecord {
@@ -16,7 +17,7 @@ export interface ImageRecord {
   providedIn: 'root'
 })
 export class ImageService {
-  private apiUrl = 'http://localhost:5000/images'; // ה-Blueprint URL של ניהול תמונות
+  private apiUrl = API_URL + '/images'; // ה-Blueprint URL של ניהול תמונות
 
   constructor(private http: HttpClient) { }
 

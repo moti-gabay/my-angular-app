@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { API_URL } from '../services/url';
 
 @Component({
   selector: 'app-file-upload-form',
@@ -39,7 +40,7 @@ export class FileUploadFormComponent {
       formData.append('year', this.fileYear.toString());
     }
 
-    this.http.post('http://localhost:5000/upload', formData, { withCredentials: true }).subscribe({
+    this.http.post(`${API_URL}/upload`, formData, { withCredentials: true }).subscribe({
       next: () => {
         console.log('הקובץ הועלה בהצלחה!');
         this.uploadSuccess.emit(); // שליחת אירוע להורה

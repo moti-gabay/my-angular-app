@@ -1,41 +1,38 @@
 .carousel-container {
-  position: relative;
-  width: 40rem;
-  height: 20rem;
-  margin: auto;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .carousel-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
+  width: 30rem;    /* רוחב קבוע */
+  height: 20rem;   /* גובה קבוע */
+  object-fit: cover; /* חיתוך התמונה כך שתמלא את המסגרת מבלי להתעוות */
+  border-radius: 8px; /* עיגול פינות - אופציונלי */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* צל - אופציונלי */
 }
 
+
 .carousel-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0,0,0,0.5);
+  background-color: #4a90e2;
   color: white;
   border: none;
   padding: 10px 15px;
-  cursor: pointer;
+  margin: 0 10px;
+  border-radius: 50%;
   font-size: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .carousel-button:hover {
-  background-color: rgba(0,0,0,0.7);
+  background-color: #357ab8;
 }
 
-.carousel-button:first-of-type {
-  left: 1rem;
-}
-
-.carousel-button:last-of-type {
-  right: 1rem;
+.loading-message, .no-images-message, .error-message {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  color: #555;
 }
