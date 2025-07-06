@@ -1,38 +1,76 @@
 .carousel-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .carousel-image {
-  width: 30rem;    /* רוחב קבוע */
-  height: 20rem;   /* גובה קבוע */
-  object-fit: cover; /* חיתוך התמונה כך שתמלא את המסגרת מבלי להתעוות */
-  border-radius: 8px; /* עיגול פינות - אופציונלי */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* צל - אופציונלי */
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 1rem;
+  transition: opacity 0.7s ease-in-out;
 }
 
-
 .carousel-button {
-  background-color: #4a90e2;
-  color: white;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
   border: none;
-  padding: 10px 15px;
-  margin: 0 10px;
+  color: white;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
   border-radius: 50%;
-  font-size: 24px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  z-index: 1;
 }
 
 .carousel-button:hover {
-  background-color: #357ab8;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
-.loading-message, .no-images-message, .error-message {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 18px;
-  color: #555;
+.carousel-button:first-of-type {
+  left: 10px;
+}
+
+.carousel-button:last-of-type {
+  right: 10px;
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.carousel-indicators span {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin: 0 4px;
+  background-color: #cbd5e0;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.carousel-indicators .active {
+  background-color: #3182ce;
+}
+
+@media (max-width: 768px) {
+  .carousel-image {
+    height: 250px;
+  }
+
+  .carousel-button {
+    font-size: 1.5rem;
+    padding: 0.3rem 0.7rem;
+  }
 }

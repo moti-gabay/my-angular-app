@@ -2,156 +2,224 @@
 
 /* Outer container for sidebar content */
 .sidebar-content {
-    padding: 1rem; 
-    display: flex; 
-    flex-direction: column; /* flex-col */
-    width:10rem;
-    height: 90vh;
-  
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    /* flex-col */
+    width: 10rem;
+    height: 80vh;
+    /* background-color: #2563eb; */
+
 }
 
 /* System Title in Sidebar */
 .sidebar-title {
-    font-size: 1.5rem; /* text-2xl */
-    font-weight: 700; /* font-bold */
-    margin-bottom: 2rem; /* mb-8 */
-    text-align: center; /* text-center */
-    color: inherit; /* inherit color from parent (white) */
-    text-decoration: none; /* remove underline for links */
+    font-size: 1.5rem;
+    /* text-2xl */
+    font-weight: 700;
+    /* font-bold */
+    margin-bottom: 2rem;
+    /* mb-8 */
+    text-align: center;
+    /* text-center */
+    color: inherit;
+    /* inherit color from parent (white) */
+    text-decoration: none;
+    /* remove underline for links */
 }
-.nav-title{
-  
-   /* border: 1px solid #4b5563; border-t border-gray-700 */
-    text-align: center; /* text-center */   
+
+.nav-title {
+
+    /* border: 1px solid #4b5563; border-t border-gray-700 */
+    text-align: center;
+    /* text-center */
 }
 
 /* Navigation List (ul) */
 .nav-list {
     /* display: flex; flex */
-    flex-direction: column; /* flex-col */
-    gap: 0.75rem; /* space-y-3 */
-    flex-grow: 1; /* flex-grow */
-    list-style: none; /* remove default list bullets */
-    padding: 0; /* remove default padding */
-    margin: 0; /* remove default margin */
+    flex-direction: column;
+    /* flex-col */
+    gap: 0.75rem;
+    /* space-y-3 */
+    flex-grow: 1;
+    /* flex-grow */
+    list-style: none;
+    /* remove default list bullets */
+    padding: 0;
+    /* remove default padding */
+    margin: 0;
+    /* remove default margin */
 }
 
 /* Navigation Link (a) common styles */
 .nav-link {
-    display: flex; /*flex*/
-     align-items: center; /*items-center */
-     flex-direction: column;
-    padding: 0.5rem; 
-    border-radius: 1.5rem; /* rounded-lg */
-    transition-property: background-color; /* transition */
-    transition-duration: 200ms; /* duration-200 */
-    color: inherit; /* inherit color from parent (white) */
-    text-decoration: none; /* remove underline */
+    display: flex;
+    /*flex*/
+    align-items: center;
+    /*items-center */
+    flex-direction: column;
+    padding: 0.5rem;
+    border-radius: 1.5rem;
+    /* rounded-lg */
+    transition-property: background-color;
+    /* transition */
+    transition-duration: 200ms;
+    /* duration-200 */
+    color: inherit;
+    /* inherit color from parent (white) */
+    text-decoration: none;
+    /* remove underline */
 }
 
 .nav-link:hover {
-    background-color: #e0d6f0; /* hover:bg-gray-700 */
+    background-color: #e0d6f0;
+    /* hover:bg-gray-700 */
 }
 
 /* Icon inside navigation link */
 .nav-icon {
-    width: 1rem; /* w-4 */
-    height: 1rem; /* h-4 */
-    margin-right: 0.75rem; /* mr-3 (for LTR, will be ml-3 in RTL) */
+    width: 1rem;
+    /* w-4 */
+    height: 1rem;
+    /* h-4 */
+    margin-right: 0.75rem;
+    /* mr-3 (for LTR, will be ml-3 in RTL) */
 }
 
 /* Login/Logout Buttons Container */
 .auth-buttons-container {
-    margin-top: 1rem; /* mt-auto pt-4 */
+    margin-top: 1rem;
+    /* mt-auto pt-4 */
     padding-top: 1rem;
-    border-top: 1px solid #4b5563; /* border-t border-gray-700 */
+    border-top: 1px solid #4b5563;
+    /* border-t border-gray-700 */
 }
 
 /* Common button styles for logout/login */
 .auth-button {
-    width: 100%; /* w-full */
-    display: flex; /* flex */
-    align-items: center; /* items-center */
-    justify-content: center; /* justify-center */
-    padding: 0.75rem; /* p-3 */
-    border-radius: 0.5rem; /* rounded-lg */
-    transition-property: background-color; /* transition */
-    transition-duration: 200ms; /* duration-200 */
-    font-size: 0.875rem; /* text-sm */
-    font-weight: 700; /* font-bold */
-    color: #ffffff; /* text-white */
-    border: none; /* remove default button border */
+    width: 100%;
+    /* w-full */
+    display: flex;
+    /* flex */
+    align-items: center;
+    /* items-center */
+    justify-content: center;
+    /* justify-center */
+    padding: 0.75rem;
+    /* p-3 */
+    border-radius: 0.5rem;
+    /* rounded-lg */
+    transition-property: background-color;
+    /* transition */
+    transition-duration: 200ms;
+    /* duration-200 */
+    font-size: 0.875rem;
+    /* text-sm */
+    font-weight: 700;
+    /* font-bold */
+    color: #ffffff;
+    /* text-white */
+    border: none;
+    /* remove default button border */
     cursor: pointer;
-    text-decoration: none; /* for anchor tags */
+    text-decoration: none;
+    /* for anchor tags */
 }
 
 /* Logout Button specific styles */
 .logout-button {
-    background-color: #ef4444; /* bg-red-500 */
+    background-color: #ef4444;
+    /* bg-red-500 */
 }
 
 .logout-button:hover {
-    background-color: #dc2626; /* hover:bg-red-600 */
+    background-color: #dc2626;
+    /* hover:bg-red-600 */
 }
 
 /* Login/Register Button specific styles */
 .login-register-button {
-    background-color: #3b82f6; /* bg-blue-500 */
-    margin-top: 0.75rem; /* Added margin-top for spacing if needed between buttons */
+    background-color: #3b82f6;
+    /* bg-blue-500 */
+    margin-top: 0.75rem;
+    /* Added margin-top for spacing if needed between buttons */
 }
 
 .login-register-button:hover {
-    background-color: #2563eb; /* hover:bg-blue-600 */
+    background-color: #2563eb;
+    /* hover:bg-blue-600 */
 }
 
 /* Icon inside login/logout buttons */
- .auth-icon {
-    width: 1rem; /* w-4 */
-     height: 1rem; /* h-4 */
-    margin-right: 0.5rem; /* mr-2 (for LTR, will be ml-2 in RTL) */
+.auth-icon {
+    width: 1rem;
+    /* w-4 */
+    height: 1rem;
+    /* h-4 */
+    margin-right: 0.5rem;
+    /* mr-2 (for LTR, will be ml-2 in RTL) */
 }
 
 /* RTL Adjustments */
 /* These will ensure correct margins for icons when dir="rtl" is active on a parent element */
 :host-context([dir="rtl"]) .nav-icon {
-  margin-left: 0.75rem;
-  margin-right: 0;
+    margin-left: 0.75rem;
+    margin-right: 0;
 }
 
 :host-context([dir="rtl"]) .auth-icon {
-  margin-left: 0.5rem;
-  margin-right: 0;
-} 
+    margin-left: 0.5rem;
+    margin-right: 0;
+}
 
 /* For overall layout in AppComponent, flex-direction will also reverse with dir="rtl" */
 /* This ensures the sidebar goes to the right automatically */
 
 /* Icon inside navigation link */
 .nav-icon {
-     width: 1rem; 
-    height: 1rem; 
-    margin-right: 0.75rem; 
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.75rem;
     /* for RTL: ensure the margin is on the left side of the icon */
-   margin-right: 0;
-   margin-left: 0.75rem;
+    margin-right: 0;
+    margin-left: 0.75rem;
 }
+
 /* Icon inside login/logout buttons */
 .auth-icon {
     width: 1rem;
     height: 1rem;
     margin-right: 0.5rem;
     /* for RTL: ensure the margin is on the left side of the icon */
-  margin-right: 0;
-    margin-left: 0.5rem; 
+    margin-right: 0;
+    margin-left: 0.5rem;
 }
+
 /* RTL Adjustments (Important!) */
 /* Explicitly override margin for RTL. */
 :host-context([dir="rtl"]) .nav-icon {
-  margin-left: 0.75rem;
-  margin-right: 0;
+    margin-left: 0.75rem;
+    margin-right: 0;
 }
 
 :host-context([dir="rtl"]) .auth-icon {
-  margin-left: 0.5rem;
-  margin-right: 0;
-} 
+    margin-left: 0.5rem;
+    margin-right: 0;
+}
+
+.active {
+    background-color: #e0d6f0;
+    /* צבע רקע כשהלינק פעיל */
+    color: #000;
+    /* צבע טקסט */
+    border-radius: 1rem;
+    border: 1px solid rgb(139, 137, 137);
+    /* עיצוב עגול */
+}
+
+.active mat-icon,
+.active .nav-title {
+    color: #000;
+    /* שגם האייקון והכותרת ישנו צבע */
+}

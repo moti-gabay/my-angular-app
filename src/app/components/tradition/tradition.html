@@ -1,1 +1,49 @@
-<p>tradition works!</p>
+<div class="tradition-container">
+    <h2 class="tradition-title">המסורת היהודית</h2>
+
+    <h2>בקצרה... </h2>
+    <div class="tradition-summary">
+        <div class="text-container">
+            <p>
+                המסורת היהודית היא מערכת חיים עשירה שהתפתחה במשך אלפי שנים ומעצבת את אורח חיי העם היהודי.
+                המסורת כוללת חגים, תפילות, מצוות, ולימוד תורה, והיא מחברת אותנו לשורשים.
+            </p>
+        </div>
+        <div class="img-container">
+            <img class="img-logo" src="assets/images/logo.png" alt="לוגו המסורת היהודית">
+        </div>
+    </div>
+
+    <div class="tradition-tabs">
+        <button *ngFor="let topic of topics" (click)="selectTopic(topic.id)"
+            [class.active]="selectedTopic === topic.id">
+            {{ topic.label }}
+        </button>
+    </div>
+
+    <div class="tradition-content">
+        <ng-container [ngSwitch]="selectedTopic">
+
+            <div *ngSwitchCase="'batMitzvah'">
+                <h3>בת מצווה</h3>
+                <p>בת מצווה היא שלב בו נערה יהודיה מגיעה לגיל 12 ומחויבת במצוות.</p>
+            </div>
+
+            <div *ngSwitchCase="'barMitzvah'">
+                <h3>בר מצווה</h3>
+                <p>בר מצווה היא שלב בו נער יהודי מגיע לגיל 13 ומחויב במצוות.</p>
+            </div>
+
+            <div *ngSwitchCase="'shabbat'">
+                <h3>הפרשת חלה</h3>
+                <p>הפרשת חלה היא אחת ממצוות הנשים החשובות במסורת היהודית.</p>
+            </div>
+
+            <div *ngSwitchCase="'holidays'">
+                <h3>חגי ישראל</h3>
+                <p>חגי ישראל כוללים את פסח, סוכות, שבועות, ראש השנה ויום כיפור.</p>
+            </div>
+
+        </ng-container>
+    </div>
+</div>

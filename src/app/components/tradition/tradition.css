@@ -1,0 +1,79 @@
+.tradition-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #f7fafc;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    direction: rtl;
+    text-align: right;
+}
+
+.tradition-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+}
+
+.text-container {
+    width: 60%;
+}
+
+.tradition-summary {
+    display: flex;
+    font-size: 1rem;
+    color: #4a5568;
+    margin-bottom: 1rem;
+}
+
+.tradition-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.tradition-tabs button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 9999px;
+    background-color: #e2e8f0;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.tradition-tabs button.active {
+    background-color: #805ad5;
+    color: white;
+}
+
+.tradition-tabs button:hover {
+    background-color: #cbd5e0;
+}
+
+.tradition-content h3 {
+    font-size: 1.5rem;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.tradition-content p {
+    font-size: 1rem;
+    color: #4a5568;
+}
+
+.img-container {
+    width: 30rem;
+
+    height: 20rem;
+}
+
+.img-logo {
+    padding: 1rem;
+    width: 100%;
+
+    height: 100%;
+}

@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CommonModule, DatePipe } from '@angular/common'; // הוספת DatePipe
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth';
 import { map } from 'rxjs/operators';
@@ -8,32 +8,75 @@ import { API_URL } from '../services/url';
 
 @Component({
   selector: 'app-file-list-display',
-  // standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: "./file-list-display.html",
   styleUrl: "./file-list-display.css"
 })
-export class FileListDisplayComponent {
-  @Input() allFiles: any[] = []; // קבלת כל הקבצים מקומפוננטת ההורה
-  @Output() fileDeleted = new EventEmitter<number>(); // ליידוע ההורה על מחיקה
-  @Output() refreshFiles = new EventEmitter<void>(); // ליידוע ההורה לרענן את רשימת הקבצים המלאה
+export class FileListDisplayComponent implements OnInit, OnChanges {
+  @Input() allFiles: any[] = [];
+  @Output() fileDeleted = new EventEmitter<number>();
+
+  displayedFiles: any[] = [];
 
   filterCategory: string = '';
-  filterYear: number | undefined
+  filterYear: number | undefined;
   sortColumn: string = 'upload_date';
   sortDirection: 'asc' | 'desc' = 'desc';
-  isAdmin: boolean = false; // מאפיין חדש לשמירת מצב האדמין
+  isAdmin: boolean = false;
 
-  constructor(private http: HttpClient, private authService: AuthService) { } // הזרקת AuthService
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   ngOnInit(): void {
-    // הרשמה לשינויים בתפקיד המשתמש כדי לעדכן את isAdmin
     this.authService.currentUser$.pipe(
-      map(user => user?.role === 'admin') // מיפוי לתפקיד 'admin'
+      map(user => user?.role === 'admin')
     ).subscribe(isAdmin => {
       this.isAdmin = isAdmin;
     });
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['allFiles']) {
+      this.updateDisplayedFiles();
+    }
+  }
+
+  updateDisplayedFiles() {
+    this.displayedFiles = this.getFilteredAndSortedFiles();
+  }
+
+  applyFilters() {
+    this.updateDisplayedFiles();
+  }
+
+  clearFilters() {
+    this.filterCategory = '';
+    this.filterYear = undefined;
+    this.updateDisplayedFiles();
+  }
+
+  applySort() {
+    this.updateDisplayedFiles();
+  }
+
+  deleteFile(fileId: number) {
+    if (!confirm("אתה בטוח שאתה רוצה למחוק את הקובץ?")) {
+      console.log('מחיקת הקובץ בוטלה על ידי המשתמש.');
+      return;
+    }
+
+    this.http.delete(`${API_URL}/files/${fileId}`, { withCredentials: true }).subscribe({
+      next: () => {
+        alert('הקובץ נמחק בהצלחה!');
+        this.allFiles = this.allFiles.filter(file => file.id !== fileId); // מעדכן את הרשימה המקומית
+        this.updateDisplayedFiles(); // מרענן את הרשימה המוצגת
+        this.fileDeleted.emit(fileId); // אם ההורה צריך לדעת
+      },
+      error: (err) => {
+        console.error('שגיאה במחיקת הקובץ:', err);
+      }
+    });
+  }
+
   getFilteredAndSortedFiles(): any[] {
     let filteredFiles = [...this.allFiles];
 
@@ -42,6 +85,7 @@ export class FileListDisplayComponent {
         file.category && file.category.toLowerCase().includes(this.filterCategory.toLowerCase())
       );
     }
+
     if (this.filterYear !== undefined && this.filterYear !== null) {
       filteredFiles = filteredFiles.filter(file =>
         file.year && file.year === this.filterYear
@@ -57,8 +101,8 @@ export class FileListDisplayComponent {
         if (valB === undefined || valB === null) valB = '';
 
         if (this.sortColumn === 'upload_date') {
-          valA = valA ? valA.getTime() : 0;
-          valB = valB ? valB.getTime() : 0;
+          valA = valA ? new Date(valA).getTime() : 0; // תוקן: ודא שמדובר ב-Date
+          valB = valB ? new Date(valB).getTime() : 0;
         } else if (this.sortColumn === 'year') {
           valA = valA || 0;
           valB = valB || 0;
@@ -68,48 +112,13 @@ export class FileListDisplayComponent {
         }
 
         let comparison = 0;
-        if (valA > valB) {
-          comparison = 1;
-        } else if (valA < valB) {
-          comparison = -1;
-        }
+        if (valA > valB) comparison = 1;
+        else if (valA < valB) comparison = -1;
 
         return this.sortDirection === 'desc' ? comparison * -1 : comparison;
       });
     }
 
     return filteredFiles;
-  }
-
-  applyFilters() {
-    // No explicit action needed here, the getter reacts to ngModel changes
-  }
-
-  clearFilters() {
-    this.filterCategory = '';
-    this.filterYear = undefined;
-  }
-
-  applySort() {
-    // No explicit action needed here, the getter reacts to ngModel changes
-  }
-
-  deleteFile(fileId: number) {
-    const wantsToDelete = true; // Replace with a custom dialog
-    if (!wantsToDelete) {
-      console.log('מחיקת הקובץ בוטלה על ידי המשתמש.');
-      return;
-    }
-
-    this.http.delete(`${API_URL}/files/${fileId}`, { withCredentials: true }).subscribe({
-      next: () => {
-        console.log('הקובץ נמחק בהצלחה!');
-        this.fileDeleted.emit(fileId); // יידוע ההורה על מחיקה
-        // אין צורך ב-this.refreshFiles.emit() אם ההורה מקבל את ה-fileDeleted ומרענן בעצמו
-      },
-      error: (err) => {
-        console.error('שגיאה במחיקת הקובץ:', err);
-      }
-    });
   }
 }

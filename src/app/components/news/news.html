@@ -1,1 +1,16 @@
-<p>news works!</p>
+<div class="news-page-container">
+  <h2 class="news-title">חדשות ופרסומים</h2>
+
+  <div class="news-item" *ngFor="let item of news">
+    <img [src]="item.imageUrl" alt="תמונה" class="news-image">
+
+    <div class="news-content">
+      <h3 class="news-item-title">{{ item.title }}</h3>
+      <p class="news-description">{{ item.description }}</p>
+      <div class="news-footer">
+        <span class="news-time">{{ item.timeAgo }}</span>
+        <a href="#" class="news-link">לכתבה המלאה &rarr;</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,9 @@
 <div *ngIf="images.length > 0" class="carousel-container">
-  <button (click)="nextImage()" class="carousel-button">❮</button>
-  
-  <img [src]="getFullImageUrl(images[currentIndex].url)"
-  [alt]="images[currentIndex].filename"
-  class="carousel-image">
-  
   <button (click)="prevImage()" class="carousel-button">❯</button>
+
+  <img [src]="getFullImageUrl(images[currentIndex].url)" [alt]="images[currentIndex].filename" class="carousel-image">
+  <button (click)="nextImage()" class="carousel-button">❮</button>
+
 </div>
 
 <div *ngIf="images.length === 0">

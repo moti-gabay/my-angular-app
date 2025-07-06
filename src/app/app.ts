@@ -7,6 +7,7 @@ import { SidebarNavComponent } from './sidebar-nav/sidebar-nav'; // ייבוא �
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Footer } from './components/footer/footer';
 import { ContactComponent } from './components/contact/contact';
+import { Tradition } from './components/tradition/tradition';
 
 @Component({
   selector: 'app-root',

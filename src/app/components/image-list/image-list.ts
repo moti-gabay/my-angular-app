@@ -50,10 +50,8 @@ export class ImageListComponent implements OnInit {
 
 
   startAutoSlide() {
-    setInterval(() => {
-      if (this.images.length > 0) {
+    setTimeout(() => {
         this.nextImage();
-      }
     }, 3000);
   }
 

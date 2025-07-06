@@ -40,7 +40,7 @@
 
   <h3 class="filter-title">רשימת קבצים</h3>
   <ul class="file-list">
-    <li *ngFor="let file of getFilteredAndSortedFiles()" class="file-item">
+    <li *ngFor="let file of displayedFiles" class="file-item">
       <div class="file-details">
         <a class="file-link" [href]="'http://localhost:5000/files/' + file.filename" target="_blank">
           <span>{{ file.filename }}</span>
@@ -48,7 +48,7 @@
         <div class="file-meta">
           <span *ngIf="file.category">קטגוריה: {{ file.category }}</span> |
           <span *ngIf="file.year">שנה: {{ file.year }}</span> |
-          <span *ngIf="file.upload_date"> תאריך העלאה: {{ file.upload_date | date:'yyyy-MM-dd' }}</span>
+          <span *ngIf="file.upload_date">תאריך העלאה: {{ file.upload_date | date:'yyyy-MM-dd' }}</span>
         </div>
       </div>
 
@@ -58,7 +58,7 @@
       </div>
     </li>
 
-    <li *ngIf="getFilteredAndSortedFiles().length === 0" class="empty-message">
+    <li *ngIf="displayedFiles.length === 0" class="empty-message">
       אין קבצים להצגה התואמים לסינון.
     </li>
   </ul>
