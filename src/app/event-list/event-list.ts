@@ -1,11 +1,11 @@
 // src/app/event-list/event-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { EventService, EventRecord } from '../services/event';
+import { EventService, EventRecord, ApprovedEventEmailData } from '../services/event';
 import { ChangeDetectorRef } from '@angular/core';
 import { AuthService } from '../services/auth';
 import { UserData } from "../services/auth"
-import { filter } from 'rxjs';
+import { catchError, filter, switchMap, take, throwError } from 'rxjs';
 @Component({
   selector: 'app-event-list',
   // standalone: true,
@@ -36,15 +36,20 @@ export class EventListComponent implements OnInit {
     this.error = '';
     this.eventService.getEvents().subscribe({
       next: (data) => {
+        const now = new Date();
+
         if (this.currentUser && this.currentUser.role === 'admin') {
           // אם המנהל מחובר - הצג את כל האירועים
           this.events = data;
           console.log(data)
         } else {
           // משתמש רגיל - הצג רק אירועים מאושרים
-          this.events = data.filter(event => event.is_approved);
+          this.events = data.filter(event =>
+            event.is_approved &&
+            event.date && // תוודא שהתאריך קיים
+            new Date(event.date) >= now
+          );
         }
-        console.log(this.events)
         this.loading = false;
         this.cdr.detectChanges(); // מוסיף רענון ידני
 
@@ -56,12 +61,51 @@ export class EventListComponent implements OnInit {
       }
     });
   }
-  approveEvent(eventId: number): void {
+  approveEvent(eventId: number, event: EventRecord): void {
     if (confirm('האם אתה בטוח שברצונך לאשר את האירוע?')) {
       this.eventService.approveEvent(eventId).subscribe({
         next: () => {
           alert('האירוע אושר בהצלחה.');
           this.fetchEvents(); // רענון הרשימה
+
+          // שליחת מייל ליוצר האירוע אם קיים
+          if (event.created_by) {
+            this.authService.getAllUsers().pipe(
+              take(1),
+              switchMap(allUsers => {
+                console.log("allUsers", allUsers); // תוודא כאן אם זה אובייקט או מערך
+                const usersArray = Array.isArray(allUsers) ? allUsers : Object.values(allUsers);
+                const creatorUser = usersArray.find(user => user.id === event.created_by);
+
+                if (!creatorUser) {
+                  throw new Error('לא נמצא יוצר האירוע');
+                }
+
+                const fullEvent: ApprovedEventEmailData = {
+                  recipient_email: creatorUser.email,
+                  event_title: event.title,
+                  event_date: event.date,
+                  event_time: event.time,
+                  event_location: event.location,
+                  creator_name: creatorUser.name
+                };
+
+                return this.eventService.sendMailToCreatorEvent(fullEvent);
+              }),
+              catchError(err => {
+                console.error('שגיאה בשליפת יוצר האירוע או שליחת מייל:', err);
+                return throwError(() => new Error('שליחת מייל נכשלה'));
+              })
+            ).subscribe({
+              next: () => {
+                console.log('המייל נשלח בהצלחה.');
+              },
+              error: (err) => {
+                console.error('שגיאה בשליחת המייל:', err);
+              }
+            });
+          }
+
         },
         error: (err) => {
           console.error('שגיאה באישור האירוע:', err);
@@ -70,6 +114,7 @@ export class EventListComponent implements OnInit {
       });
     }
   }
+
   unapproveEvent(eventId: number): void {
     if (confirm('האם אתה בטוח שברצונך לבטל את אישור האירוע?')) {
       this.eventService.unapproveEvent(eventId).subscribe({
@@ -84,5 +129,17 @@ export class EventListComponent implements OnInit {
     }
   }
 
-
+  deleteEvent(eventId: number): void {
+    if (confirm("אתה בטוח שברצונך למחןק את האירוע?")) {
+      this.eventService.deleteEvent(eventId).subscribe({
+        next: () => {
+          this.fetchEvents()
+        },
+        error: (err) => {
+          console.log("אירעה שגיאה בזמן מחיקת האירוע", err);
+          alert("אירעה שגיאה בזמן מחיקת האירוע")
+        }
+      })
+    }
+  }
 }

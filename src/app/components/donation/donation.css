@@ -1,0 +1,134 @@
+/* src/app/donation/donation.component.css */
+
+.donation-container {
+    padding: 2.5rem;
+    margin-top: 2rem; /* Adjust based on navbar height */
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    /* max-width: 50rem; */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    direction: rtl; /* לוודא כיוון RTL עבור תוכן הקומפוננטה */
+}
+
+.donation-title {
+    font-size: 2.2rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.donation-description {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: right; /* ליישר את הלייבל והאינפוט לימין */
+}
+
+.form-label {
+    display: block;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    text-align: right; /* ליישר את הטקסט בתוך האינפוט לימין */
+    box-sizing: border-box; /* לוודא שה-padding לא מגדיל את הרוחב */
+}
+
+.paypal-button-wrapper {
+    margin-top: 2rem;
+    min-height: 50px; /* לוודא שיש מספיק מקום לכפתור PayPal */
+    display: flex;
+    justify-content: center; /* למרכז את כפתור PayPal */
+}
+
+/* PayBox Link Styling */
+.paybox-link-wrapper {
+    margin-top: 2rem;
+    display: block; /* Default to block (visible) for small screens */
+}
+
+.paybox-text {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 0.8rem;
+}
+
+.paybox-button {
+    display: inline-flex; /* כדי שהלוגו והטקסט יהיו בשורה */
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.5rem;
+    background-color: #007bff; /* צבע כחול של PayBox */
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+    width: 100%; /* תופס את כל הרוחב בקונטיינר שלו */
+    max-width: 250px; /* רוחב מקסימלי לכפתור */
+    margin: 0 auto; /* למרכז את הכפתור */
+}
+
+.paybox-button:hover {
+    background-color: #0056b3;
+}
+
+.paybox-logo {
+    height: 24px; /* גובה הלוגו */
+    margin-left: 0.8rem; /* רווח בין הלוגו לטקסט ב-RTL */
+}
+
+/* Media query to hide PayBox link on medium and larger screens */
+@media (min-width: 768px) { /* Tailwind's 'md' breakpoint */
+    .paybox-link-wrapper {
+        display: none; /* Hide on medium and larger screens */
+    }
+}
+
+.donation-status {
+    margin-top: 1.5rem;
+    padding: 0.8rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.donation-status.success {
+    background-color: #e6ffe6;
+    color: #28a745;
+    border: 1px solid #28a745;
+}
+
+.donation-status.error {
+    background-color: #ffe6e6;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+.security-note {
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    color: #777;
+}
+
+.security-icon {
+    margin-left: 0.3rem; /* רווח בין האייקון לטקסט ב-RTL */
+}

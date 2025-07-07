@@ -1,22 +1,85 @@
+/* src/app/homepage/homepage.component.css */
 
+.home-container {
+    /* הסרתי גובה קבוע (height: 90vh) כדי לאפשר לתוכן לקבוע את הגובה */
+    width: 90%; /* רוחב יחסי */
+    margin: 2rem auto; /* ממורכז אופקית, מרווח אנכי */
+    padding: 1rem;
+    display: flex;
+    flex-direction: column; /* ברירת מחדל: עמודה (למסכים קטנים) */
+    justify-content: center; /* ממורכז אנכית במצב עמודה */
+    align-items: center; /* ממורכז אופקית במצב עמודה */
+    background-color: #f7fafc; /* רקע בהיר */
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    direction: rtl; /* כיווניות מימין לשמאל */
+    text-align: right; /* יישור טקסט לימין */
+    font-family: 'Inter', sans-serif; /* וודא שגופן Inter נטען */
+}
 
+/* Media Query למסכים בינוניים ומעלה (768px) */
+@media (min-width: 768px) {
+    .home-container {
+        flex-direction: row; /* במסכים גדולים: שורה */
+        justify-content: space-around; /* פיזור אופקי */
+        align-items: flex-start; /* יישור למעלה בשורה */
+        min-height: 70vh; /* גובה מינימלי במסכים גדולים אם רוצים */
+    }
+}
 
-.home-container{
-  /* border: 1px solid black; */
-  width: 90%;
-  height: 90vh;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+.home-inner-container {
+    width: 100%; /* ברירת מחדל: רוחב מלא למסכים קטנים */
+    padding: 1rem;
 }
-.home-inner-container{
-    width: 40%;
 
+@media (min-width: 768px) {
+    .home-inner-container {
+        width: 45%; /* רוחב 45% במסכים גדולים */
+    }
 }
-.img-container{
-  width: 50%;
-  
+
+.home-inner-container h2 {
+    font-size: 2.2rem;
+    color: #2d3748;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    text-align: center; /* ממורכז במסכים קטנים */
 }
-.logo-img{
-    width: 100%;
+
+@media (min-width: 768px) {
+    .home-inner-container h2 {
+        text-align: right; /* יישור לימין במסכים גדולים */
+    }
 }
+
+.home-inner-container p {
+    font-size: 1.05rem;
+    color: #4a5568;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.img-container {
+    width: 100%; /* ברירת מחדל: רוחב מלא למסכים קטנים */
+    padding: 1rem;
+    display: flex;
+    justify-content: center; /* למרכז את התמונה */
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .img-container {
+        width: 45%; /* רוחב 45% במסכים גדולים */
+        /* הסרתי גובה קבוע כאן, תן ל-app-image-gallery לנהל את הגובה */
+    }
+}
+
+/* אם יש לך קלאס .logo-img בתוך app-image-gallery, זה יהיה ה-CSS שלו */
+/* .logo-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+} */
+
+/* וודא ש-app-image-gallery עצמו רספונסיבי */
+/* לדוגמה, אם הוא מכיל גריד, וודא שהגריד מתאים את עצמו */

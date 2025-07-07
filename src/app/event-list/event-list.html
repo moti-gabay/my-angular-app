@@ -32,13 +32,16 @@
           צפה בפרטים
         </a> -->
 
-        <button *ngIf="currentUser?.role === 'admin' && !event.is_approved" (click)="approveEvent(event.id!)"
+        <button *ngIf="currentUser?.role === 'admin' && !event.is_approved" (click)="approveEvent(event.id!,event)"
           class="approve-button">
           אשר אירוע
         </button>
         <button *ngIf="currentUser?.role === 'admin' && event.is_approved" (click)="unapproveEvent(event.id!)"
           class="unapprove-button">
           בטל אישור
+        </button>
+        <button *ngIf="currentUser?.role === 'admin'" (click)="deleteEvent(event.id!)" class="delete-button">
+          מחק אירוע
         </button>
 
       </div>

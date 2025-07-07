@@ -1,0 +1,47 @@
+<div class="contact-form-container">
+  <h2>טופס יצירת בקשה חדשה</h2>
+
+  <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm" class="contact-form">
+
+    <div class="form-group">
+      <label>סוג האירוע<span class="required">*</span></label>
+      <input type="text" name="title" [(ngModel)]="formData.title" required>
+    </div>
+
+    <div class="form-group">
+      <label>תאריך<span class="required">*</span></label>
+      <input type="date" name="date" [(ngModel)]="formData.date" required>
+    </div>
+
+    <div class="form-group">
+      <label>שעה<span class="required">*</span></label>
+      <input type="time" name="time" [(ngModel)]="formData.time" required>
+    </div>
+
+    <div class="form-group">
+      <label>מיקום<span class="required">*</span></label>
+      <input type="text" name="location" [(ngModel)]="formData.location" required>
+    </div>
+
+    <div class="form-group">
+      <label>כמות משתתפים<span class="required">*</span></label>
+      <input type="number" name="needed_volunteers" [(ngModel)]="formData.needed_volunteers" required>
+    </div>
+
+    <div class="form-group">
+      <label>פרטי איש קשר<span class="required">*</span></label>
+      <textarea name="description" [(ngModel)]="formData.description" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>ציוד נדרש (אופציונלי)</label>
+      <textarea name="equipment" [(ngModel)]="formData.equipment"></textarea>
+    </div>
+    <div class="btn-container">
+
+      <button type="submit" [disabled]="!contactForm.valid" class="submit-button">שלח בקשה</button>
+
+    </div>
+    <div *ngIf="message" class="message">{{ message }}</div>
+  </form>
+</div>

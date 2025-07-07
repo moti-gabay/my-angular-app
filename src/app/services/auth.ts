@@ -97,4 +97,9 @@ export class AuthService {
     console.error('AuthService: HTTP Error:', errorMessage, error);
     return throwError(() => new Error(errorMessage));
   }
+
+ getAllUsers(): Observable<Object> {
+  return this.http.get(`http://localhost:5000/users`, { withCredentials: true });
+}
+
 }

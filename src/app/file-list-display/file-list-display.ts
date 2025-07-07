@@ -23,6 +23,7 @@ export class FileListDisplayComponent implements OnInit, OnChanges {
   sortColumn: string = 'upload_date';
   sortDirection: 'asc' | 'desc' = 'desc';
   isAdmin: boolean = false;
+  userMap = new Map<number, string>();
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -32,7 +33,21 @@ export class FileListDisplayComponent implements OnInit, OnChanges {
     ).subscribe(isAdmin => {
       this.isAdmin = isAdmin;
     });
+    this.authService.getAllUsers().subscribe({
+      next: (users: any) => { // אם ה-API שלך מחזיר מערך
+        users.forEach((user: any) => {
+          this.userMap.set(user.id, user.full_name); // יצירת מפה של id לשם
+        });
+      },
+      error: (err) => {
+        console.error('שגיאה בטעינת רשימת המשתמשים:', err);
+      }
+    });
   }
+  getUserNameById(userId: number): string {
+    return this.userMap.get(userId) || 'משתמש לא ידוע';
+  }
+
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['allFiles']) {

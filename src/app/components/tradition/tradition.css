@@ -1,3 +1,5 @@
+/* src/app/tradition/tradition.component.css */
+
 .tradition-container {
     max-width: 800px;
     margin: 2rem auto;
@@ -7,73 +9,132 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     direction: rtl;
     text-align: right;
+    font-family: 'Inter', sans-serif; /* וודא שגופן Inter נטען */
 }
 
 .tradition-title {
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.5rem; /* הגדלתי מעט לכותרת ראשית */
     color: #2d3748;
     margin-bottom: 1.5rem;
+    font-weight: bold; /* הדגשה */
 }
 
-.text-container {
-    width: 60%;
+/* כותרת "בקצרה..." */
+.tradition-container h2:nth-of-type(2) {
+    font-size: 1.8rem; /* גודל מתאים לכותרת משנה */
+    color: #333;
+    margin-bottom: 1rem;
+    text-align: right; /* יישור לימין */
 }
 
 .tradition-summary {
     display: flex;
+    flex-direction: column; /* ברירת מחדל: עמודה (למסכים קטנים) */
+    align-items: center; /* למרכז פריטים כשהם בעמודה */
     font-size: 1rem;
     color: #4a5568;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem; /* מרווח תחתון מהטאבים */
+    gap: 1.5rem; /* רווח בין הטקסט לתמונה במצב עמודה */
+}
+
+/* Media Query למסכים בינוניים ומעלה (768px) */
+@media (min-width: 768px) {
+    .tradition-summary {
+        flex-direction: row; /* במסכים גדולים: שורה */
+        align-items: flex-start; /* יישור למעלה בשורה */
+        gap: 2rem; /* רווח בין הטקסט לתמונה במצב שורה */
+    }
+}
+
+.text-container {
+    width: 100%; /* ברירת מחדל: רוחב מלא למסכים קטנים */
+    margin-bottom: 1rem; /* מרווח תחתון כשהטקסט מעל התמונה */
+}
+
+@media (min-width: 768px) {
+    .text-container {
+        width: 60%; /* רוחב 60% במסכים גדולים */
+        margin-bottom: 0; /* ביטול מרווח תחתון במצב שורה */
+    }
+}
+
+.text-container p {
+    line-height: 1.7; /* רווח שורות לקריאות טובה יותר */
+}
+
+.img-container {
+    width: 100%; /* ברירת מחדל: רוחב מלא למסכים קטנים */
+    height: auto; /* גובה אוטומטי לשמירה על יחס גובה-רוחב */
+    max-height: 200px; /* גובה מקסימלי לתמונה במסכים קטנים */
+    display: flex; /* כדי למרכז את התמונה בתוך הקונטיינר */
+    justify-content: center;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .img-container {
+        width: 40%; /* רוחב 40% במסכים גדולים */
+        max-height: none; /* ביטול הגבלת גובה במסכים גדולים */
+    }
+}
+
+.img-logo {
+    padding: 1rem;
+    width: 100%; /* התמונה תתאים לרוחב הקונטיינר שלה */
+    height: 100%; /* התמונה תתאים לגובה הקונטיינר שלה */
+    object-fit: contain; /* לוודא שהלוגו נראה בשלמותו בתוך המסגרת */
 }
 
 .tradition-tabs {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    flex-wrap: wrap; /* הטאבים יעברו שורה אם אין מספיק מקום */
+    gap: 0.8rem; /* רווח בין הטאבים */
     margin-bottom: 1.5rem;
+    padding: 0.5rem 0; /* ריווח קטן מעל ומתחת לטאבים */
 }
 
 .tradition-tabs button {
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem; /* הגדלתי מעט את הריווח הפנימי */
     border: none;
-    border-radius: 9999px;
+    border-radius: 9999px; /* כפתורים מעוגלים מאוד */
     background-color: #e2e8f0;
     cursor: pointer;
     font-weight: bold;
-    transition: background-color 0.3s;
+    color: #4a5568; /* צבע טקסט ברירת מחדל */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap; /* מונע שבירת שורה בטקסט של הכפתור */
 }
 
 .tradition-tabs button.active {
-    background-color: #805ad5;
+    background-color: #805ad5; /* צבע סגול לטאב פעיל */
     color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* צל קטן לטאב פעיל */
 }
 
-.tradition-tabs button:hover {
+.tradition-tabs button:hover:not(.active) {
     background-color: #cbd5e0;
 }
 
+.tradition-content {
+    padding: 1rem;
+    background-color: #ffffff; /* רקע לבן לתוכן הטאב */
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 .tradition-content h3 {
-    font-size: 1.5rem;
+    font-size: 1.7rem; /* גודל כותרת תוכן */
     color: #2d3748;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
+    text-align: right;
+    font-weight: bold;
 }
 
 .tradition-content p {
-    font-size: 1rem;
+    font-size: 1.05rem; /* גודל טקסט תוכן */
     color: #4a5568;
-}
-
-.img-container {
-    width: 30rem;
-
-    height: 20rem;
-}
-
-.img-logo {
-    padding: 1rem;
-    width: 100%;
-
-    height: 100%;
+    line-height: 1.7;
+    text-align: right;
 }

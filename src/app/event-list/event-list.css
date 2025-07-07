@@ -10,6 +10,10 @@
     margin-bottom: 20px;
 }
 
+.events-list{
+    max-height: 50rem;
+    overflow: auto;
+}
 .event-card {
     background-color: #f9f9f9;
     border-radius: 12px;
@@ -84,6 +88,16 @@
 
 .unapprove-button {
     background-color: #f44336;
+    /* אדום */
+     color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.delete-button {
+    background-color: #7d3933;
     /* אדום */
      color: white;
     padding: 8px 14px;

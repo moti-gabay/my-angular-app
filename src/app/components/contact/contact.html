@@ -1,45 +1,37 @@
-<div class="contact-form-container">
-  <h2>טופס יצירת בקשה חדשה</h2>
+<!-- src/app/contact/contact.component.html -->
+<div class="contact-container">
+  <h2 class="contact-title">צור קשר</h2>
+  <p class="contact-description">
+    יש לך שאלה, בקשה או משוב? נשמח לשמוע ממך!
+  </p>
 
-  <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm" class="contact-form">
-
+  <form (ngSubmit)="onSubmit()" class="contact-form">
     <div class="form-group">
-      <label>סוג האירוע<span class="required">*</span></label>
-      <input type="text" name="title" [(ngModel)]="formData.title" required>
+      <label for="name" class="form-label">שם מלא:</label>
+      <input type="text" id="name" [(ngModel)]="contactData.name" name="name" required class="form-input">
     </div>
 
     <div class="form-group">
-      <label>תאריך<span class="required">*</span></label>
-      <input type="date" name="date" [(ngModel)]="formData.date" required>
+      <label for="email" class="form-label">אימייל:</label>
+      <input type="email" id="email" [(ngModel)]="contactData.email" name="email" required class="form-input">
     </div>
 
     <div class="form-group">
-      <label>שעה<span class="required">*</span></label>
-      <input type="time" name="time" [(ngModel)]="formData.time" required>
+      <label for="subject" class="form-label">נושא:</label>
+      <input type="text" id="subject" [(ngModel)]="contactData.subject" name="subject" class="form-input">
     </div>
 
     <div class="form-group">
-      <label>מיקום<span class="required">*</span></label>
-      <input type="text" name="location" [(ngModel)]="formData.location" required>
+      <label for="message" class="form-label">הודעה:</label>
+      <textarea id="message" [(ngModel)]="contactData.message" name="message" rows="5" required class="form-textarea"></textarea>
     </div>
 
-    <div class="form-group">
-      <label>כמות משתתפים<span class="required">*</span></label>
-      <input type="number" name="needed_volunteers" [(ngModel)]="formData.needed_volunteers" required>
-    </div>
-
-    <div class="form-group">
-      <label>פרטי איש קשר<span class="required">*</span></label>
-      <textarea name="description" [(ngModel)]="formData.description" required></textarea>
-    </div>
-
-    <div class="form-group">
-      <label>ציוד נדרש (אופציונלי)</label>
-      <textarea name="equipment" [(ngModel)]="formData.equipment"></textarea>
-    </div>
-
-    <button type="submit" [disabled]="!contactForm.valid" class="submit-button">שלח בקשה</button>
-
-    <div *ngIf="message" class="message">{{ message }}</div>
+    <button type="submit" class="submit-button">שלח הודעה</button>
   </form>
+
+  <div *ngIf="statusMessage" class="status-message" 
+       [class.success]="isSuccess" 
+       [class.error]="!isSuccess">
+    {{ statusMessage }}
+  </div>
 </div>

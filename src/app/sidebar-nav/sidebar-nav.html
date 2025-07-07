@@ -1,77 +1,88 @@
 <div class="sidebar-content">
-  <ng-container>
-    <ng-container *ngIf="currentUser$ | async as user">
-      <ul class="nav-list">
-        <li *ngIf="user.role === 'admin' || user.role === 'member'">
-          <a routerLink="/files" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
-            <mat-icon>folder</mat-icon>
-            <span class="nav-title">ניהול קבצים</span>
-          </a>
-        </li>
-        <li *ngIf="user.role === 'admin' || user.role === 'member'">
-          <a routerLink="/images" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
-            <mat-icon>image</mat-icon>
-            <span class="nav-title">גלריית תמונות</span>
-          </a>
-        </li>
+  <ng-container *ngIf="currentUser$ | async as user">
+    <ul class="nav-list">
+      <!-- כפתורים למנהל ולחבר -->
+      <li *ngIf="user.role === 'admin' || user.role === 'member'">
+        <a routerLink="/files" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
+          <mat-icon>folder</mat-icon>
+          <span class="nav-title">ניהול קבצים</span>
+        </a>
+      </li>
 
-        <li *ngIf="user.role === 'admin' || user.role === 'member'">
-          <a routerLink="/admin-events" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
-            <mat-icon>event</mat-icon>
-            <span class="nav-title"> ניהול אירועים</span>
-          </a>
-        </li>
+      <li *ngIf="user.role === 'admin' || user.role === 'member'">
+        <a routerLink="/images" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
+          <mat-icon>image</mat-icon>
+          <span class="nav-title">גלריית תמונות</span>
+        </a>
+      </li>
 
-       
+      <li *ngIf="user.role === 'admin' || user.role === 'member'">
+        <a routerLink="/admin-events" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
+          <mat-icon>event</mat-icon>
+          <span class="nav-title">ניהול אירועים</span>
+        </a>
+      </li>
 
-        <li *ngIf="user.role === 'user'">
+      <!-- כפתורים למשתמש רגיל -->
+      <ng-container *ngIf="user.role === 'user' || user.role === 'admin' || user.role === 'member' ">
+        <li>
           <a routerLink="/homepage" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
             <mat-icon>home</mat-icon>
             <span class="nav-title">מי אנחנו</span>
-
           </a>
         </li>
-        <li *ngIf="user.role === 'user'">
+
+        <li>
           <a routerLink="/news" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
             <mat-icon>article</mat-icon>
             <span class="nav-title">חדשות ופרסומים</span>
           </a>
         </li>
-        <li *ngIf="user.role === 'user'">
+
+        <li>
           <a routerLink="/tradition" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
             <mat-icon>book</mat-icon>
             <span class="nav-title">המסורת היהודית</span>
           </a>
         </li>
-        <li *ngIf="user.role === 'user'">
+
+        <li>
           <a routerLink="/events" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
             <mat-icon>event</mat-icon>
-            <span class="nav-title">ארועים</span>
+            <span class="nav-title">אירועים</span>
           </a>
         </li>
-        <li *ngIf="user.role === 'user'">
+
+        <li>
+          <a routerLink="/add-event" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
+            <mat-icon>add</mat-icon>
+            <span class="nav-title">צור אירוע</span>
+          </a>
+        </li>
+
+        <li>
           <a routerLink="/contact" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
             <mat-icon>mail</mat-icon>
             <span class="nav-title">צור קשר</span>
           </a>
         </li>
-        <li *ngIf="user.role === 'user'">
+
+        <li>
           <a routerLink="/donation" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
             <mat-icon>volunteer_activism</mat-icon>
             <span class="nav-title">תרומה</span>
           </a>
         </li>
-
-      </ul>
-    </ng-container>
+      </ng-container>
+    </ul>
 
     <div class="auth-buttons-container">
       <button *ngIf="isLoggedInStatus$" (click)="onLogoutClick()" class="auth-button logout-button">
         <mat-icon>logout</mat-icon>
         <span>התנתק</span>
       </button>
-      <a *ngIf="!isLoggedInStatus$" routerLink="/login" (click)="onLinkClick()"
-        class="auth-button login-register-button">
+
+      <a *ngIf="!isLoggedInStatus$" routerLink="/login" (click)="onLinkClick()" class="auth-button login-register-button">
         <mat-icon>login</mat-icon>
         <span>התחבר / הירשם</span>
       </a>

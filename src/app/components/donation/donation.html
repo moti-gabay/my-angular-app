@@ -1,1 +1,40 @@
-<p>donation works!</p>
+<!-- src/app/donation/donation.component.html -->
+<div class="donation-container">
+  <h2 class="donation-title">תרומה לאתר</h2>
+  <p class="donation-description">
+    תרומתך עוזרת לנו להמשיך ולספק תוכן ושירותים איכותיים.
+  </p>
+
+  <div class="form-group">
+    <label for="donationAmount" class="form-label">סכום התרומה (ILS):</label>
+    <input type="number" id="donationAmount" [(ngModel)]="donationAmount" 
+           (ngModelChange)="onAmountChange()"
+           min="1" step="1" class="form-input">
+  </div>
+
+  <div #paypalButtonContainer class="paypal-button-wrapper">
+    <!-- כפתור PayPal ירונדר כאן על ידי ה-SDK -->
+  </div>
+
+  <!-- קישור PayBox - יוצג רק במסכים קטנים (טלפונים) -->
+  <div class="paybox-link-wrapper">
+    <p class="paybox-text">או תרמו דרך PayBox:</p>
+    <a href="https://link.payboxapp.com/HPNEdc74wRY54Vsx6" target="_blank" rel="noopener noreferrer" 
+       class="paybox-button">
+      <img src="https://www.payboxapp.com/wp-content/uploads/2020/04/site-logo-white.png" alt="לוגו PayBox" class="paybox-logo">
+      <span>תרומה ב-PayBox</span>
+    </a>
+  </div>
+
+  <div *ngIf="donationStatus" class="donation-status" 
+       [class.success]="donationStatus.includes('תודה')" 
+       [class.error]="donationStatus.includes('שגיאה') || donationStatus.includes('בוטלה')">
+    {{ donationStatus }}
+  </div>
+
+  <p class="security-note">
+    <small>
+      <span class="security-icon">🔒</span> כל התרומות מאובטחות באמצעות PayPal ו-PayBox.
+    </small>
+  </p>
+</div>

@@ -39,5 +39,9 @@ export class SidebarNavComponent {
     if (this.isSidebarOpen) {
       this.toggleSidebar.emit();
     }
+
+  }
+  onToggleSidebarClick(): void {
+    this.toggleSidebar.emit();
   }
 }

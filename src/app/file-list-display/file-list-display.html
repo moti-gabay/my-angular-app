@@ -4,7 +4,8 @@
   <div class="filter-section">
     <div class="filter-group">
       <label for="filterCategoryInput" class="filter-label">סנן לפי קטגוריה:</label>
-      <input type="text" id="filterCategoryInput" [(ngModel)]="filterCategory" class="filter-input" placeholder="כל הקטגוריות">
+      <input type="text" id="filterCategoryInput" [(ngModel)]="filterCategory" class="filter-input"
+        placeholder="כל הקטגוריות">
     </div>
 
     <div class="filter-group">
@@ -48,12 +49,14 @@
         <div class="file-meta">
           <span *ngIf="file.category">קטגוריה: {{ file.category }}</span> |
           <span *ngIf="file.year">שנה: {{ file.year }}</span> |
-          <span *ngIf="file.upload_date">תאריך העלאה: {{ file.upload_date | date:'yyyy-MM-dd' }}</span>
+          <span *ngIf="file.upload_date">תאריך העלאה: {{ file.upload_date | date:'yyyy-MM-dd' }}</span>|
+          <span>{{ getUserNameById(file.uploaded_by) }}</span>
         </div>
       </div>
 
       <div class="file-actions">
-        <a class="action-button view-button" [href]="'http://localhost:5000/files/' + file.filename" target="_blank">צפה</a>
+        <a class="action-button view-button" [href]="'http://localhost:5000/files/' + file.filename"
+          target="_blank">צפה</a>
         <button *ngIf="isAdmin" class="action-button delete-button" (click)="deleteFile(file.id)">מחק</button>
       </div>
     </li>

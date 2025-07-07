@@ -7,19 +7,18 @@ import { SidebarNavComponent } from './sidebar-nav/sidebar-nav'; // ייבוא �
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Footer } from './components/footer/footer';
 import { ContactComponent } from './components/contact/contact';
-import { Tradition } from './components/tradition/tradition';
 
 @Component({
   selector: 'app-root',
-  // standalone: true,
+  standalone: true,
   imports: [
     RouterOutlet,
     CommonModule,
     Footer,
     SidebarNavComponent
   ],
-  templateUrl:"./app.html",
-  styleUrl:"./app.css",
+  templateUrl: "./app.html",
+  styleUrl: "./app.css",
   animations: [
     trigger('sidebarAnimation', [
       state('open', style({
@@ -38,7 +37,7 @@ export class AppComponent implements OnInit {
   title = 'file-manager-app';
   isSidebarOpen: boolean = true;
 
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
     // מצב ההתחברות מטופל על ידי AuthService והוא אסינכרוני

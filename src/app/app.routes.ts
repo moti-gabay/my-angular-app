@@ -7,12 +7,12 @@ import { roleGuard } from './auth/role.guard'; // ייבוא ה-RoleGuard
 import { HomePage } from './components/home-page/home-page';
 import { News } from './components/news/news';
 import { Tradition } from './components/tradition/tradition';
-import { Events } from './components/events/events';
-import { ContactComponent } from './components/contact/contact';
+import { AddEventComponent } from './components/add-event/add-event';
 import { ImageGalleryComponent } from './image-gallery/image-gallery';
-import { Donation } from './components/donation/donation';
+import { DonationComponent } from './components/donation/donation';
 import { ApprovedEventsComponent } from './components/approved-events/approved-events';
 import { EventListComponent } from './event-list/event-list';
+import { ContactComponent } from './components/contact/contact';
 
 export const routes: Routes = [
   { path: 'login', component: LoginRegisterComponent },
@@ -28,7 +28,7 @@ export const routes: Routes = [
     canActivate: [roleGuard],
     data: { roles: ['admin', 'member'] } // רק אדמין וחבר יכולים לגשת למסך הקבצים
   },
-   {
+  {
     path: 'admin-events', // נתיב עבור "ארועים" (אם זהו נתיב נפרד מניהול אירועים לאדמין)
     component: EventListComponent, // placeholder component
     canActivate: [roleGuard],
@@ -38,44 +38,50 @@ export const routes: Routes = [
     path: 'dashboard',
     component: UserDashboardComponent,
     canActivate: [roleGuard],
-    data: { roles: ['user'] } // רק משתמש רגיל יכול לגשת למסך זה
+    data: { roles: ['user','admin', 'member'] } // רק משתמש רגיל יכול לגשת למסך זה
   },
   // ניתובים חדשים עבור משתמשים רגילים
   {
     path: 'homepage', // נתיב עבור "מי אנחנו"
     component: HomePage, // placeholder component
     canActivate: [roleGuard],
-    data: { roles: ['user'] }
+    data: { roles:['user','admin', 'member'] }
   },
   {
     path: 'news', // נתיב עבור "חדשות ופרסומים"
     component: News, // placeholder component
     canActivate: [roleGuard],
-    data: { roles: ['user'] }
+    data: { roles:['user','admin', 'member'] }
   },
   {
     path: 'tradition', // נתיב עבור "המסורת היהודית"
     component: Tradition, // placeholder component
     canActivate: [roleGuard],
-    data: { roles: ['user'] }
+    data: { roles:['user','admin', 'member'] }
   },
   {
-    path: 'events', 
+    path: 'events',
     component: ApprovedEventsComponent, // placeholder component
     canActivate: [roleGuard],
-    data: { roles: ['user'] }
+    data: { roles:['user','admin', 'member'] }
   },
   {
-    path: 'contact', 
+    path: 'contact',
     component: ContactComponent, // placeholder component
     canActivate: [roleGuard],
-    data: { roles: ['user'] }
+    data: { roles:['user','admin', 'member'] }
   },
   {
-    path: 'donation', 
-    component: Donation, // placeholder component
+    path: 'add-event',
+    component: AddEventComponent, // placeholder component
     canActivate: [roleGuard],
-    data: { roles: ['user'] }
+    data: { roles:['user','admin', 'member'] }
+  },
+  {
+    path: 'donation',
+    component: DonationComponent, // placeholder component
+    canActivate: [roleGuard],
+    data: { roles:['user','admin', 'member'] }
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // ברירת מחדל: הפנה ללוגין
   { path: '**', redirectTo: '/login' } // לכל נתיב לא ידוע

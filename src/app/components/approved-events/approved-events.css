@@ -1,31 +1,80 @@
-/* approved-events.component.css */
+/* src/app/approved-events/approved-events.component.css */
 
 .container {
     display: flex;
+    flex-direction: column;
+    /* ברירת מחדל: עמודה (למסכים קטנים) */
     width: 100%;
+    min-height: calc(100vh - var(--navbar-height, 64px));
+    /* גובה מינימלי, פחות גובה ה-navbar */
     font-family: 'Arial', sans-serif;
     background-color: #f6f6f6;
+    padding: 1rem;
+    /* ריווח כללי לקונטיינר */
+    box-sizing: border-box;
+    /* לוודא ש-padding לא מגדיל את הרוחב */
+    direction: rtl;
+    /* כיווניות מימין לשמאל */
+    text-align: right;
+    /* יישור טקסט לימין */
+}
+
+/* Media Query למסכים גדולים (768px ומעלה) */
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+        /* במסכים גדולים: שורה */
+        justify-content: center;
+        /* למרכז את התוכן */
+        align-items: flex-start;
+        /* יישור למעלה */
+        gap: 20px;
+        /* רווח בין הסיידבאר לצ'אט בוקס */
+        padding: 20px;
+        /* ריווח גדול יותר בדסקטופ */
+    }
 }
 
 .sidebar {
-    height: calc(100vh - 100px);
-    overflow: auto;
-    width: 25rem;
+    width: 100%;
+    /* ברירת מחדל: רוחב מלא למסכים קטנים */
+    height: auto;
+    /* גובה אוטומטי למסכים קטנים */
+    overflow-y: auto;
+    /* גלילה אנכית אם התוכן חורג */
+    max-height: 30rem;
     background-color: #f8f2f9;
     padding: 20px;
-    border-left: 1px solid #ddd;
+    border-radius: 10px;
+    /* פינות מעוגלות */
+    border-left: none;
+    /* ביטול גבול שמאלי במובייל */
+    margin-bottom: 20px;
+    /* מרווח תחתון מהצ'אט בוקס במובייל */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* צל קטן */
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        width: 300px;
+        /* רוחב קבוע לסיידבאר בדסקטופ */
+        height: calc(100vh - 100px);
+        /* גובה כפי שהיה, פחות navbar */
+        border-left: 1px solid #ddd;
+        /* החזרת גבול שמאלי בדסקטופ */
+        margin-bottom: 0;
+        /* ביטול מרווח תחתון */
+    }
 }
 
 .sidebar h2 {
     text-align: center;
     margin-bottom: 20px;
-    font-size: 20px;
+    font-size: 24px;
+    /* גודל כותרת גדול יותר */
     color: #333;
-}
-
-.event-card {
-    overflow: auto;
-    height: calc(100vh - 100px);
+    font-weight: bold;
 }
 
 .event-item {
@@ -36,10 +85,18 @@
     padding: 10px;
     border-radius: 10px;
     transition: background-color 0.2s ease-in-out;
+    border: 1px solid transparent;
+    /* גבול שקוף כברירת מחדל */
 }
 
 .event-item:hover {
     background-color: #e0d7f7;
+}
+
+.event-item strong {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
 }
 
 .event-item span {
@@ -48,30 +105,57 @@
 }
 
 .chat-box {
-    width: 40rem;
-    height: 50rem;
-    flex: 1;
+    width: 100%;
+    /* ברירת מחדל: רוחב מלא למסכים קטנים */
+    height: auto;
+    /* גובה אוטומטי למסכים קטנים */
+    min-height: 300px;
+    /* גובה מינימלי לצ'אט בוקס במובייל */
+    background-color: #ffffff;
+    /* רקע לבן */
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* צל קטן */
 }
 
-
+@media (min-width: 768px) {
+    .chat-box {
+        width: 600px;
+        /* רוחב קבוע לצ'אט בוקס בדסקטופ */
+        height: calc(100vh - 100px);
+        /* גובה כפי שהיה, פחות navbar */
+        min-height: auto;
+        /* ביטול גובה מינימלי */
+    }
+}
 
 .chat-message {
     background-color: #b3dbf7;
     padding: 15px;
     border-radius: 20px;
-    max-width: 70%;
+    max-width: 90%;
+    /* הגדלתי מקסימום רוחב למסכים קטנים */
     margin-bottom: 15px;
     font-size: 16px;
+    text-align: right;
+    /* יישור לימין */
+    line-height: 1.6;
 }
 
 .response-buttons {
     display: flex;
+    flex-wrap: wrap;
+    /* כפתורים יעברו שורה אם אין מקום */
+    justify-content: center;
+    /* למרכז כפתורים */
     gap: 10px;
     margin-bottom: 15px;
+    width: 100%;
+    /* תופס את כל הרוחב הזמין */
 }
 
 .response-buttons button {
@@ -82,6 +166,10 @@
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.2s;
+    flex-grow: 1;
+    /* מאפשר לכפתורים לגדול ולתפוס רוחב */
+    min-width: 120px;
+    /* רוחב מינימלי לכפתור */
 }
 
 .response-buttons button:hover {
@@ -91,6 +179,8 @@
 .confirmation {
     font-size: 14px;
     color: #333;
+    text-align: center;
+    /* ממורכז */
 }
 
 .confirmation a {
@@ -101,6 +191,7 @@
 
 .footer-icon {
     margin-top: auto;
+    /* דוחף את האייקון לתחתית הצ'אט בוקס */
     text-align: center;
     color: #666;
     font-size: 24px;
