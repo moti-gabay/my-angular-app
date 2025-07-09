@@ -1,0 +1,65 @@
+// src/app/news-article/news-article.component.ts
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { NewsService, NewsItem } from '../../services/news'; // וודא נתיב נכון
+import { CommonModule, DatePipe } from '@angular/common'; // ייבוא CommonModule ו-DatePipe
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser'; // לייבוא DomSanitizer
+import { ChangeDetectorRef } from '@angular/core';
+
+@Component({
+  selector: 'app-news-info',
+  // standalone: true,
+  imports: [CommonModule, DatePipe,RouterLink], // הוספת DatePipe
+  templateUrl: './news-info.html',
+  styleUrls: ['./news-info.css']
+})
+export class NewsInfo implements OnInit {
+  newsItem: NewsItem | null = null;
+  loading: boolean = true;
+  error: string = '';
+  safeFullContent: SafeHtml | null = null; // לתוכן HTML בטוח
+
+  constructor(
+    private route: ActivatedRoute,
+    private cdr : ChangeDetectorRef,
+    private newsService: NewsService,
+    private sanitizer: DomSanitizer // הזרקת DomSanitizer
+  ) { }
+
+  ngOnInit(): void {
+    this.loading = true;
+    this.error = '';
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id) {
+        this.newsService.getNewsItemById(parseInt(id, 10)).subscribe({
+          next: (data) => {
+            this.newsItem = data;
+            // אם full_content מכיל HTML, סמן אותו כבטוח
+            if (this.newsItem && this.newsItem.full_content) {
+              this.safeFullContent = this.sanitizer.bypassSecurityTrustHtml(this.newsItem.full_content);
+            }
+            this.loading = false;
+            this.cdr.detectChanges()
+          },
+          error: (err) => {
+            console.error('Error fetching news article:', err);
+            this.error = 'שגיאה בטעינת הכתבה.';
+            this.loading = false;
+          }
+        });
+      } else {
+        this.error = 'מזהה כתבה לא נמצא.';
+        this.loading = false;
+      }
+    });
+  }
+
+  getFullImageUrl(relativeUrl: string): string {
+    // הנחה: API_URL מגיע משירות ה-url או environment
+    // אם ה-URL המלא כבר מגיע מהשרת, אז אין צורך בזה
+    // נניח ש-API_URL הוא 'http://localhost:5000'
+    const baseUrl = 'http://localhost:5000'; // או API_URL אם הוא מוגדר כ-http://localhost:5000
+    return `${baseUrl}${relativeUrl}`;
+  }
+}

@@ -21,7 +21,7 @@
 }
 
 /* כותרת "בקצרה..." */
-.tradition-container h2:nth-of-type(2) {
+.tradition-container h2:nth-of-type(2) { /* מתייחס לכותרת השנייה במיכל */
     font-size: 1.8rem; /* גודל מתאים לכותרת משנה */
     color: #333;
     margin-bottom: 1rem;
@@ -137,4 +137,88 @@
     color: #4a5568;
     line-height: 1.7;
     text-align: right;
+}
+
+/* חדש: עיצוב עבור כפתור "לכתבה המלאה" */
+.read-more-section {
+  text-align: left; /* יישור לשמאל ב-RTL */
+  margin-top: 1.5rem;
+}
+
+.read-more-button {
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  background-color: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.read-more-button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+
+/* הודעות טעינה/שגיאה/אין פריטים */
+.loading-message, .error-message, .no-items-message {
+  text-align: center;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  font-size: 1.1em;
+}
+
+.loading-message {
+  background-color: #e0f7fa;
+  color: #00796b;
+  border: 1px solid #b2ebf2;
+}
+
+.error-message {
+  background-color: #ffe0b2;
+  color: #e65100;
+  border: 1px solid #ffcc80;
+}
+
+.error-message button {
+  background-color: #e65100;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
+}
+
+.error-message button:hover {
+  background-color: #ff7043;
+}
+
+.no-items-message {
+  background-color: #f0f0f0;
+  color: #555;
+  border: 1px solid #ddd;
+}
+
+/* רספונסיביות כללית */
+@media (max-width: 768px) {
+  .tradition-container {
+    padding: 1rem;
+    margin: 1rem auto;
+  }
+  .tradition-title {
+    font-size: clamp(1.8rem, 6vw, 2.2rem);
+  }
+  .tradition-content h3 {
+    font-size: clamp(1.4rem, 5vw, 1.7rem);
+  }
+  .tradition-content p {
+    font-size: clamp(0.95rem, 3vw, 1.05rem);
+  }
 }

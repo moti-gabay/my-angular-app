@@ -1,0 +1,29 @@
+<!-- src/app/tradition-article/tradition-article.component.html -->
+<div class="tradition-article-container" *ngIf="!loading && traditionItem">
+  <h1 class="article-title">{{ traditionItem.title }}</h1>
+  
+  <div class="article-meta">
+    <span class="published-date" *ngIf="traditionItem.created_at">פורסם ב: {{ traditionItem.created_at | date:'fullDate' }}</span>
+    <span class="category-tag" *ngIf="traditionItem.category">{{ traditionItem.category }}</span>
+  </div>
+
+  <div class="article-image-wrapper" *ngIf="traditionItem.image_url">
+    <img [src]="getFullImageUrl(traditionItem.image_url)" [alt]="traditionItem.title" class="article-image">
+  </div>
+
+  <div class="article-content" [innerHTML]="safeFullContent">
+    <!-- תוכן הכתבה המלאה יוצג כאן -->
+  </div>
+
+  <div class="back-link">
+    <a routerLink="/tradition">← חזרה למסורת היהודית</a>
+  </div>
+</div>
+
+<div class="loading-message" *ngIf="loading">
+  טוען פריט מסורת...
+</div>
+
+<div class="error-message" *ngIf="error">
+  {{ error }}
+</div>

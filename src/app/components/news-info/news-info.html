@@ -1,0 +1,29 @@
+<!-- src/app/news-article/news-article.component.html -->
+<div class="news-article-container" *ngIf="!loading && newsItem">
+  <h1 class="article-title">{{ newsItem.title }}</h1>
+  
+  <div class="article-meta">
+    <span class="published-date">פורסם ב: {{ newsItem.published_at | date:'fullDate' }} ({{ newsItem.timeAgo }})</span>
+    <!-- ניתן להוסיף כאן מידע נוסף כמו שם כותב, קטגוריה וכו' -->
+  </div>
+
+  <div class="article-image-wrapper" *ngIf="newsItem.imageUrl"> <!-- שינוי: newsItem.imageUrl -->
+    <img [src]="getFullImageUrl(newsItem.imageUrl)" [alt]="newsItem.title" class="article-image">
+  </div>
+
+  <div class="article-content" [innerHTML]="safeFullContent">
+    <!-- תוכן הכתבה המלאה יוצג כאן -->
+  </div>
+
+  <div class="back-link">
+    <a routerLink="/news">← חזרה לחדשות</a>
+  </div>
+</div>
+
+<div class="loading-message" *ngIf="loading">
+  טוען כתבה...
+</div>
+
+<div class="error-message" *ngIf="error">
+  {{ error }}
+</div>

@@ -130,7 +130,7 @@ export class EventListComponent implements OnInit {
   }
 
   deleteEvent(eventId: number): void {
-    if (confirm("אתה בטוח שברצונך למחןק את האירוע?")) {
+    if (confirm("אתה בטוח שברצונך למחוק את האירוע?")) {
       this.eventService.deleteEvent(eventId).subscribe({
         next: () => {
           this.fetchEvents()

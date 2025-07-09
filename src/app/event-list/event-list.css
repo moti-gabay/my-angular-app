@@ -1,112 +1,234 @@
+/* src/app/event-list/event-list.css */
+
 .events-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #f7fafc;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  direction: rtl;
+  text-align: right;
+  font-family: 'Inter', sans-serif;
 }
 
-.events-title {
-    text-align: center;
-    font-size: 28px;
-    margin-bottom: 20px;
+.events-page-title {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 0.8rem;
 }
 
-.events-list{
-    max-height: 50rem;
-    overflow: auto;
-}
-.event-card {
-    background-color: #f9f9f9;
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 16px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.loading-message, .error-message, .no-events-message {
+  text-align: center;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  font-size: 1.1em;
 }
 
-.event-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
+.loading-message {
+  background-color: #e0f7fa;
+  color: #00796b;
+  border: 1px solid #b2ebf2;
 }
 
-.event-info {
-    margin: 4px 0;
+.error-message {
+  background-color: #ffe0b2;
+  color: #e65100;
+  border: 1px solid #ffcc80;
 }
 
-.label {
-    font-weight: bold;
+.error-message button {
+  background-color: #e65100;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
 }
 
-.event-description {
-    margin-top: 10px;
-    font-style: italic;
+.error-message button:hover {
+  background-color: #ff7043;
 }
 
-.event-actions {
-    margin-top: 15px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
+.no-events-message {
+  background-color: #f0f0f0;
+  color: #555;
+  border: 1px solid #ddd;
 }
 
-.view-details-button {
-    background-color: #007bff;
-    color: white;
-    padding: 8px 14px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
+.events-table-wrapper {
+  overflow-x: auto; /* מאפשר גלילה אופקית בטבלה במסכים קטנים */
+  margin-top: 20px;
 }
 
-.view-details-button:hover {
-    background-color: #0056b3;
+.events-table {
+  width: 100%;
+  border-collapse: collapse; /* מסיר רווחים בין תאים */
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden; /* כדי לשמור על פינות מעוגלות */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.events-table th, .events-table td {
+  padding: 12px 15px;
+  text-align: right; /* יישור לימין */
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.events-table th {
+  background-color: #3498db;
+  color: white;
+  font-weight: bold;
+  font-size: 1em;
+  white-space: nowrap; /* מונע שבירת שורה בכותרות עמודות */
+}
+
+.events-table tbody tr:nth-child(even) {
+  background-color: #f8f8f8; /* צבע רקע לשורות זוגיות */
+}
+
+.events-table tbody tr:hover {
+  background-color: #f0f8ff; /* צבע רקע בעת ריחוף */
+}
+
+/* עיצוב סטטוס אישור */
+.approved {
+  color: #28a745; /* ירוק */
+  font-weight: bold;
+}
+
+.pending {
+  color: #ffc107; /* צהוב */
+  font-weight: bold;
+}
+
+/* עיצוב כפתורי פעולות */
+.actions-cell {
+  white-space: nowrap; /* מונע שבירת שורה לכפתורים */
+}
+
+.action-button {
+  padding: 8px 12px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.85em;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .approve-button {
-    background-color: #28a745;
-    color: white;
-    padding: 8px 14px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+  background-color: #28a745; /* ירוק */
+  color: white;
 }
 
 .approve-button:hover {
-    background-color: #218838;
-    transform: scale(1.05);
-}
-
-.loading-message,
-.error-message,
-.no-events-message {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 16px;
+  background-color: #218838;
+  transform: translateY(-2px);
 }
 
 .unapprove-button {
-    background-color: #f44336;
-    /* אדום */
-     color: white;
-    padding: 8px 14px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-.delete-button {
-    background-color: #7d3933;
-    /* אדום */
-     color: white;
-    padding: 8px 14px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+  background-color: #ffc107; /* צהוב */
+  color: #333;
 }
 
 .unapprove-button:hover {
-    background-color: #d32f2f;
+  background-color: #e0a800;
+  transform: translateY(-2px);
+}
+
+.delete-button {
+  background-color: #dc3545; /* אדום */
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+  transform: translateY(-2px);
+}
+
+.register-button {
+  background-color: #007bff; /* כחול */
+  color: white;
+}
+
+.register-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.unregister-button {
+  background-color: #6c757d; /* אפור */
+  color: white;
+}
+
+.unregister-button:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+}
+
+/* רספונסיביות לטבלה במסכים קטנים */
+@media (max-width: 768px) {
+  .events-container {
+    padding: 1rem;
+    margin: 1rem auto;
+  }
+
+  .events-table thead {
+    display: none; /* הסתר כותרות עמודות ב-CSS */
+  }
+
+  .events-table, .events-table tbody, .events-table tr, .events-table td {
+    display: block; /* הצג אלמנטים של טבלה כבלוק */
+    width: 100%;
+  }
+
+  .events-table tr {
+    margin-bottom: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .events-table td {
+    text-align: right; /* יישור לימין */
+    padding-left: 50%; /* רווח כדי להכיל את ה-label */
+    position: relative;
+  }
+
+  .events-table td::before {
+    content: attr(data-label); /* השתמש ב-data-label ככותרת */
+    position: absolute;
+    right: 15px; /* מיקום ה-label */
+    width: 45%;
+    padding-left: 10px;
+    font-weight: bold;
+    text-align: left; /* יישור לשמאל עבור ה-label */
+    color: #555;
+  }
+
+  /* הסתר את ה-label עבור עמודת הפעולות */
+  .events-table td.actions-cell::before {
+    content: '';
+    display: none;
+  }
+
+  .events-table td:nth-of-type(1)::before { content: "כותרת:"; }
+  .events-table td:nth-of-type(2)::before { content: "תאריך:"; }
+  .events-table td:nth-of-type(3)::before { content: "שעה:"; }
+  .events-table td:nth-of-type(4)::before { content: "מיקום:"; }
+  .events-table td:nth-of-type(5)::before { content: "תיאור:"; }
+  .events-table td:nth-of-type(6)::before { content: "יוצר האירוע:"; }
+  .events-table td:nth-of-type(7)::before { content: "סטטוס אישור:"; }
 }

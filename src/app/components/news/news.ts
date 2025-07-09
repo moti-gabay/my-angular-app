@@ -1,58 +1,45 @@
-import { CommonModule } from '@angular/common';
+// src/app/news-list/news-list.component.ts
 import { Component, OnInit } from '@angular/core';
-
-interface NewsItem {
-  id: number;
-  title: string;
-  description: string;
-  imageUrl: string;
-  timeAgo: string; // לדוגמה: '23 דקות'
-}
+import { CommonModule } from '@angular/common';
+import { NewsService, NewsItem } from '../../services/news'; // ייבוא NewsService ו-NewsItem
+import { RouterLink } from '@angular/router'; // לייבוא RouterLink לקישורים
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
-  selector: 'app-news',
-  templateUrl: './news.html',
-  styleUrls: ['./news.css'],
-    imports: [CommonModule],
-
+  selector: 'app-news', // שינוי הסלקטור לשם עקבי
+  // standalone: true, // וודא שזה standalone
+  imports: [CommonModule,RouterLink], // הוספת RouterLink
+  templateUrl: './news.html', // וודא ששם הקובץ נכון
+  styleUrls: ['./news.css'] // וודא ששם הקובץ נכון
 })
-export class News implements OnInit {
+export class News implements OnInit { // שינוי שם הקלאס ל-NewsListComponent
+  news: NewsItem[] = [];
+  loading: boolean = false; // מצב טעינה
+  error: string = ''; // הודעת שגיאה
 
-  news: NewsItem[] = [
-      {
-        id: 1,
-        title: 'עשרות אלפים בהילולת משה רבנו',
-        description: 'אלפי המאמינים הגיעו לציונו של משה רבנו וערכו הילולה מרגשת.',
-        imageUrl: 'assets/images/logo.png',
-        timeAgo: 'לפני 23 דקות'
-      },
-      {
-        id: 2,
-        title: 'הכנסת ספר תורה לישוב החדש',
-        description: 'שמחה גדולה ביישוב עם הכנסת ספר תורה מרגשת בהשתתפות התושבים.',
-        imageUrl: 'assets/images/logo.png',
-        timeAgo: 'לפני שעה'
-      }
-      // תוכל להוסיף עוד פריטים
-    ];
+  constructor(private newsService: NewsService ,private cdr :ChangeDetectorRef) { } // הזרקת NewsService
 
-  ngOnInit() {
-    this.news = [
-      {
-        id: 1,
-        title: 'עשרות אלפים בהילולת משה רבנו',
-        description: 'אלפי המאמינים הגיעו לציונו של משה רבנו וערכו הילולה מרגשת.',
-        imageUrl: 'assets/images/news1.jpg',
-        timeAgo: 'לפני 23 דקות'
+  ngOnInit(): void {
+    this.fetchNews(); // קריאה לפונקציה לשליפת חדשות עם אתחול הקומפוננטה
+    
+  }
+
+  fetchNews(): void {
+    this.loading = false; // התחל טעינה
+    this.error = ''; // נקה שגיאות קודמות
+
+    this.newsService.getNews().subscribe({
+      next: (data) => {
+        this.news = data; // עדכן את מערך החדשות עם הנתונים שהתקבלו
+        this.loading = false; // סיים טעינה
+        this.cdr.detectChanges()
+        console.log('חדשות נטענו בהצלחה:', this.news);
       },
-      {
-        id: 2,
-        title: 'הכנסת ספר תורה לישוב החדש',
-        description: 'שמחה גדולה ביישוב עם הכנסת ספר תורה מרגשת בהשתתפות התושבים.',
-        imageUrl: 'assets/images/news2.jpg',
-        timeAgo: 'לפני שעה'
+      error: (err) => {
+        this.error = 'שגיאה בטעינת החדשות. אנא נסה שוב מאוחר יותר.'; // הגדר הודעת שגיאה
+        this.loading = false; // סיים טעינה במקרה של שגיאה
+        console.error('שגיאה בשליפת חדשות:', err);
       }
-      // תוכל להוסיף עוד פריטים
-    ];
+    });
   }
 }

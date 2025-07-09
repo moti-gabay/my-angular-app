@@ -9,6 +9,7 @@ import { FileListDisplayComponent } from '../file-list-display/file-list-display
 import { ImageUploaderComponent } from '../image-uploader/image-uploader';
 import { ImageGalleryComponent } from '../image-gallery/image-gallery';
 import { API_URL } from '../services/url';
+import {ChangeDetectorRef} from "@angular/core"
 
 @Component({
   selector: 'app-file-manager',
@@ -26,7 +27,8 @@ import { API_URL } from '../services/url';
 export class FileManagerComponent implements OnInit {
   allFiles: any[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private cdr:ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
     this.fetchFiles();
@@ -41,6 +43,7 @@ export class FileManagerComponent implements OnInit {
           ...file,
           upload_date: file.upload_date ? new Date(file.upload_date) : null
         }));
+        this.cdr.detectChanges()
       },
       error: (err) => {
         console.error('שגיאה בטעינת רשימת הקבצים בקומפוננטת האב:', err);

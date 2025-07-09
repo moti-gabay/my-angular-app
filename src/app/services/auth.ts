@@ -34,12 +34,12 @@ export class AuthService {
   private checkInitialAuthStatus(): Observable<UserData | null> {
     return this.http.get<UserData>(`${this.apiUrl}/me`, { withCredentials: true }).pipe(
       tap(user => {
-        console.log('AuthService: Initial auth check - User data received', user);
+        // console.log('AuthService: Initial auth check - User data received', user);
         this.currentUserSubject.next(user);
         this._isLoggedIn.next(true);
       }),
       catchError((error: HttpErrorResponse) => {
-        console.log('AuthService: Initial auth check - Not logged in or token invalid', error);
+        // console.log('AuthService: Initial auth check - Not logged in or token invalid', error);
         this.currentUserSubject.next(null);
         this._isLoggedIn.next(false);
         // נתב לדף ההתחברות רק אם שגיאת 401/403 ורק אם לא נמצאים כבר בדף ההתחברות

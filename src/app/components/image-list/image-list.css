@@ -1,19 +1,21 @@
+/* carousel.css */
+
 .carousel-container {
   position: relative;
   width: 100%;
-  max-width: 600px;
-  margin: 2rem auto;
-  overflow: hidden;
-  border-radius: 1rem;
+  /* max-width: 600px; רוחב מקסימלי לקרוסלה */
+  margin: 2rem auto; /* ממורכזת אופקית */
+  /* overflow: hidden; חותך תוכן שחורג מהגבולות (חשוב ל-object-fit) */
+  border-radius: 0.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .carousel-image {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
+  width: 30rem; /* התמונה תמלא את כל רוחב הקונטיינר שלה */
+  height: 20rem; /*גובה קבוע לכל התמונות*/
+  object-fit: cover; /* קנה מידה של התמונה כדי למלא את הקונטיינר, חותך חלקים עודפים */
   border-radius: 1rem;
-  transition: opacity 0.7s ease-in-out;
+  transition: opacity 0.7s ease-in-out; /* אנימציה של מעבר תמונה */
 }
 
 .carousel-button {
@@ -66,7 +68,7 @@
 
 @media (max-width: 768px) {
   .carousel-image {
-    height: 250px;
+    height: 250px; /* גובה קבוע שונה למסכים קטנים */
   }
 
   .carousel-button {

@@ -1,5 +1,6 @@
-<!-- events.component.html -->
+<!-- src/app/event-list/event-list.html -->
 <div class="events-container">
+  <h2 class="events-page-title">אירועים קרובים</h2>
 
   <div *ngIf="loading" class="loading-message">
     טוען אירועים...
@@ -7,49 +8,67 @@
 
   <div *ngIf="error" class="error-message">
     {{ error }}
+    <button (click)="fetchEvents()">נסה שוב</button>
   </div>
 
-  <div *ngIf="events.length > 0" class="events-list">
-    <div *ngFor="let event of events" class="event-card">
-
-
-      <h3 class="event-title">{{ event.title }}</h3>
-
-      <p class="event-info">
-        <span class="label">תאריך:</span> {{ event.date | date:'medium' }}
-      </p>
-
-      <p *ngIf="event.location" class="event-info">
-        <span class="label">מיקום:</span> {{ event.location }}
-      </p>
-
-      <p class="event-description">
-        {{ event.description }}
-      </p>
-
-      <div class="event-actions">
-        <!-- <a [routerLink]="['/events', event.id]" class="view-details-button">
-          צפה בפרטים
-        </a> -->
-
-        <button *ngIf="currentUser?.role === 'admin' && !event.is_approved" (click)="approveEvent(event.id!,event)"
-          class="approve-button">
-          אשר אירוע
-        </button>
-        <button *ngIf="currentUser?.role === 'admin' && event.is_approved" (click)="unapproveEvent(event.id!)"
-          class="unapprove-button">
-          בטל אישור
-        </button>
-        <button *ngIf="currentUser?.role === 'admin'" (click)="deleteEvent(event.id!)" class="delete-button">
-          מחק אירוע
-        </button>
-
-      </div>
-
-    </div>
+  <div *ngIf="!loading && !error && events.length > 0" class="events-table-wrapper">
+    <table class="events-table">
+      <thead>
+        <tr>
+          <th>כותרת</th>
+          <th>תאריך</th>
+          <th>שעה</th>
+          <th>מיקום</th>
+          <th>תיאור</th>
+          <th *ngIf="currentUser?.role === 'admin'">דרישות מתנדבים</th>
+          <th *ngIf="currentUser?.role === 'admin'">סטטוס אישור</th>
+          <th>פעולות</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let event of events">
+          <td>{{ event.title }}</td>
+          <td>{{ event.date | date:'shortDate' }}</td>
+          <td>{{ event.time }}</td>
+          <td>{{ event.location }}</td>
+          <td>{{ event.description }}</td>
+          <td *ngIf="currentUser?.role === 'admin'">
+            <!-- {{ event.creator_name || 'לא ידוע' }} ({{ event.creator_email || 'לא ידוע' }}) -->
+          </td>
+          <td *ngIf="currentUser?.role === 'admin'">
+            <span [class.approved]="event.is_approved" [class.pending]="!event.is_approved">
+              {{ event.is_approved ? 'מאושר' : 'ממתין' }}
+            </span>
+          </td>
+          <td class="actions-cell">
+            <!-- כפתורי ניהול לאדמין -->
+            <ng-container *ngIf="currentUser?.role === 'admin'">
+              <button *ngIf="!event.is_approved" (click)="approveEvent(event.id!, event)" class="action-button approve-button">
+                אשר
+              </button>
+              <button *ngIf="event.is_approved" (click)="unapproveEvent(event.id!)" class="action-button unapprove-button">
+                בטל אישור
+              </button>
+              <button (click)="deleteEvent(event.id!)" class="action-button delete-button">
+                מחק
+              </button>
+            </ng-container>
+            <!-- כפתורי הרשמה/ביטול הרשמה למשתמשים רגילים (צריך להוסיף לוגיקה ב-TS) -->
+            <!-- <ng-container *ngIf="currentUser?.role !== 'admin'">
+              <button *ngIf="event.is_approved && !isUserRegistered(event)" (click)="registerToEvent(event.id!)" class="action-button register-button">
+                הירשם
+              </button>
+              <button *ngIf="event.is_approved && isUserRegistered(event)" (click)="unregisterToEvent(event.id!)" class="action-button unregister-button">
+                הסר הרשמה
+              </button>
+            </ng-container> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <div *ngIf="!loading && events.length === 0" class="no-events-message">
+  <div *ngIf="!loading && !error && events.length === 0" class="no-events-message">
     אין אירועים קרובים להצגה.
   </div>
 </div>

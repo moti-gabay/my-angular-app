@@ -16,10 +16,10 @@ export const authGuard: CanActivateFn = (
     take(1), // קח את הערך הנוכחי וסגור את ה-Observable
     map(isLoggedIn => {
       if (isLoggedIn) {
-        console.log('AuthGuard: User is logged in, access granted.');
+        // console.log('AuthGuard: User is logged in, access granted.');
         return true; // המשתמש מחובר, אפשר להמשיך
       } else {
-        console.log('AuthGuard: User is not logged in, redirecting to login.');
+        // console.log('AuthGuard: User is not logged in, redirecting to login.');
         router.navigate(['/login']);
         return false; // המשתמש אינו מחובר, הפנה לדף ההתחברות
       }

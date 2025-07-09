@@ -13,6 +13,8 @@ import { DonationComponent } from './components/donation/donation';
 import { ApprovedEventsComponent } from './components/approved-events/approved-events';
 import { EventListComponent } from './event-list/event-list';
 import { ContactComponent } from './components/contact/contact';
+import { NewsInfo } from './components/news-info/news-info';
+import { TraditionInfo } from './components/tradition-info/tradition-info';
 
 export const routes: Routes = [
   { path: 'login', component: LoginRegisterComponent },
@@ -38,50 +40,62 @@ export const routes: Routes = [
     path: 'dashboard',
     component: UserDashboardComponent,
     canActivate: [roleGuard],
-    data: { roles: ['user','admin', 'member'] } // רק משתמש רגיל יכול לגשת למסך זה
+    data: { roles: ['user', 'admin', 'member'] } // רק משתמש רגיל יכול לגשת למסך זה
   },
   // ניתובים חדשים עבור משתמשים רגילים
   {
     path: 'homepage', // נתיב עבור "מי אנחנו"
     component: HomePage, // placeholder component
     canActivate: [roleGuard],
-    data: { roles:['user','admin', 'member'] }
+    data: { roles: ['user', 'admin', 'member'] }
   },
   {
     path: 'news', // נתיב עבור "חדשות ופרסומים"
     component: News, // placeholder component
     canActivate: [roleGuard],
-    data: { roles:['user','admin', 'member'] }
+    data: { roles: ['user', 'admin', 'member'] }
+  },
+  {
+    path: 'news/:id', // <--- נתיב חדש לכתבה מלאה עם פרמטר ID
+    component: NewsInfo, // קומפוננטת הכתבה המלאה
+    canActivate: [roleGuard],
+    data: { roles: ['user', 'admin', 'member'] }
   },
   {
     path: 'tradition', // נתיב עבור "המסורת היהודית"
     component: Tradition, // placeholder component
     canActivate: [roleGuard],
-    data: { roles:['user','admin', 'member'] }
+    data: { roles: ['user', 'admin', 'member'] }
+  },
+  {
+    path: 'tradition/:id', // נתיב עבור "המסורת היהודית"
+    component: TraditionInfo, // placeholder component
+    canActivate: [roleGuard],
+    data: { roles: ['user', 'admin', 'member'] }
   },
   {
     path: 'events',
     component: ApprovedEventsComponent, // placeholder component
     canActivate: [roleGuard],
-    data: { roles:['user','admin', 'member'] }
+    data: { roles: ['user', 'admin', 'member'] }
   },
   {
     path: 'contact',
     component: ContactComponent, // placeholder component
     canActivate: [roleGuard],
-    data: { roles:['user','admin', 'member'] }
+    data: { roles: ['user', 'admin', 'member'] }
   },
   {
     path: 'add-event',
     component: AddEventComponent, // placeholder component
     canActivate: [roleGuard],
-    data: { roles:['user','admin', 'member'] }
+    data: { roles: ['user', 'admin', 'member'] }
   },
   {
     path: 'donation',
     component: DonationComponent, // placeholder component
     canActivate: [roleGuard],
-    data: { roles:['user','admin', 'member'] }
+    data: { roles: ['user', 'admin', 'member'] }
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // ברירת מחדל: הפנה ללוגין
   { path: '**', redirectTo: '/login' } // לכל נתיב לא ידוע

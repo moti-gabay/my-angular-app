@@ -1,50 +1,70 @@
 <!-- src/app/tradition/tradition.component.html -->
 <div class="tradition-container">
-    <h2 class="tradition-title">המסורת היהודית</h2>
+  <h2 class="tradition-title">המסורת היהודית</h2>
 
-    <h2>בקצרה... </h2>
-    <div class="tradition-summary">
+  <!-- הצגת מצב טעינה -->
+  <div *ngIf="loading" class="loading-message">
+    <p>טוען פריטי מסורת... אנא המתן.</p>
+  </div>
+
+  <!-- הצגת הודעת שגיאה -->
+  <div *ngIf="error" class="error-message">
+    <p>{{ error }}</p>
+    <button (click)="fetchTraditionItems()">נסה שוב</button>
+  </div>
+
+  <!-- הצגת המסורת רק כאשר הטעינה הסתיימה ואין שגיאות -->
+  <ng-container *ngIf="!loading && !error">
+    <!-- הודעה אם אין פריטים להצגה -->
+    <div *ngIf="traditionItems.length === 0" class="no-items-message">
+      <p>אין פריטי מסורת זמינים כרגע.</p>
+    </div>
+
+    <ng-container *ngIf="traditionItems.length > 0">
+      <h2>בקצרה... </h2>
+      <div class="tradition-summary">
         <div class="text-container">
-            <p>
-                המסורת היהודית היא מערכת חיים עשירה שהתפתחה במשך אלפי שנים ומעצבת את אורח חיי העם היהודי.
-                המסורת כוללת חגים, תפילות, מצוות, ולימוד תורה, והיא מחברת אותנו לשורשים.
-            </p>
+          <!-- הצגת התיאור הקצר של הפריט הנבחר -->
+          <p *ngIf="selectedTraditionItem">{{ selectedTraditionItem.short_description }}</p>
+          <p *ngIf="!selectedTraditionItem">בחר נושא מהטאבים למטה כדי ללמוד עליו יותר.</p>
         </div>
         <div class="img-container">
-            <img class="img-logo" src="assets/images/logo.png" alt="לוגו המסורת היהודית">
+          <!-- הצגת התמונה של הפריט הנבחר -->
+          <img class="img-logo" [src]="getFullImageUrl(selectedTraditionItem?.image_url)" 
+               [alt]="selectedTraditionItem?.title || 'לוגו המסורת היהודית'"
+               onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/333333?text=אין+תמונה';">
         </div>
-    </div>
+      </div>
 
-    <div class="tradition-tabs">
-        <button *ngFor="let topic of topics" (click)="selectTopic(topic.id)"
-            [class.active]="selectedTopic === topic.id">
-            {{ topic.label }}
+      <div class="tradition-tabs">
+        <!-- יצירת כפתורים דינמיים מתוך פריטי המסורת -->
+        <button *ngFor="let item of traditionItems" (click)="selectTopic(item.id!)"
+          [class.active]="selectedTraditionItem?.id === item.id">
+          {{ item.title }}
         </button>
-    </div>
+      </div>
 
-    <div class="tradition-content">
-        <ng-container [ngSwitch]="selectedTopic">
-
-            <div *ngSwitchCase="'batMitzvah'">
-                <h3>בת מצווה</h3>
-                <p>בת מצווה היא שלב בו נערה יהודיה מגיעה לגיל 12 ומחויבת במצוות.</p>
-            </div>
-
-            <div *ngSwitchCase="'barMitzvah'">
-                <h3>בר מצווה</h3>
-                <p>בר מצווה היא שלב בו נער יהודי מגיע לגיל 13 ומחויב במצוות.</p>
-            </div>
-
-            <div *ngSwitchCase="'shabbat'">
-                <h3>הפרשת חלה</h3>
-                <p>הפרשת חלה היא אחת ממצוות הנשים החשובות במסורת היהודית.</p>
-            </div>
-
-            <div *ngSwitchCase="'holidays'">
-                <h3>חגי ישראל</h3>
-                <p>חגי ישראל כוללים את פסח, סוכות, שבועות, ראש השנה ויום כיפור.</p>
-            </div>
-
+      <div class="tradition-content">
+        <!-- הצגת הכותרת והתוכן המלא של הפריט הנבחר -->
+        <ng-container *ngIf="selectedTraditionItem">
+          <h3>{{ selectedTraditionItem.title }}</h3>
+          <div [innerHTML]="safeFullContent"></div>
+          <p *ngIf="!safeFullContent && selectedTraditionItem.full_content">
+            {{ selectedTraditionItem.full_content }}
+          </p>
+          <p *ngIf="!selectedTraditionItem.full_content">אין תוכן מלא זמין לפריט זה.</p>
+          
+          <!-- <--- הוספת קישור לכתבה המלאה כאן -->
+          <div class="read-more-section">
+            <a [routerLink]="['/tradition', selectedTraditionItem.id]" class="read-more-button">
+              לכתבה המלאה &rarr;
+            </a>
+          </div>
         </ng-container>
-    </div>
+        <ng-container *ngIf="!selectedTraditionItem">
+          <p>בחר נושא מהטאבים למעלה כדי לראות את התוכן המלא.</p>
+        </ng-container>
+      </div>
+    </ng-container>
+  </ng-container>
 </div>

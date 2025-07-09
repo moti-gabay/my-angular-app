@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth';
 import { map } from 'rxjs/operators';
 import { API_URL } from '../services/url';
+import { ChangeDetectorRef } from "@angular/core"
 
 @Component({
   selector: 'app-file-list-display',
@@ -25,7 +26,7 @@ export class FileListDisplayComponent implements OnInit, OnChanges {
   isAdmin: boolean = false;
   userMap = new Map<number, string>();
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService,private cdr:ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.authService.currentUser$.pipe(
@@ -38,6 +39,7 @@ export class FileListDisplayComponent implements OnInit, OnChanges {
         users.forEach((user: any) => {
           this.userMap.set(user.id, user.full_name); // יצירת מפה של id לשם
         });
+        this.cdr.detectChanges()
       },
       error: (err) => {
         console.error('שגיאה בטעינת רשימת המשתמשים:', err);

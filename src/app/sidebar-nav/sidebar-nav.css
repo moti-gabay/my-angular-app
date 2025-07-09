@@ -2,12 +2,12 @@
 
 /* Outer container for sidebar content */
 .sidebar-content {
-    padding: 1rem;
+    padding: 0.5rem;
     display: flex;
     flex-direction: column;
     /* flex-col */
     width: 8rem;
-    height: 80vh;
+    /* height: 80vh; */
     /* background-color: #2563eb; */
 
 }
@@ -60,8 +60,8 @@
     align-items: center;
     /*items-center */
     flex-direction: column;
-    padding: 0.5rem;
-    border-radius: 1.5rem;
+    padding: 0.4rem;
+    border-radius: 0.5rem;
     /* rounded-lg */
     transition-property: background-color;
     /* transition */
@@ -107,7 +107,7 @@
     /* items-center */
     justify-content: center;
     /* justify-center */
-    padding: 0.75rem;
+    padding: 0.5rem;
     /* p-3 */
     border-radius: 0.5rem;
     /* rounded-lg */
@@ -130,17 +130,22 @@
 
 /* Logout Button specific styles */
 .logout-button {
+    display: flex;
+    flex-direction: column;
     background-color: #ef4444;
     /* bg-red-500 */
 }
 
 .logout-button:hover {
+
     background-color: #dc2626;
     /* hover:bg-red-600 */
 }
 
 /* Login/Register Button specific styles */
 .login-register-button {
+    display: flex;
+    flex-direction: column;
     background-color: #3b82f6;
     /* bg-blue-500 */
     margin-top: 0.75rem;
@@ -214,7 +219,7 @@
     /* צבע רקע כשהלינק פעיל */
     color: #000;
     /* צבע טקסט */
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     border: 1px solid rgb(139, 137, 137);
     /* עיצוב עגול */
 }

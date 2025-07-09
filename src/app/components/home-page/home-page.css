@@ -3,6 +3,7 @@
 .home-container {
     /* הסרתי גובה קבוע (height: 90vh) כדי לאפשר לתוכן לקבוע את הגובה */
     width: 90%; /* רוחב יחסי */
+    max-width: 1200px; /* הוספה: רוחב מקסימלי כדי למנוע התרחבות יתר במסכים גדולים מאוד */
     margin: 2rem auto; /* ממורכז אופקית, מרווח אנכי */
     padding: 1rem;
     display: flex;
@@ -23,7 +24,7 @@
         flex-direction: row; /* במסכים גדולים: שורה */
         justify-content: space-around; /* פיזור אופקי */
         align-items: flex-start; /* יישור למעלה בשורה */
-        min-height: 70vh; /* גובה מינימלי במסכים גדולים אם רוצים */
+        min-height: auto; /* גובה מינימלי במסכים גדולים אם רוצים */
     }
 }
 
@@ -39,7 +40,8 @@
 }
 
 .home-inner-container h2 {
-    font-size: 2.2rem;
+    /* שימוש ב-clamp לגודל כותרת רספונסיבי יותר */
+    font-size: clamp(1.8rem, 5vw, 2.2rem); /* גודל מינימלי, גודל יחסי לרוחב מסך, גודל מקסימלי */
     color: #2d3748;
     margin-bottom: 1rem;
     font-weight: bold;
@@ -53,7 +55,8 @@
 }
 
 .home-inner-container p {
-    font-size: 1.05rem;
+    /* שימוש ב-clamp לגודל פונט רספונסיבי יותר */
+    font-size: clamp(0.95rem, 2.5vw, 1.05rem);
     color: #4a5568;
     line-height: 1.7;
     margin-bottom: 1rem;
@@ -70,16 +73,20 @@
 @media (min-width: 768px) {
     .img-container {
         width: 45%; /* רוחב 45% במסכים גדולים */
-        /* הסרתי גובה קבוע כאן, תן ל-app-image-gallery לנהל את הגובה */
     }
 }
 
-/* אם יש לך קלאס .logo-img בתוך app-image-gallery, זה יהיה ה-CSS שלו */
-/* .logo-img {
+/* הוספה: כללים לתמונות בתוך ה-img-container, אם הן מופיעות ישירות */
+/* אם התמונות מנוהלות ע"י app-image-gallery, וודא ש-app-image-gallery עצמו רספונסיבי */
+.img-container img {
     max-width: 100%;
-    height: auto;
-    display: block;
-} */
+    height: auto; /* שמירה על יחס גובה-רוחב */
+    display: block; /* מסיר רווחים מיותרים מתחת לתמונה */
+    border-radius: 0.5rem; /* התאמה לפי העיצוב הכללי */
+    object-fit: cover; /* חיתוך תמונה למילוי שטח אם יש גובה קבוע */
+    /* אם תרצה גובה קבוע לתמונות כאן (כמו בקרוסלה), הוסף: */
+    /* height: 300px; */
+}
 
 /* וודא ש-app-image-gallery עצמו רספונסיבי */
 /* לדוגמה, אם הוא מכיל גריד, וודא שהגריד מתאים את עצמו */
