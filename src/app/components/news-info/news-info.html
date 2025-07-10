@@ -7,8 +7,8 @@
     <!-- ניתן להוסיף כאן מידע נוסף כמו שם כותב, קטגוריה וכו' -->
   </div>
 
-  <div class="article-image-wrapper" *ngIf="newsItem.imageUrl"> <!-- שינוי: newsItem.imageUrl -->
-    <img [src]="getFullImageUrl(newsItem.imageUrl)" [alt]="newsItem.title" class="article-image">
+  <div class="article-image-wrapper" *ngIf="newsItem.image_url"> <!-- שינוי: newsItem.imageUrl -->
+    <img [src]="getFullImageUrl(newsItem.image_url)" [alt]="newsItem.title" class="article-image">
   </div>
 
   <div class="article-content" [innerHTML]="safeFullContent">

@@ -1,0 +1,37 @@
+<!-- src/app/news-add/news-add.component.html -->
+<div class="news-add-container">
+  <h2 class="page-title">הוספת כתבה חדשה</h2>
+
+  <div class="add-form-wrapper">
+    <form #newsForm="ngForm" (ngSubmit)="onSubmit(newsForm)">
+      <div class="form-group">
+        <label for="title">כותרת:</label>
+        <input type="text" id="title" name="title" [(ngModel)]="formData.title" required>
+      </div>
+
+      <div class="form-group">
+        <label for="description">תיאור קצר:</label>
+        <textarea id="description" name="description" [(ngModel)]="formData.description" rows="3"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="full_content">תוכן מלא:</label>
+        <textarea id="full_content" name="full_content" [(ngModel)]="formData.full_content" rows="10" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="image_url">כתובת תמונה (URL):</label>
+        <input type="url" id="image_url" name="image_url" [(ngModel)]="formData.image_url">
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="!newsForm.valid" class="submit-button">הוסף כתבה</button>
+        <button type="button" (click)="onCancel()" class="cancel-button">ביטול</button>
+      </div>
+
+      <div *ngIf="message" class="form-message">
+        {{ message }}
+      </div>
+    </form>
+  </div>
+</div>

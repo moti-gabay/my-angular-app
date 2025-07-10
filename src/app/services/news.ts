@@ -10,7 +10,7 @@ export interface NewsItem {
   title: string;
   description: string; // תיאור קצר / תקציר
   full_content: string; // תוכן הכתבה המלא
-  imageUrl: string; // URL לתמונה (כפי שמגיע מהשרת)
+  image_url: string; // URL לתמונה (כפי שמגיע מהשרת)
   published_at?: string; // תאריך/שעת פרסום (עדיין קיים)
   timeAgo?: string; // מחרוזת "לפני X זמן" (כפי שמגיע מהשרת)
 }

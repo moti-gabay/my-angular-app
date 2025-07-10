@@ -1,0 +1,42 @@
+<!-- src/app/tradition-add/tradition-add.component.html -->
+<div class="tradition-add-container">
+  <h2 class="page-title">הוספת פריט מסורת חדש</h2>
+
+  <div class="add-form-wrapper">
+    <form #traditionForm="ngForm" (ngSubmit)="onSubmit(traditionForm)">
+      <div class="form-group">
+        <label for="title">כותרת:</label>
+        <input type="text" id="title" name="title" [(ngModel)]="formData.title" required>
+      </div>
+
+      <div class="form-group">
+        <label for="short_description">תיאור קצר:</label>
+        <textarea id="short_description" name="short_description" [(ngModel)]="formData.short_description" rows="3"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="full_content">תוכן מלא:</label>
+        <textarea id="full_content" name="full_content" [(ngModel)]="formData.full_content" rows="10" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="category">קטגוריה:</label>
+        <input type="text" id="category" name="category" [(ngModel)]="formData.category">
+      </div>
+
+      <div class="form-group">
+        <label for="image_url">כתובת תמונה (URL):</label>
+        <input type="url" id="image_url" name="image_url" [(ngModel)]="formData.image_url">
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="!traditionForm.valid" class="submit-button">הוסף פריט מסורת</button>
+        <button type="button" (click)="onCancel()" class="cancel-button">ביטול</button>
+      </div>
+
+      <div *ngIf="message" class="form-message">
+        {{ message }}
+      </div>
+    </form>
+  </div>
+</div>
