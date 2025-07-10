@@ -5,11 +5,13 @@ import { NewsService, NewsItem } from '../../services/news'; // וודא נתי�
 import { CommonModule, DatePipe } from '@angular/common'; // ייבוא CommonModule ו-DatePipe
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'; // לייבוא DomSanitizer
 import { ChangeDetectorRef } from '@angular/core';
+import { AuthService } from '../../services/auth';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-news-info',
   // standalone: true,
-  imports: [CommonModule, DatePipe,RouterLink], // הוספת DatePipe
+  imports: [CommonModule, DatePipe, RouterLink], // הוספת DatePipe
   templateUrl: './news-info.html',
   styleUrls: ['./news-info.css']
 })
@@ -18,12 +20,14 @@ export class NewsInfo implements OnInit {
   loading: boolean = true;
   error: string = '';
   safeFullContent: SafeHtml | null = null; // לתוכן HTML בטוח
+  isAdmin: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
-    private cdr : ChangeDetectorRef,
+    private cdr: ChangeDetectorRef,
     private newsService: NewsService,
-    private sanitizer: DomSanitizer // הזרקת DomSanitizer
+    private sanitizer: DomSanitizer, // הזרקת DomSanitizerת
+    private authService:AuthService
   ) { }
 
   ngOnInit(): void {

@@ -1,0 +1,152 @@
+/* src/app/news-edit/news-edit.component.css */
+
+.news-edit-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #f7fafc;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  direction: rtl;
+  text-align: right;
+  font-family: 'Inter', sans-serif;
+}
+
+.page-title {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 0.8rem;
+}
+
+.loading-message, .error-message, .form-message {
+  text-align: center;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 8px;
+  font-size: 1em;
+}
+
+.loading-message {
+  background-color: #e0f7fa;
+  color: #00796b;
+  border: 1px solid #b2ebf2;
+}
+
+.error-message {
+  background-color: #ffe0b2;
+  color: #e65100;
+  border: 1px solid #ffcc80;
+}
+
+.form-message {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.edit-form-wrapper {
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #4a5568;
+}
+
+.form-group input[type="text"],
+.form-group input[type="url"],
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box; /* כולל padding ו-border ברוחב */
+  direction: rtl; /* כיווניות טקסט בתוך השדות */
+  text-align: right;
+}
+
+.form-group textarea {
+  resize: vertical; /* מאפשר שינוי גודל אנכי בלבד */
+  min-height: 100px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end; /* כפתורים מיושרים לשמאל ב-RTL */
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.submit-button, .cancel-button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.submit-button:hover:not(:disabled) {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+.submit-button:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}
+
+.cancel-button {
+  background-color: #e2e8f0;
+  color: #4a5568;
+}
+
+.cancel-button:hover {
+  background-color: #cbd5e0;
+  transform: translateY(-2px);
+}
+
+/* רספונסיביות */
+@media (max-width: 768px) {
+  .news-edit-container {
+    padding: 1rem;
+    margin: 1rem auto;
+  }
+  .page-title {
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+  }
+  .form-actions {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .submit-button, .cancel-button {
+    width: 100%;
+  }
+}

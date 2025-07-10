@@ -108,6 +108,7 @@ export class EventService {
     return this.http.post(`${this.apiUrl}/${eventId}/unregister`, {}, { withCredentials: true });
   }
 
+  
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An unknown error occurred!';
     if (error.error instanceof ErrorEvent) {

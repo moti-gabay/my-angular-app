@@ -1,14 +1,16 @@
 // src/app/tradition/tradition.component.ts
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { TraditionService, TraditionItem } from '../../services/tradition';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router'; // <--- ייבוא RouterLink
 import { ChangeDetectorRef } from "@angular/core"
+import { AuthService } from '../../services/auth';
+import { map } from 'rxjs';
 @Component({
   selector: 'app-tradition',
   standalone: true,
-  imports: [CommonModule, DatePipe, RouterLink], // <--- הוספת RouterLink ל-imports
+  imports: [CommonModule, RouterLink], // <--- הוספת RouterLink ל-imports
   templateUrl: './tradition.html',
   styleUrls: ['./tradition.css']
 })
@@ -16,6 +18,7 @@ export class Tradition implements OnInit {
   traditionItems: TraditionItem[] = [];
   selectedTraditionItem: TraditionItem | null = null;
   safeFullContent: SafeHtml | null = null;
+  isAdmin: boolean = false;
 
   loading: boolean = true;
   error: string = '';
@@ -23,7 +26,8 @@ export class Tradition implements OnInit {
   constructor(
     private cdr: ChangeDetectorRef,
     private traditionService: TraditionService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {

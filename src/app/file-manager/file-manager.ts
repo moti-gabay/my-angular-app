@@ -9,7 +9,7 @@ import { FileListDisplayComponent } from '../file-list-display/file-list-display
 import { ImageUploaderComponent } from '../image-uploader/image-uploader';
 import { ImageGalleryComponent } from '../image-gallery/image-gallery';
 import { API_URL } from '../services/url';
-import {ChangeDetectorRef} from "@angular/core"
+import { ChangeDetectorRef } from "@angular/core"
 
 @Component({
   selector: 'app-file-manager',
@@ -17,17 +17,16 @@ import {ChangeDetectorRef} from "@angular/core"
   imports: [
     CommonModule,
     FileUploadFormComponent,
-    FileListDisplayComponent,
-    ImageUploaderComponent
+    FileListDisplayComponent
   ],
-  templateUrl:"./file-manager.html",
+  templateUrl: "./file-manager.html",
   styleUrls: ['./file-manager.css']
 
 })
 export class FileManagerComponent implements OnInit {
   allFiles: any[] = [];
 
-  constructor(private http: HttpClient,private cdr:ChangeDetectorRef
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit() {

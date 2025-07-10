@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { NewsService, NewsItem } from '../../services/news'; // ייבוא NewsService ו-NewsItem
 import { RouterLink } from '@angular/router'; // לייבוא RouterLink לקישורים
 import { ChangeDetectorRef } from '@angular/core';
+import { AuthService } from '../../services/auth';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-news', // שינוי הסלקטור לשם עקבי
   // standalone: true, // וודא שזה standalone
-  imports: [CommonModule,RouterLink], // הוספת RouterLink
+  imports: [CommonModule, RouterLink], // הוספת RouterLink
   templateUrl: './news.html', // וודא ששם הקובץ נכון
   styleUrls: ['./news.css'] // וודא ששם הקובץ נכון
 })
@@ -16,12 +18,18 @@ export class News implements OnInit { // שינוי שם הקלאס ל-NewsListC
   news: NewsItem[] = [];
   loading: boolean = false; // מצב טעינה
   error: string = ''; // הודעת שגיאה
+  isAdmin: boolean = false;
 
-  constructor(private newsService: NewsService ,private cdr :ChangeDetectorRef) { } // הזרקת NewsService
+  constructor(private newsService: NewsService, private cdr: ChangeDetectorRef, private authService: AuthService) { } // הזרקת NewsService
 
   ngOnInit(): void {
+    this.authService.currentUser$.pipe(
+      map(user => user?.role === 'admin')
+    ).subscribe(isAdmin => {
+      this.isAdmin = isAdmin;
+    });
     this.fetchNews(); // קריאה לפונקציה לשליפת חדשות עם אתחול הקומפוננטה
-    
+
   }
 
   fetchNews(): void {

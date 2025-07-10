@@ -111,6 +111,8 @@
 }
 
 .file-list {
+   max-height: 30rem;
+  overflow: auto;
   list-style: none;
   padding: 0;
 }

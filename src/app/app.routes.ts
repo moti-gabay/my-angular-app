@@ -15,6 +15,7 @@ import { EventListComponent } from './event-list/event-list';
 import { ContactComponent } from './components/contact/contact';
 import { NewsInfo } from './components/news-info/news-info';
 import { TraditionInfo } from './components/tradition-info/tradition-info';
+import { NewsEditComponent } from './components/news-edit/news-edit';
 
 export const routes: Routes = [
   { path: 'login', component: LoginRegisterComponent },
@@ -56,6 +57,12 @@ export const routes: Routes = [
     data: { roles: ['user', 'admin', 'member'] }
   },
   {
+    path: 'edit-news/:id', // נתיב עבור "חדשות ופרסומים"
+    component: NewsEditComponent, // placeholder component
+    canActivate: [roleGuard],
+    data: { roles: ['admin'] }
+  },
+  {
     path: 'news/:id', // <--- נתיב חדש לכתבה מלאה עם פרמטר ID
     component: NewsInfo, // קומפוננטת הכתבה המלאה
     canActivate: [roleGuard],
@@ -69,6 +76,12 @@ export const routes: Routes = [
   },
   {
     path: 'tradition/:id', // נתיב עבור "המסורת היהודית"
+    component: TraditionInfo, // placeholder component
+    canActivate: [roleGuard],
+    data: { roles: ['user', 'admin', 'member'] }
+  },
+  {
+    path: 'edit-tradition/:id', // נתיב עבור "המסורת היהודית"
     component: TraditionInfo, // placeholder component
     canActivate: [roleGuard],
     data: { roles: ['user', 'admin', 'member'] }

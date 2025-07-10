@@ -1,14 +1,8 @@
 <div class="file-management-container">
-  <app-file-upload-form (uploadSuccess)="onUploadSuccess()"></app-file-upload-form>
 
-  <hr class="separator">
 
-  <app-file-list-display 
-    [allFiles]="allFiles" 
-    (fileDeleted)="onFileDeleted($event)">
+  <app-file-list-display [allFiles]="allFiles" (fileDeleted)="onFileDeleted($event)">
   </app-file-list-display>
-
   <hr class="separator">
-
-  <app-image-uploader></app-image-uploader>
+  <app-file-upload-form (uploadSuccess)="onUploadSuccess()"></app-file-upload-form>
 </div>

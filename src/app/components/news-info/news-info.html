@@ -18,6 +18,10 @@
   <div class="back-link">
     <a routerLink="/news">← חזרה לחדשות</a>
   </div>
+  <div>
+        <a *ngIf="isAdmin" [routerLink]="['/edit-news', newsItem.id]" class="news-link">  לעריכת הכתבה &rarr;</a>
+
+  </div>
 </div>
 
 <div class="loading-message" *ngIf="loading">

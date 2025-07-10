@@ -12,6 +12,9 @@
       <div class="news-footer">
         <span class="news-time">{{ item.timeAgo }}</span> <!-- שינוי: item.timeAgo -->
         <a [routerLink]="['/news', item.id]" class="news-link">לכתבה המלאה &rarr;</a>
+        <a *ngIf="isAdmin" [routerLink]="['/edit-news', item.id]" class="news-link">  לעריכת הכתבה &rarr;</a>
+
+
       </div>
     </div>
   </div>

@@ -7,7 +7,8 @@
     flex-direction: column;
     /* flex-col */
     width: 8rem;
-    /* height: 80vh; */
+    max-height: 50rem;
+    overflow: auto;
     /* background-color: #2563eb; */
 
 }

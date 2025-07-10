@@ -1,9 +1,9 @@
 /* src/app/tradition-article/tradition-article.component.css */
 
 .tradition-article-container {
-  max-width: 800px;
+  max-width: 50rem;
   margin: 2rem auto;
-  padding: 1.5rem;
+  padding: 1rem;
   background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -45,8 +45,8 @@
 }
 
 .article-image {
-  max-width: 100%;
-  height: auto;
+  max-width: 90%;
+  height: 20rem;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   object-fit: cover;
@@ -62,16 +62,20 @@
 .article-content p {
   margin-bottom: 1em;
 }
+
 .article-content h2 {
   font-size: clamp(1.4rem, 4vw, 2rem);
   margin-top: 1.5em;
   margin-bottom: 0.8em;
   color: #2c3e50;
 }
-.article-content ul, .article-content ol {
+
+.article-content ul,
+.article-content ol {
   margin-right: 1.5em;
   margin-bottom: 1em;
 }
+
 .article-content li {
   margin-bottom: 0.5em;
 }
@@ -96,7 +100,8 @@
   background-color: #2980b9;
 }
 
-.loading-message, .error-message {
+.loading-message,
+.error-message {
   text-align: center;
   margin-top: 2rem;
   font-size: 1.2rem;
@@ -112,10 +117,17 @@
     padding: 1rem;
     margin: 1rem auto;
   }
+
   .article-title {
     font-size: clamp(1.6rem, 6vw, 2.2rem);
   }
+
   .article-content {
     font-size: clamp(0.9rem, 3vw, 1rem);
+  }
+
+  .article-image {
+    height: 15rem;
+
   }
 }

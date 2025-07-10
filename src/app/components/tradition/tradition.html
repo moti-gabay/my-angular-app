@@ -59,6 +59,9 @@
             <a [routerLink]="['/tradition', selectedTraditionItem.id]" class="read-more-button">
               לכתבה המלאה &rarr;
             </a>
+             <a *ngIf="isAdmin" [routerLink]="['/edit-tradition', selectedTraditionItem.id]" class="read-more-button">
+              לעריכת הפרסום &rarr;
+            </a>
           </div>
         </ng-container>
         <ng-container *ngIf="!selectedTraditionItem">

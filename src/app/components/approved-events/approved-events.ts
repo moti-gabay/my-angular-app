@@ -28,18 +28,35 @@ export class ApprovedEventsComponent implements OnInit {
   fetchApprovedEvents(): void {
     this.eventService.getApprovedEvents().subscribe({
       next: (events) => {
-        this.approvedEvents = events
-        console.log(this.approvedEvents[0].registered_users); // תוודא שזה Array ולא String
+        const now = new Date(); // תאריך ושעה נוכחיים
 
-        this.cdr.detectChanges(); // מוסיף רענון ידני
+        // סנן רק אירועים עתידיים
+        this.approvedEvents = events.filter(event => {
+          if (!event.date || !event.time) {
+            return false; // התעלם מאירועים ללא תאריך או שעה מוגדרים
+          }
 
+          // יצירת אובייקט Date עבור האירוע
+          // נניח ש-event.date הוא בפורמט 'YYYY-MM-DD' ו-event.time הוא 'HH:MM:SS'
+          const eventDateTimeString = `${event.date}T${event.time}`;
+          const eventDate = new Date(eventDateTimeString);
+
+          return eventDate > now; // החזר רק אירועים שתאריכם ושעתם בעתיד
+        });
+
+        // מיון האירועים העתידיים לפי תאריך (מהקרוב לרחוק)
+        this.approvedEvents.sort((a, b) => {
+          const dateA = new Date(`${a.date}T${a.time}`).getTime();
+          const dateB = new Date(`${b.date}T${b.time}`).getTime();
+          return dateA - dateB;
+        }); this.cdr.detectChanges(); // מוסיף רענון ידני
       },
       error: (err) => console.error('Error loading approved events', err)
     });
   }
 
   unapproveEvent(eventId: number): void {
-    if (confirm('האם אתה בטוח שברצונך לבטל את אישור האירוע?')) {
+    if (confirm('האם אתה בטוח שברצונך לבטל את אישור הגעה לאירוע?')) {
       this.eventService.unapproveEvent(eventId).subscribe({
         next: () => this.fetchApprovedEvents(),
         error: (err) => alert('שגיאה בביטול אישור האירוע')
