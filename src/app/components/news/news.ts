@@ -50,4 +50,30 @@ export class News implements OnInit { // שינוי שם הקלאס ל-NewsListC
       }
     });
   }
+
+   deleteNewsItem(id: number): void {
+    if (confirm('האם אתה בטוח שברצונך למחוק כתבה זו?')) {
+      this.newsService.deleteNewsItem(id).subscribe({
+        next: () => {
+          alert('הכתבה נמחקה בהצלחה.');
+          this.fetchNews(); // רענן את רשימת החדשות לאחר המחיקה
+        },
+        error: (err) => {
+          console.error('שגיאה במחיקת כתבה:', err);
+          alert('שגיאה במחיקת הכתבה.');
+        }
+      });
+    }
+  }
+
+  getFullImageUrl(relativeUrl: string | undefined): string {
+    if (!relativeUrl) {
+      return 'https://placehold.co/400x200/cccccc/333333?text=אין+תמונה'; // תמונת פלייס הולדר
+    }
+    const baseUrl = 'http://localhost:5000'; // וודא שזה תואם ל-base URL של השרת שלך
+    if (relativeUrl.startsWith('http://') || relativeUrl.startsWith('https://')) {
+      return relativeUrl; // אם זה כבר URL מלא
+    }
+    return `${baseUrl}${relativeUrl}`;
+  }
 }

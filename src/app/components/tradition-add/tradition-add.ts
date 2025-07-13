@@ -39,7 +39,6 @@ export class TraditionAddComponent implements OnInit {
       this.traditionService.createTraditionItem(this.formData).subscribe({
         next: (newItem:TraditionItem) => {
           this.message = 'פריט המסורת נוסף בהצלחה!';
-          console.log('Tradition item added:', newItem);
           form.resetForm({ // איפוס הטופס לערכי ברירת מחדל
             title: '',
             short_description: '',
@@ -50,7 +49,7 @@ export class TraditionAddComponent implements OnInit {
           // ניתן לנווט לדף רשימת המסורת או לדף הפריט החדש
           // this.router.navigate(['/tradition', newItem.id]); 
           // או:
-          // this.router.navigate(['/tradition']);
+          this.router.navigate(['/tradition']);
         },
         error: (err:any) => {
           console.error('Error adding tradition item:', err);

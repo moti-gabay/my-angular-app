@@ -31,6 +31,11 @@ export class Tradition implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.authService.currentUser$.pipe(
+      map(user => user?.role === 'admin')
+    ).subscribe(isAdmin => {
+      this.isAdmin = isAdmin;
+    });
     this.fetchTraditionItems();
   }
 
@@ -67,6 +72,24 @@ export class Tradition implements OnInit {
       console.log('פריט מסורת נבחר:', this.selectedTraditionItem.title);
     }
   }
+
+  deleteTraditionItem(id: number): void {
+    if (confirm('האם אתה בטוח שברצונך למחוק פריט מסורת זה?')) {
+      this.traditionService.deleteTraditionItem(id).subscribe({
+        next: () => {
+          alert('פריט המסורת נמחק בהצלחה.');
+          this.fetchTraditionItems();
+          this.selectTopic(this.traditionItems[0].id!);
+          // רענן את רשימת הפריטים לאחר המחיקה
+        },
+        error: (err) => {
+          console.error('שגיאה במחיקת פריט מסורת:', err);
+          alert('שגיאה במחיקת פריט המסורת.');
+        }
+      });
+    }
+  }
+
 
   getFullImageUrl(relativeUrl: string | undefined): string {
     if (!relativeUrl) {

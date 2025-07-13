@@ -18,6 +18,7 @@ import { TraditionInfo } from './components/tradition-info/tradition-info';
 import { NewsEditComponent } from './components/news-edit/news-edit';
 import { NewsAddComponent } from './components/news-add/news-add';
 import { TraditionAddComponent } from './components/tradition-add/tradition-add';
+import { TraditionEditComponent } from './components/tradition-edit/tradition-edit';
 
 export const routes: Routes = [
   { path: 'login', component: LoginRegisterComponent },
@@ -96,9 +97,9 @@ export const routes: Routes = [
   },
   {
     path: 'edit-tradition/:id', // נתיב עבור "המסורת היהודית"
-    component: TraditionInfo, // placeholder component
+    component: TraditionEditComponent, // placeholder component
     canActivate: [roleGuard],
-    data: { roles: ['user', 'admin', 'member'] }
+    data: { roles: ['admin'] }
   },
   {
     path: 'events',

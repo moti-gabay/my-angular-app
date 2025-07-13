@@ -66,3 +66,13 @@
 .news-link:hover {
   text-decoration: underline;
 }
+
+
+.delete-button {
+  background-color: #dc3545; /* אדום */
+  color: white;
+}
+.delete-button:hover {
+  background-color: #c82333;
+  transform: translateY(-2px);
+}
