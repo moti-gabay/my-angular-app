@@ -7,6 +7,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'; // לייב�
 import { ChangeDetectorRef } from '@angular/core';
 import { AuthService } from '../../services/auth';
 import { map } from 'rxjs';
+import { API_URL } from '../../services/url';
 
 @Component({
   selector: 'app-news-info',
@@ -59,11 +60,15 @@ export class NewsInfo implements OnInit {
     });
   }
 
-  getFullImageUrl(relativeUrl: string): string {
-    // הנחה: API_URL מגיע משירות ה-url או environment
-    // אם ה-URL המלא כבר מגיע מהשרת, אז אין צורך בזה
-    // נניח ש-API_URL הוא 'http://localhost:5000'
-    const baseUrl = 'http://localhost:5000'; // או API_URL אם הוא מוגדר כ-http://localhost:5000
-    return `${baseUrl}${relativeUrl}`;
-  }
+   getFullImageUrl(relativeUrl: string | undefined): string {
+      console.log(`${relativeUrl}`)
+      if (!relativeUrl) {
+        return 'https://placehold.co/400x200/cccccc/333333?text=אין+תמונה'; // תמונת פלייס הולדר
+      }
+      const baseUrl = 'http://localhost:5000'; // וודא שזה תואם ל-base URL של השרת שלך
+      if (relativeUrl.startsWith('http://') || relativeUrl.startsWith('https://')) {
+        return relativeUrl; // אם זה כבר URL מלא
+      }
+      return `${baseUrl}${relativeUrl}`;
+    }
 }

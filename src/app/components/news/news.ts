@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router'; // לייבוא RouterLink לקי�
 import { ChangeDetectorRef } from '@angular/core';
 import { AuthService } from '../../services/auth';
 import { map } from 'rxjs';
+import { API_URL } from '../../services/url';
 
 @Component({
   selector: 'app-news', // שינוי הסלקטור לשם עקבי
@@ -39,6 +40,7 @@ export class News implements OnInit { // שינוי שם הקלאס ל-NewsListC
     this.newsService.getNews().subscribe({
       next: (data) => {
         this.news = data; // עדכן את מערך החדשות עם הנתונים שהתקבלו
+
         this.loading = false; // סיים טעינה
         this.cdr.detectChanges()
         // console.log('חדשות נטענו בהצלחה:', this.news);
@@ -51,7 +53,7 @@ export class News implements OnInit { // שינוי שם הקלאס ל-NewsListC
     });
   }
 
-   deleteNewsItem(id: number): void {
+  deleteNewsItem(id: number): void {
     if (confirm('האם אתה בטוח שברצונך למחוק כתבה זו?')) {
       this.newsService.deleteNewsItem(id).subscribe({
         next: () => {

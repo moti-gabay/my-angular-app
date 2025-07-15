@@ -4,7 +4,7 @@
 
   <div class="news-item" *ngFor="let item of news">
     
-    <img [src]="item.image_url" alt="תמונה" class="news-image"> <!-- שינוי: item.imageUrl -->
+    <img [src]="getFullImageUrl(item.image_url)" alt="תמונה" class="news-image"> <!-- שינוי: item.imageUrl -->
 
     <div class="news-content">
       <h3 class="news-item-title">{{ item.title }}</h3>

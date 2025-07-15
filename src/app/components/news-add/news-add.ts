@@ -44,7 +44,7 @@ export class NewsAddComponent implements OnInit {
             title: '',
             description: '',
             full_content: '',
-            imageUrl: ''
+            image_url: ''
           });
           // ניתן לנווט לדף החדשות או לדף הכתבה החדשה
           // this.router.navigate(['/news', newItem.id]); 
