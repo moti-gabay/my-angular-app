@@ -63,7 +63,7 @@ export const routes: Routes = [
     path: 'edit-news/:id', // נתיב עבור "חדשות ופרסומים"
     component: NewsEditComponent, // placeholder component
     canActivate: [roleGuard],
-    data: { roles: ['admin'],renderMode: 'client' }
+    data: { roles: ['admin'],renderMode: 'dynamic' }
   },
   {
     path: 'add-news', // נתיב עבור "חדשות ופרסומים"
@@ -75,7 +75,7 @@ export const routes: Routes = [
     path: 'news/:id', // <--- נתיב חדש לכתבה מלאה עם פרמטר ID
     component: NewsInfo, // קומפוננטת הכתבה המלאה
     canActivate: [roleGuard],
-    data: { roles: ['user', 'admin', 'member'],renderMode: 'client' }
+    data: { roles: ['user', 'admin', 'member'],renderMode: 'dynamic' }
   },
   {
     path: 'tradition', // נתיב עבור "המסורת היהודית"
@@ -95,14 +95,14 @@ export const routes: Routes = [
     canActivate: [roleGuard],
     data: {
       roles: ['user', 'admin', 'member'],
-      renderMode: 'client'
+      renderMode: 'dynamic'
     },
   },
   {
     path: 'edit-tradition/:id', // נתיב עבור "המסורת היהודית"
     component: TraditionEditComponent, // placeholder component
     canActivate: [roleGuard],
-    data: { roles: ['admin'] ,renderMode: 'client'}
+    data: { roles: ['admin'] ,renderMode: 'dynamic'}
   },
   {
     path: 'events',
