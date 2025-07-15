@@ -57,7 +57,7 @@ export class AuthService {
       // השתמש ב-switchMap כדי להחליף ל-Observable של checkInitialAuthStatus
       // זה מבטיח ש-checkInitialAuthStatus תסתיים לפני שה-Observable של login יסתיים.
       switchMap(() => {
-        console.log('AuthService: Login successful, now calling /me to update user state.');
+        // console.log('AuthService: Login successful, now calling /me to update user state.');
         return this.checkInitialAuthStatus(); // זה יעדכן את currentUserSubject ו-isLoggedInSubject
       }),
       map(user => { // map את התוצאה הסופית של השרשרת
