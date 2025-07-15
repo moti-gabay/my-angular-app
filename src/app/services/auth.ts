@@ -53,7 +53,7 @@ export class AuthService {
 
   login(userData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, userData, { withCredentials: true }).pipe(
-      tap(response => console.log('AuthService: Login API response received', response)),
+      // tap(response =>console.log('AuthService: Login API response received', response)),
       // השתמש ב-switchMap כדי להחליף ל-Observable של checkInitialAuthStatus
       // זה מבטיח ש-checkInitialAuthStatus תסתיים לפני שה-Observable של login יסתיים.
       switchMap(() => {
@@ -61,7 +61,7 @@ export class AuthService {
         return this.checkInitialAuthStatus(); // זה יעדכן את currentUserSubject ו-isLoggedInSubject
       }),
       map(user => { // map את התוצאה הסופית של השרשרת
-        console.log('AuthService: Login process complete, user state updated:', user);
+        // console.log('AuthService: Login process complete, user state updated:', user);
         return user; // החזר את פרטי המשתמש או כל דבר אחר שתרצה
       }),
       catchError(this.handleError)
@@ -70,7 +70,7 @@ export class AuthService {
 
   register(userData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/register`, userData, { withCredentials: true }).pipe(
-      tap(response => console.log('AuthService: Register response:', response)),
+      // tap(response => console.log('AuthService: Register response:', response)),
       catchError(this.handleError)
     );
   }
@@ -78,7 +78,7 @@ export class AuthService {
   logout(): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/logout`, {}, { withCredentials: true }).pipe(
       tap(() => {
-        console.log('AuthService: Logged out successfully.');
+        // console.log('AuthService: Logged out successfully.');
         this.currentUserSubject.next(null);
         this._isLoggedIn.next(false);
         this.router.navigate(['/login']);

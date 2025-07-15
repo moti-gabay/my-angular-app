@@ -25,7 +25,7 @@ export class NewsService {
 
   getNews(): Observable<NewsItem[]> {
     return this.http.get<NewsItem[]>(this.apiUrl, { withCredentials: true }).pipe(
-      tap(),
+      // tap(),
       catchError(this.handleError)
     );
   }
