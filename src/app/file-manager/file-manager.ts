@@ -52,12 +52,12 @@ export class FileManagerComponent implements OnInit {
   }
 
   onUploadSuccess() {
-    console.log('קובץ הועלה בהצלחה, מרענן את רשימת הקבצים.');
+    // console.log('קובץ הועלה בהצלחה, מרענן את רשימת הקבצים.');
     this.fetchFiles();
   }
 
   onFileDeleted(fileId: number) {
-    console.log(`קובץ עם ID ${fileId} נמחק, מרענן את רשימת הקבצים.`);
+    // console.log(`קובץ עם ID ${fileId} נמחק, מרענן את רשימת הקבצים.`);
     this.fetchFiles();
   }
 }

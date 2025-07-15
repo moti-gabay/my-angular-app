@@ -77,7 +77,7 @@ export class FileListDisplayComponent implements OnInit, OnChanges {
 
   deleteFile(fileId: number) {
     if (!confirm("אתה בטוח שאתה רוצה למחוק את הקובץ?")) {
-      console.log('מחיקת הקובץ בוטלה על ידי המשתמש.');
+      // console.log('מחיקת הקובץ בוטלה על ידי המשתמש.');
       return;
     }
 

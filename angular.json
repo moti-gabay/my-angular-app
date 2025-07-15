@@ -32,9 +32,7 @@
             "outputMode": "server",
             "ssr": {
               "entry": "src/server.ts"
-            },
-            "prerender": false,  <--- הוסף/שנה שורה זו ל-false
-            "routes": []         <--- הוסף שורה זו (רשימת נתיבים ל-prerender, כרגע ריקה)
+            }
           },
           "configurations": {
             "production": {
@@ -50,9 +48,7 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all",
-              "prerender": false,  <--- הוסף/שנה שורה זו גם כאן עבור production
-              "routes": []         <--- הוסף שורה זו גם כאן עבור production
+              "outputHashing": "all"
             },
             "development": {
               "optimization": false,

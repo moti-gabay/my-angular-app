@@ -44,7 +44,7 @@ export class ImageUploaderComponent {
         this.uploading = false;
         this.uploadedImageUrl = `${API_URL}${res.url}`; 
         this.imageUploaded.emit({ url: this.uploadedImageUrl, id: res.id, filename: res.filename }); 
-        console.log('Image uploaded successfully:', res);
+        // console.log('Image uploaded successfully:', res);
         this.selectedFile = undefined;
       },
       error: (err) => {

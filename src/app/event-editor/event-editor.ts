@@ -97,7 +97,7 @@ export class EventEditorComponent implements OnInit {
       this.eventService.updateEvent(this.event.id!, this.event).subscribe({
         next: (res) => {
           this.showMessage('האירוע עודכן בהצלחה!', 'success');
-          console.log('Event updated:', res);
+          // console.log('Event updated:', res);
           this.fetchEventsForAdmin(); // רענן רשימה
         },
         error: (err) => {
@@ -109,7 +109,7 @@ export class EventEditorComponent implements OnInit {
       this.eventService.createEvent(this.event).subscribe({
         next: (res) => {
           this.showMessage('האירוע נוצר בהצלחה!', 'success');
-          console.log('Event created:', res);
+          // console.log('Event created:', res);
           this.resetForm();
           this.fetchEventsForAdmin(); // רענן רשימה
           // אופציונלי: נווט לעמוד העריכה של האירוע החדש
@@ -128,7 +128,7 @@ export class EventEditorComponent implements OnInit {
       this.eventService.deleteEvent(this.event.id).subscribe({
         next: () => {
           this.showMessage('האירוע נמחק בהצלחה!', 'success');
-          console.log('Event deleted.');
+          // console.log('Event deleted.');
           this.router.navigate(['/events/admin']); // נווט חזרה לרשימת הניהול
         },
         error: (err) => {
@@ -144,7 +144,7 @@ export class EventEditorComponent implements OnInit {
       this.eventService.deleteEvent(eventId).subscribe({
         next: () => {
           this.showMessage('האירוע נמחק בהצלחה!', 'success');
-          console.log('Event deleted from list.');
+          // console.log('Event deleted from list.');
           this.fetchEventsForAdmin(); // רענן את הרשימה לאחר המחיקה
         },
         error: (err) => {

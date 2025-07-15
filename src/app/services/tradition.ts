@@ -30,7 +30,7 @@ export class TraditionService {
    */
   getAllTraditionItems(): Observable<TraditionItem[]> {
     return this.http.get<TraditionItem[]>(this.apiUrl, { withCredentials: true }).pipe(
-      tap(data => console.log('Fetched tradition items:', data)),
+      // tap(data => console.log('Fetched tradition items:', data)),
       catchError(this.handleError)
     );
   }
@@ -40,7 +40,7 @@ export class TraditionService {
    */
   getTraditionItemById(id: number): Observable<TraditionItem> {
     return this.http.get<TraditionItem>(`${this.apiUrl}/${id}`, { withCredentials: true }).pipe(
-      tap(data => console.log(`Fetched tradition item ${id}:`, data)),
+      // tap(data => console.log(`Fetched tradition item ${id}:`, data)),
       catchError(this.handleError)
     );
   }
@@ -50,7 +50,7 @@ export class TraditionService {
    */
   createTraditionItem(item: TraditionItem): Observable<TraditionItem> {
     return this.http.post<TraditionItem>(this.apiUrl, item, { withCredentials: true }).pipe(
-      tap(data => console.log('Created tradition item:', data)),
+      // tap(data => console.log('Created tradition item:', data)),
       catchError(this.handleError)
     );
   }
@@ -60,7 +60,7 @@ export class TraditionService {
    */
   updateTraditionItem(id: number, item: TraditionItem): Observable<TraditionItem> {
     return this.http.put<TraditionItem>(`${this.apiUrl}/${id}`, item, { withCredentials: true }).pipe(
-      tap(data => console.log(`Updated tradition item ${id}:`, data)),
+      // tap(data => console.log(`Updated tradition item ${id}:`, data)),
       catchError(this.handleError)
     );
   }
@@ -70,7 +70,7 @@ export class TraditionService {
    */
   deleteTraditionItem(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`, { withCredentials: true }).pipe(
-      tap(() => console.log(`Deleted tradition item ${id}`)),
+      // tap(() => console.log(`Deleted tradition item ${id}`)),
       catchError(this.handleError)
     );
   }

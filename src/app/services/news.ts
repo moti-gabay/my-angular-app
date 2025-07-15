@@ -25,14 +25,14 @@ export class NewsService {
 
   getNews(): Observable<NewsItem[]> {
     return this.http.get<NewsItem[]>(this.apiUrl, { withCredentials: true }).pipe(
-      tap(data => console.log('Fetched news items:', data)),
+      tap(),
       catchError(this.handleError)
     );
   }
 
   getNewsItemById(id: number): Observable<NewsItem> {
     return this.http.get<NewsItem>(`${this.apiUrl}/${id}`, { withCredentials: true }).pipe(
-      tap(data => console.log(`Fetched news item ${id}:`, data)),
+      // tap(data => console.log(`Fetched news item ${id}:`, data)),
       catchError(this.handleError)
     );
   }
@@ -40,7 +40,7 @@ export class NewsService {
   // פונקציה חדשה: יצירת פריט חדשות
   createNewsItem(item: NewsItem): Observable<NewsItem> {
     return this.http.post<NewsItem>(this.apiUrl, item, { withCredentials: true }).pipe(
-      tap(data => console.log('Created news item:', data)),
+      // tap(data => console.log('Created news item:', data)),
       catchError(this.handleError)
     );
   }
@@ -48,7 +48,7 @@ export class NewsService {
   // פונקציה חדשה: עדכון פריט חדשות קיים
   updateNewsItem(id: number, item: NewsItem): Observable<NewsItem> {
     return this.http.put<NewsItem>(`${this.apiUrl}/${id}`, item, { withCredentials: true }).pipe(
-      tap(data => console.log(`Updated news item ${id}:`, data)),
+      // tap(data => console.log(`Updated news item ${id}:`, data)),
       catchError(this.handleError)
     );
   }
@@ -56,7 +56,7 @@ export class NewsService {
   // פונקציה חדשה: מחיקת פריט חדשות
   deleteNewsItem(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`, { withCredentials: true }).pipe(
-      tap(() => console.log(`Deleted news item ${id}`)),
+      // tap(() => console.log(`Deleted news item ${id}`)),
       catchError(this.handleError)
     );
   }

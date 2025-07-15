@@ -41,7 +41,7 @@ export class News implements OnInit { // שינוי שם הקלאס ל-NewsListC
         this.news = data; // עדכן את מערך החדשות עם הנתונים שהתקבלו
         this.loading = false; // סיים טעינה
         this.cdr.detectChanges()
-        console.log('חדשות נטענו בהצלחה:', this.news);
+        // console.log('חדשות נטענו בהצלחה:', this.news);
       },
       error: (err) => {
         this.error = 'שגיאה בטעינת החדשות. אנא נסה שוב מאוחר יותר.'; // הגדר הודעת שגיאה

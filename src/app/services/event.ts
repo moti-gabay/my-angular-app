@@ -81,7 +81,7 @@ export class EventService {
    */
   sendMailToCreatorEvent(emailData: ApprovedEventEmailData): Observable<any> { // <--- תיקון: שינוי מ-fullEvent ל-ApprovedEventEmailData
     // וודא שהנתיב ל-endpoint של שליחת אימיילים נכון
-    console.log("emailData from sendMailToCreatorEvent function ", emailData)
+    // console.log("emailData from sendMailToCreatorEvent function ", emailData)
     return this.http.post(`${API_URL}/api/send-event-approved-email`, emailData, { withCredentials: true });
   }
 

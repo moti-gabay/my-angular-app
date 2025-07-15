@@ -58,7 +58,7 @@ export class DonationComponent implements OnInit, AfterViewInit { // Changed cla
 
   private loadPayPalScript(): void {
     if (document.getElementById('paypal-sdk')) {
-      console.log('PayPal SDK already loaded.');
+      // console.log('PayPal SDK already loaded.');
       return;
     }
 
@@ -67,7 +67,7 @@ export class DonationComponent implements OnInit, AfterViewInit { // Changed cla
     // Use environment.paypalClientId
     script.src = `https://www.paypal.com/sdk/js?client-id=${environment.paypalClientId}&currency=ILS&disable-funding=credit,card`; // ILS for Israeli Shekel
     script.onload = () => {
-      console.log('PayPal SDK loaded successfully.');
+      // console.log('PayPal SDK loaded successfully.');
       // If the script loads after ngAfterViewInit, render the button here
       if (this.paypalButtonContainer && typeof paypal !== 'undefined') {
         this.renderPayPalButton();
@@ -95,7 +95,7 @@ export class DonationComponent implements OnInit, AfterViewInit { // Changed cla
 
       // Function to create an order
       createOrder: (data: any, actions: any) => {
-        console.log('Creating PayPal order...');
+        // console.log('Creating PayPal order...');
         return actions.order.create({
           purchase_units: [{
             amount: {
@@ -108,11 +108,11 @@ export class DonationComponent implements OnInit, AfterViewInit { // Changed cla
 
       // Function after payment approval
       onApprove: (data: any, actions: any) => {
-        console.log('Order approved, attempting to capture:', data);
+        // console.log('Order approved, attempting to capture:', data);
         // This is a critical step that should be done on the server-side in production!
         // Here we perform client-side capture for demonstration purposes only.
         return actions.order.capture().then((details: any) => {
-          console.log('Transaction completed by ' + details.payer.name.given_name, details);
+          // console.log('Transaction completed by ' + details.payer.name.given_name, details);
           this.donationStatus = `תודה רבה על תרומתך בסך ${this.donationAmount} ILS, ${details.payer.name.given_name}!`;
           
           // Send confirmation email to the server
@@ -139,7 +139,7 @@ export class DonationComponent implements OnInit, AfterViewInit { // Changed cla
 
       // Function in case of cancellation
       onCancel: (data: any) => {
-        console.log('Payment cancelled:', data);
+        // console.log('Payment cancelled:', data);
         this.donationStatus = 'התרומה בוטלה.';
       },
 

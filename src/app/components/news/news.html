@@ -13,7 +13,7 @@
         <span class="news-time">{{ item.timeAgo }}</span> <!-- שינוי: item.timeAgo -->
         <a [routerLink]="['/news', item.id]" class="news-link">לכתבה המלאה &rarr;</a>
         <a *ngIf="isAdmin" [routerLink]="['/edit-news', item.id]" class="news-link"> לעריכת הכתבה &rarr;</a>
-        <button (click)="deleteNewsItem(item.id!)" class="action-button delete-button">מחק</button>
+        <button *ngIf="isAdmin" (click)="deleteNewsItem(item.id!)" class="action-button delete-button">מחק</button>
         <!-- <--- כפתור מחיקה -->
 
       </div>

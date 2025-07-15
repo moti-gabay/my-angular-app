@@ -46,10 +46,10 @@ export class Tradition implements OnInit {
       next: (data) => {
         this.traditionItems = data;
         this.loading = false;
-        console.log('פריטי מסורת נטענו בהצלחה:', this.traditionItems);
+        // console.log('פריטי מסורת נטענו בהצלחה:', this.traditionItems);
         this.cdr.detectChanges()
         if (this.traditionItems.length > 0) {
-          this.selectTopic(this.traditionItems[0].id!);
+          // this.selectTopic(this.traditionItems[0].id!);
         }
       },
       error: (err) => {
@@ -69,18 +69,18 @@ export class Tradition implements OnInit {
       } else {
         this.safeFullContent = null;
       }
-      console.log('פריט מסורת נבחר:', this.selectedTraditionItem.title);
+      // console.log('פריט מסורת נבחר:', this.selectedTraditionItem.title);
     }
   }
 
-  deleteTraditionItem(id: number): void {
+   deleteTraditionItem(id: number): void {
     if (confirm('האם אתה בטוח שברצונך למחוק פריט מסורת זה?')) {
       this.traditionService.deleteTraditionItem(id).subscribe({
         next: () => {
           alert('פריט המסורת נמחק בהצלחה.');
-          this.fetchTraditionItems();
-          this.selectTopic(this.traditionItems[0].id!);
-          // רענן את רשימת הפריטים לאחר המחיקה
+          this.fetchTraditionItems(); 
+          // this.selectTopic(this.traditionItems[0].id!);
+ // רענן את רשימת הפריטים לאחר המחיקה
         },
         error: (err) => {
           console.error('שגיאה במחיקת פריט מסורת:', err);

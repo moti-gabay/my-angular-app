@@ -59,7 +59,7 @@ export class NewsEditComponent implements OnInit {
       this.newsService.updateNewsItem(this.newsItem.id, this.newsItem).subscribe({
         next: (updatedItem) => {
           this.message = 'הכתבה עודכנה בהצלחה!';
-          console.log('News item updated:', updatedItem);
+          // console.log('News item updated:', updatedItem);
           // ניתוב חזרה לדף הכתבה המלאה
           this.router.navigate(['/news', this.newsItem!.id]);
           this.cdr.detectChanges()

@@ -33,14 +33,14 @@ export class ContactComponent {
       return;
     }
 
-    console.log('Contact Form Submitted:', this.contactData);
+    // console.log('Contact Form Submitted:', this.contactData);
 
     this.contactService.sendContactForm(this.contactData).subscribe({
       next: (res: any) => {
         this.statusMessage = 'הודעתך נשלחה בהצלחה! נחזור אליך בהקדם.';
         this.isSuccess = true;
         this.resetForm();
-        console.log('Contact email send request successful:', res);
+        // console.log('Contact email send request successful:', res);
       },
       error: (err: any) => {
         this.statusMessage = 'אירעה שגיאה בשליחת ההודעה. אנא נסה שוב מאוחר יותר.';

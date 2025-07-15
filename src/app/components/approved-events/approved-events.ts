@@ -65,7 +65,7 @@ export class ApprovedEventsComponent implements OnInit {
   }
   selectEvent(event: any) {
     this.selectedEvent = event;
-    console.log(event.registered_users.length)
+    // console.log(event.registered_users.length)
 
   }
   registerToEvent(eventId?: number): void {

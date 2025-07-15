@@ -74,7 +74,7 @@ export class ImageGalleryComponent implements OnInit {
     if (confirm('האם אתה בטוח שברצונך למחוק תמונה זו? פעולה זו בלתי הפיכה!')) {
       this.imageService.deleteImageRecord(imageId).subscribe({
         next: () => {
-          console.log(`Image ${imageId} deleted successfully.`);
+          // console.log(`Image ${imageId} deleted successfully.`);
           this.fetchImages();
         },
         error: (err) => {

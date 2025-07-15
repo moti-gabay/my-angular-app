@@ -20,7 +20,7 @@ export class ContactService {
   constructor(private http: HttpClient) { }
 
   sendContactForm(formData: ContactFormData): Observable<any> {
-    console.log('ContactService: Sending contact form data...', formData);
+    // console.log('ContactService: Sending contact form data...', formData);
     return this.http.post<any>(`${this.apiUrl}/send-contact-email`, formData, { withCredentials: true }).pipe(
       tap(response => console.log('ContactService: Contact email sent response:', response)),
       catchError(this.handleError)

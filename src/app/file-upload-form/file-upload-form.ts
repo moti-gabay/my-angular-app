@@ -42,7 +42,7 @@ export class FileUploadFormComponent {
 
     this.http.post(`${API_URL}/upload`, formData, { withCredentials: true }).subscribe({
       next: () => {
-        console.log('הקובץ הועלה בהצלחה!');
+        // console.log('הקובץ הועלה בהצלחה!');
         this.uploadSuccess.emit(); // שליחת אירוע להורה
         this.resetForm();
       },

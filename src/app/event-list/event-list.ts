@@ -41,7 +41,7 @@ export class EventListComponent implements OnInit {
         if (this.currentUser && this.currentUser.role === 'admin') {
           // אם המנהל מחובר - הצג את כל האירועים
           this.events = data;
-          console.log(data)
+          // console.log(data)
         } else {
           // משתמש רגיל - הצג רק אירועים מאושרים
           this.events = data.filter(event =>
@@ -73,7 +73,7 @@ export class EventListComponent implements OnInit {
             this.authService.getAllUsers().pipe(
               take(1),
               switchMap(allUsers => {
-                console.log("allUsers", allUsers); // תוודא כאן אם זה אובייקט או מערך
+                // console.log("allUsers", allUsers); // תוודא כאן אם זה אובייקט או מערך
                 const usersArray = Array.isArray(allUsers) ? allUsers : Object.values(allUsers);
                 const creatorUser = usersArray.find(user => user.id === event.created_by);
 
@@ -98,7 +98,7 @@ export class EventListComponent implements OnInit {
               })
             ).subscribe({
               next: () => {
-                console.log('המייל נשלח בהצלחה.');
+                // console.log('המייל נשלח בהצלחה.');
               },
               error: (err) => {
                 console.error('שגיאה בשליחת המייל:', err);

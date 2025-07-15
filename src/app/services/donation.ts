@@ -13,7 +13,7 @@ export class DonationService {
   constructor(private http: HttpClient) { }
 
   sendDonationConfirmationEmail(emailDetails: { recipient_email: string, payer_name: string, amount: number, currency: string, transaction_id: string }): Observable<any> {
-    console.log('DonationService: Sending donation confirmation email request...', emailDetails);
+    // console.log('DonationService: Sending donation confirmation email request...', emailDetails);
     return this.http.post<any>(`${this.apiUrl}/send-donation-confirmation`, emailDetails, { withCredentials: true }).pipe(
       tap(response => console.log('DonationService: Email sent response:', response)),
       catchError(this.handleError)
