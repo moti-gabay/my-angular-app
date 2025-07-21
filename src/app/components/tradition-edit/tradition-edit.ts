@@ -58,7 +58,7 @@ export class TraditionEditComponent implements OnInit {
       this.traditionService.updateTraditionItem(this.traditionItem.id, this.traditionItem).subscribe({
         next: (updatedItem) => {
           this.message = 'פריט המסורת עודכן בהצלחה!';
-          console.log('Tradition item updated:', updatedItem);
+          // console.log('Tradition item updated:', updatedItem);
           // ניתוב חזרה לדף פריט המסורת המלאה
           this.router.navigate(['/tradition', this.traditionItem!.id]);
           // או: this.router.navigate(['/tradition']); // ניתוב לרשימת פריטי המסורת

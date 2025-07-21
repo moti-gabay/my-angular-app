@@ -2,7 +2,7 @@
 
   <div>
     <app-sidebar-nav [isLoggedInStatus$]="authService.isLoggedIn$" [currentUser$]="authService.currentUser$"
-      [isSidebarOpen]="isSidebarOpen" (logout)="onLogout()" (toggleSidebar)="toggleSidebar()"></app-sidebar-nav>
+      (logout)="onLogout()" ></app-sidebar-nav>
   </div>
   <div class="content-container">
     <router-outlet></router-outlet>

@@ -1,88 +1,91 @@
-<div class="sidebar-content">
+<!-- <button class="toggle-button" (click)="toggleSidebar()">
+  {{ isOpen ? '✖️' : '☰' }}
+</button> -->
+<div class="sidebar-content" [class.closed]="isOpen">
   <ng-container *ngIf="currentUser$ | async as user">
     <ul class="nav-list">
       <!-- כפתורים למנהל ולחבר -->
       <li *ngIf="user.role === 'admin' || user.role === 'member'">
-        <a routerLink="/files" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
+        <a routerLink="/files" routerLinkActive="active" class="nav-link">
           <mat-icon>folder</mat-icon>
           <span class="nav-title">ניהול קבצים</span>
         </a>
       </li>
-      
+
       <li *ngIf="user.role === 'admin' || user.role === 'member'">
-        <a routerLink="/images" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
+        <a routerLink="/images" routerLinkActive="active" class="nav-link">
           <mat-icon>image</mat-icon>
           <span class="nav-title">גלריית תמונות</span>
         </a>
       </li>
-      
+
       <li *ngIf="user.role === 'admin' || user.role === 'member'">
-        <a routerLink="/admin-events" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
+        <a routerLink="/admin-events" routerLinkActive="active" class="nav-link">
           <mat-icon>event</mat-icon>
           <span class="nav-title">ניהול אירועים</span>
         </a>
       </li>
-      
+
       <!-- כפתורים למשתמש רגיל -->
       <ng-container *ngIf="user.role === 'user' || user.role === 'admin' || user.role === 'member' ">
         <li>
-          <a routerLink="/homepage" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
+          <a routerLink="/homepage" routerLinkActive="active" class="nav-link">
             <mat-icon>home</mat-icon>
             <span class="nav-title">מי אנחנו</span>
           </a>
         </li>
-        
+
         <li>
-          <a routerLink="/news" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
+          <a routerLink="/news" routerLinkActive="active" class="nav-link">
             <mat-icon>article</mat-icon>
             <span class="nav-title">חדשות ופרסומים</span>
           </a>
         </li>
-        
+
         <li>
-          <a routerLink="/tradition" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
+          <a routerLink="/tradition" routerLinkActive="active" class="nav-link">
             <mat-icon>book</mat-icon>
             <span class="nav-title">המסורת היהודית</span>
           </a>
         </li>
-        
+
         <li>
-          <a routerLink="/events" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
+          <a routerLink="/events" routerLinkActive="active" class="nav-link">
             <mat-icon>event</mat-icon>
             <span class="nav-title">אירועים</span>
           </a>
         </li>
-        
+
         <li>
-          <a routerLink="/add-event" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
+          <a routerLink="/add-event" routerLinkActive="active" class="nav-link">
             <mat-icon>add</mat-icon>
             <span class="nav-title">צור אירוע</span>
           </a>
         </li>
         <ng-container *ngIf="user.role === 'admin'">
           <li>
-            <a routerLink="/add-news" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
+            <a routerLink="/add-news" routerLinkActive="active" class="nav-link">
               <mat-icon>add</mat-icon>
-              <span class="nav-title">  הוספת חדשות </span>
+              <span class="nav-title"> הוספת חדשות </span>
             </a>
           </li>
-           <li>
-            <a routerLink="/add-tradition" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
+          <li>
+            <a routerLink="/add-tradition" routerLinkActive="active" class="nav-link">
               <mat-icon>add</mat-icon>
-              <span class="nav-title">  הוספת מסורת ופרסום </span>
+              <span class="nav-title"> הוספת מסורת ופרסום </span>
             </a>
           </li>
         </ng-container>
-        
+
         <li>
-          <a routerLink="/contact" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
+          <a routerLink="/contact" routerLinkActive="active" class="nav-link">
             <mat-icon>mail</mat-icon>
             <span class="nav-title">צור קשר</span>
           </a>
         </li>
 
         <li>
-          <a routerLink="/donation" routerLinkActive="active" (click)="onLinkClick()" class="nav-link">
+          <a routerLink="/donation" routerLinkActive="active" class="nav-link">
             <mat-icon>volunteer_activism</mat-icon>
             <span class="nav-title">תרומה</span>
           </a>
@@ -96,8 +99,7 @@
         <span>התנתק</span>
       </button>
 
-      <a *ngIf="!isLoggedInStatus$" routerLink="/login" (click)="onLinkClick()"
-        class="auth-button login-register-button">
+      <a *ngIf="!isLoggedInStatus$" routerLink="/login" class="auth-button login-register-button">
         <mat-icon>login</mat-icon>
         <span>התחבר / הירשם</span>
       </a>

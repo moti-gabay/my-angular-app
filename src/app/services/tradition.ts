@@ -21,7 +21,7 @@ export interface TraditionItem {
   providedIn: 'root'
 })
 export class TraditionService {
-  private apiUrl = API_URL + '/tradition/'; // נקודת הקצה של השרת עבור מסורת
+  private apiUrl = API_URL + '/tradition'; // נקודת הקצה של השרת עבור מסורת
 
   constructor(private http: HttpClient) { }
 

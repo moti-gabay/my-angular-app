@@ -3,7 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '../services/url';
-
+import { ChangeDetectorRef } from "@angular/core"
 @Component({
   selector: 'app-image-uploader',
   // standalone: true,
@@ -19,7 +19,7 @@ export class ImageUploaderComponent {
 
   @Output() imageUploaded = new EventEmitter<{ url: string, id: number, filename: string }>(); // פולט את URL התמונה המועלה
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) { }
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
@@ -42,10 +42,11 @@ export class ImageUploaderComponent {
     this.http.post<any>(`${API_URL}/images`, formData, { withCredentials: true }).subscribe({
       next: (res) => {
         this.uploading = false;
-        this.uploadedImageUrl = `${API_URL}${res.url}`; 
-        this.imageUploaded.emit({ url: this.uploadedImageUrl, id: res.id, filename: res.filename }); 
+        this.uploadedImageUrl = `${API_URL}${res.url}`;
+        this.imageUploaded.emit({ url: this.uploadedImageUrl, id: res.id, filename: res.filename });
         // console.log('Image uploaded successfully:', res);
         this.selectedFile = undefined;
+        this.cdr.detectChanges()
       },
       error: (err) => {
         this.uploading = false;

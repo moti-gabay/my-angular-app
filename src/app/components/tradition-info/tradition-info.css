@@ -54,6 +54,7 @@
 }
 
 .article-content {
+  overflow: auto;
   font-size: clamp(1rem, 2.5vw, 1.15rem);
   color: #34495e;
   line-height: 1.8;

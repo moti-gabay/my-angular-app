@@ -7,6 +7,8 @@ import { SidebarNavComponent } from './sidebar-nav/sidebar-nav'; // ייבוא �
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Footer } from './components/footer/footer';
 import { ContactComponent } from './components/contact/contact';
+import { f } from "../../node_modules/@angular/material/icon-module.d-COXCrhrh";
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +17,9 @@ import { ContactComponent } from './components/contact/contact';
     RouterOutlet,
     CommonModule,
     Footer,
-    SidebarNavComponent
+    SidebarNavComponent,
+    MatIconModule // הוספת MatIconModule
+
   ],
   templateUrl: "./app.html",
   styleUrl: "./app.css",
@@ -35,17 +39,19 @@ import { ContactComponent } from './components/contact/contact';
 })
 export class AppComponent implements OnInit {
   title = 'file-manager-app';
-  isSidebarOpen: boolean = true;
 
+  // מתודה לפתיחה/סגירה של הסיידבאר
+
+
+  // מתודה המופעלת כאשר הסיידבאר נסגר (לדוגמה, בלחיצה על קישור)
+ 
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
     // מצב ההתחברות מטופל על ידי AuthService והוא אסינכרוני
   }
 
-  toggleSidebar(): void {
-    this.isSidebarOpen = !this.isSidebarOpen;
-  }
+  
 
   onLogout(): void {
     this.authService.logout().subscribe(); // הפעל את פונקציית ההתנתקות משירות האימות
