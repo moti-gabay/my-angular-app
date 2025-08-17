@@ -59,24 +59,26 @@ export const routes: Routes = [
     canActivate: [roleGuard],
     data: { roles: ['user', 'admin', 'member'] }
   },
-  {
-    path: 'edit-news/:id',
-    component: NewsEditComponent,
-    canActivate: [roleGuard],
-    data: { roles: ['admin'], renderMode: 'server' }
-  },
+ {
+  path: 'edit-news/:id',
+  component: NewsEditComponent,
+  canActivate: [roleGuard],
+  data: { roles: ['admin'] },
+  renderMode: 'server'
+},
   {
     path: 'add-news',
     component: NewsAddComponent,
     canActivate: [roleGuard],
     data: { roles: ['admin'] }
   },
-  {
-    path: 'news/:id',
-    component: NewsInfo,
-    canActivate: [roleGuard],
-    data: { roles: ['user', 'admin', 'member'], renderMode: 'server' }
-  },
+ {
+  path: 'news/:id',
+  component: NewsInfo,
+  canActivate: [roleGuard],
+  data: { roles: ['user', 'admin', 'member'] },
+  renderMode: 'server'
+},
   {
     path: 'tradition',
     component: Tradition,
@@ -89,18 +91,20 @@ export const routes: Routes = [
     canActivate: [roleGuard],
     data: { roles: ['admin'] }
   },
-  {
-    path: 'tradition/:id',
-    component: TraditionInfo,
-    canActivate: [roleGuard],
-    data: { roles: ['user', 'admin', 'member'], renderMode: 'server' }
-  },
-  {
-    path: 'edit-tradition/:id',
-    component: TraditionEditComponent,
-    canActivate: [roleGuard],
-    data: { roles: ['admin'], renderMode: 'server' }
-  },
+ {
+  path: 'tradition/:id',
+  component: TraditionInfo,
+  canActivate: [roleGuard],
+  data: { roles: ['user', 'admin', 'member'] },
+  renderMode: 'server'
+},
+ {
+  path: 'edit-tradition/:id',
+  component: TraditionEditComponent,
+  canActivate: [roleGuard],
+  data: { roles: ['admin'] },
+  renderMode: 'server'
+}
   {
     path: 'events',
     component: ApprovedEventsComponent,
