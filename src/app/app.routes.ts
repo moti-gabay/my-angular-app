@@ -63,9 +63,8 @@ export const routes: Routes = [
   path: 'edit-news/:id',
   component: NewsEditComponent,
   canActivate: [roleGuard],
-  data: { roles: ['admin'] },
-  renderMode: 'server'
-},
+  data: { roles: ['admin'] }
+ },
   {
     path: 'add-news',
     component: NewsAddComponent,
@@ -76,9 +75,8 @@ export const routes: Routes = [
   path: 'news/:id',
   component: NewsInfo,
   canActivate: [roleGuard],
-  data: { roles: ['user', 'admin', 'member'] },
-  renderMode: 'server'
-},
+  data: { roles: ['user', 'admin', 'member'] }
+ },
   {
     path: 'tradition',
     component: Tradition,
@@ -95,16 +93,14 @@ export const routes: Routes = [
   path: 'tradition/:id',
   component: TraditionInfo,
   canActivate: [roleGuard],
-  data: { roles: ['user', 'admin', 'member'] },
-  renderMode: 'server'
-},
+  data: { roles: ['user', 'admin', 'member'] }
+ },
  {
   path: 'edit-tradition/:id',
   component: TraditionEditComponent,
   canActivate: [roleGuard],
-  data: { roles: ['admin'] },
-  renderMode: 'server'
-}
+  data: { roles: ['admin'] }
+ },
   {
     path: 'events',
     component: ApprovedEventsComponent,
