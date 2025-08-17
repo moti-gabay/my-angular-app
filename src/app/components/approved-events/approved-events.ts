@@ -77,7 +77,7 @@ export class ApprovedEventsComponent implements OnInit {
       this.eventService.registerToEvent(eventId).subscribe({
         next: () => {
           this.fetchApprovedEvents() // קריאה לפונקציה שמביאה מחדש את הנתונים
-
+          
           alert('רשמת בהצלחה')
         },
         error: (err) => {
