@@ -2,7 +2,10 @@ import { Routes } from '@angular/router';
 import { roleGuard } from './auth/role.guard';
 
 export const routes: Routes = [
-  { path: 'login', loadComponent: () => import('./components/login-register/login-register').then(m => m.LoginRegisterComponent) },
+  { 
+    path: 'login', 
+    loadComponent: () => import('./components/login-register/login-register').then(m => m.LoginRegisterComponent) 
+  },
 
   {
     path: 'files',
@@ -32,13 +35,13 @@ export const routes: Routes = [
     path: 'news/:id',
     loadComponent: () => import('./components/news-info/news-info').then(m => m.NewsInfo),
     canActivate: [roleGuard],
-    data: { roles: ['user', 'admin', 'member'] }
+    data: { roles: ['user', 'admin', 'member'], renderMode: 'client' }
   },
   {
     path: 'edit-news/:id',
     loadComponent: () => import('./components/news-edit/news-edit').then(m => m.NewsEditComponent),
     canActivate: [roleGuard],
-    data: { roles: ['admin'] }
+    data: { roles: ['admin'], renderMode: 'client' }
   },
   {
     path: 'add-news',
@@ -56,13 +59,13 @@ export const routes: Routes = [
     path: 'tradition/:id',
     loadComponent: () => import('./components/tradition-info/tradition-info').then(m => m.TraditionInfo),
     canActivate: [roleGuard],
-    data: { roles: ['user', 'admin', 'member'] }
+    data: { roles: ['user', 'admin', 'member'], renderMode: 'client' }
   },
   {
     path: 'edit-tradition/:id',
     loadComponent: () => import('./components/tradition-edit/tradition-edit').then(m => m.TraditionEditComponent),
     canActivate: [roleGuard],
-    data: { roles: ['admin'] }
+    data: { roles: ['admin'], renderMode: 'client' }
   },
   {
     path: 'add-tradition',
