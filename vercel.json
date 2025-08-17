@@ -1,0 +1,36 @@
+{
+  "routes": [
+    {
+      "src": "/news/:id",
+      "status": 200,
+      "continue": true,
+      "headers": {
+        "x-vc-disable-prerendering": "true"
+      }
+    },
+    {
+      "src": "/edit-news/:id",
+      "status": 200,
+      "continue": true,
+      "headers": {
+        "x-vc-disable-prerendering": "true"
+      }
+    },
+    {
+      "src": "/tradition/:id",
+      "status": 200,
+      "continue": true,
+      "headers": {
+        "x-vc-disable-prerendering": "true"
+      }
+    },
+    {
+      "src": "/edit-tradition/:id",
+      "status": 200,
+      "continue": true,
+      "headers": {
+        "x-vc-disable-prerendering": "true"
+      }
+    }
+  ]
+}
