@@ -1,13 +1,11 @@
 import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { withInterceptorsFromDi, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
-
-import { routes } from './app.routes';
-import { provideServerRendering } from '@angular/platform-server'; // ← השתנה כאן
-import { provideHttpClient } from '@angular/common/http';
-import { AuthService } from './services/auth';
 import { FormsModule } from '@angular/forms';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { AuthService } from './services/auth';
+import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,10 +13,9 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes),
-    provideServerRendering(), // ← כאן במקום provideClientHydration()
-    provideHttpClient(),
+    provideClientHydration(withEventReplay()),
     AuthService,
     provideAnimations(),
-    importProvidersFrom(FormsModule),
-  ],
+    importProvidersFrom(FormsModule)
+  ]
 };
