@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 import { roleGuard } from './auth/role.guard';
 
-export const routes: Routes = [
-  { 
-    path: 'login', 
-    loadComponent: () => import('./components/login-register/login-register').then(m => m.LoginRegisterComponent) 
-  },
+// הגדרה של סוג מותאם ל־Route עם getPrerenderParams
+
+
+export const routes = [
+  { path: 'login', loadComponent: () => import('./components/login-register/login-register').then(m => m.LoginRegisterComponent) },
 
   {
     path: 'files',
@@ -25,6 +25,7 @@ export const routes: Routes = [
     canActivate: [roleGuard],
     data: { roles: ['user', 'admin', 'member'] }
   },
+
   {
     path: 'news',
     loadComponent: () => import('./components/news/news').then(m => m.News),
@@ -35,20 +36,23 @@ export const routes: Routes = [
     path: 'news/:id',
     loadComponent: () => import('./components/news-info/news-info').then(m => m.NewsInfo),
     canActivate: [roleGuard],
-    data: { roles: ['user', 'admin', 'member'], renderMode: 'client' }
-  },
+    data: { roles: ['user', 'admin', 'member'] },
+    getPrerenderParams: async () => [{ id: '1' }, { id: '2' }, { id: '3' }]
+  } as any,
   {
     path: 'edit-news/:id',
     loadComponent: () => import('./components/news-edit/news-edit').then(m => m.NewsEditComponent),
     canActivate: [roleGuard],
-    data: { roles: ['admin'], renderMode: 'client' }
-  },
+    data: { roles: ['admin'] },
+    getPrerenderParams: async () => [{ id: '1' }, { id: '2' }, { id: '3' }]
+  } as any,
   {
     path: 'add-news',
     loadComponent: () => import('./components/news-add/news-add').then(m => m.NewsAddComponent),
     canActivate: [roleGuard],
     data: { roles: ['admin'] }
   },
+
   {
     path: 'tradition',
     loadComponent: () => import('./components/tradition/tradition').then(m => m.Tradition),
@@ -59,20 +63,23 @@ export const routes: Routes = [
     path: 'tradition/:id',
     loadComponent: () => import('./components/tradition-info/tradition-info').then(m => m.TraditionInfo),
     canActivate: [roleGuard],
-    data: { roles: ['user', 'admin', 'member'], renderMode: 'client' }
-  },
+    data: { roles: ['user', 'admin', 'member'] },
+    getPrerenderParams: async () => [{ id: '1' }, { id: '2' }, { id: '3' }]
+  } as any,
   {
     path: 'edit-tradition/:id',
     loadComponent: () => import('./components/tradition-edit/tradition-edit').then(m => m.TraditionEditComponent),
     canActivate: [roleGuard],
-    data: { roles: ['admin'], renderMode: 'client' }
-  },
+    data: { roles: ['admin'] },
+    getPrerenderParams: async () => [{ id: '1' }, { id: '2' }, { id: '3' }]
+  } as any,
   {
     path: 'add-tradition',
     loadComponent: () => import('./components/tradition-add/tradition-add').then(m => m.TraditionAddComponent),
     canActivate: [roleGuard],
     data: { roles: ['admin'] }
   },
+
   {
     path: 'events',
     loadComponent: () => import('./components/approved-events/approved-events').then(m => m.ApprovedEventsComponent),
