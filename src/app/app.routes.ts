@@ -32,20 +32,20 @@ export const routes = [
     canActivate: [roleGuard],
     data: { roles: ['user', 'admin', 'member'] }
   },
-  {
-    path: 'news/:id',
-    loadComponent: () => import('./components/news-info/news-info').then(m => m.NewsInfo),
-    canActivate: [roleGuard],
-    data: { roles: ['user', 'admin', 'member'] },
-    getPrerenderParams: async () => [{ id: '1' }, { id: '2' }, { id: '3' }]
-  } as any,
-  {
-    path: 'edit-news/:id',
-    loadComponent: () => import('./components/news-edit/news-edit').then(m => m.NewsEditComponent),
-    canActivate: [roleGuard],
-    data: { roles: ['admin'] },
-    getPrerenderParams: async () => [{ id: '1' }, { id: '2' }, { id: '3' }]
-  } as any,
+  // {
+  //   path: 'news/:id',
+  //   loadComponent: () => import('./components/news-info/news-info').then(m => m.NewsInfo),
+  //   canActivate: [roleGuard],
+  //   data: { roles: ['user', 'admin', 'member'] },
+  //   getPrerenderParams: async () => [{ id: '1' }, { id: '2' }, { id: '3' }]
+  // } as any,
+  // {
+  //   path: 'edit-news/:id',
+  //   loadComponent: () => import('./components/news-edit/news-edit').then(m => m.NewsEditComponent),
+  //   canActivate: [roleGuard],
+  //   data: { roles: ['admin'] },
+  //   getPrerenderParams: async () => [{ id: '1' }, { id: '2' }, { id: '3' }]
+  // } as any,
   {
     path: 'add-news',
     loadComponent: () => import('./components/news-add/news-add').then(m => m.NewsAddComponent),
@@ -59,20 +59,20 @@ export const routes = [
     canActivate: [roleGuard],
     data: { roles: ['user', 'admin', 'member'] }
   },
-  {
-    path: 'tradition/:id',
-    loadComponent: () => import('./components/tradition-info/tradition-info').then(m => m.TraditionInfo),
-    canActivate: [roleGuard],
-    data: { roles: ['user', 'admin', 'member'] },
-    getPrerenderParams: async () => [{ id: '1' }, { id: '2' }, { id: '3' }]
-  } as any,
-  {
-    path: 'edit-tradition/:id',
-    loadComponent: () => import('./components/tradition-edit/tradition-edit').then(m => m.TraditionEditComponent),
-    canActivate: [roleGuard],
-    data: { roles: ['admin'] },
-    getPrerenderParams: async () => [{ id: '1' }, { id: '2' }, { id: '3' }]
-  } as any,
+  // {
+  //   path: 'tradition/:id',
+  //   loadComponent: () => import('./components/tradition-info/tradition-info').then(m => m.TraditionInfo),
+  //   canActivate: [roleGuard],
+  //   data: { roles: ['user', 'admin', 'member'] },
+  //   getPrerenderParams: async () => [{ id: '1' }, { id: '2' }, { id: '3' }]
+  // } as any,
+  // {
+  //   path: 'edit-tradition/:id',
+  //   loadComponent: () => import('./components/tradition-edit/tradition-edit').then(m => m.TraditionEditComponent),
+  //   canActivate: [roleGuard],
+  //   data: { roles: ['admin'] },
+  //   getPrerenderParams: async () => [{ id: '1' }, { id: '2' }, { id: '3' }]
+  // } as any,
   {
     path: 'add-tradition',
     loadComponent: () => import('./components/tradition-add/tradition-add').then(m => m.TraditionAddComponent),
