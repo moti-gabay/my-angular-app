@@ -111,6 +111,7 @@ export const routes = [
     data: { roles: ['user', 'admin', 'member'] }
   },
 
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: '**', redirectTo: '/login' }
+{ path: '', redirectTo: '/login', pathMatch: 'full' as const },
+{ path: '**', redirectTo: '/login', pathMatch: 'full' as const }
+
 ];
