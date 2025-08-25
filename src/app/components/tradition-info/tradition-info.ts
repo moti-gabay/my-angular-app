@@ -5,6 +5,7 @@ import { TraditionService, TraditionItem } from '../../services/tradition'; // �
 import { CommonModule, DatePipe } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'; // לייבוא DomSanitizer
 import { ChangeDetectorRef } from "@angular/core"
+import { API_URL } from '../../services/url';
 @Component({
   selector: 'app-tradition-article',
   standalone: true,
@@ -59,7 +60,7 @@ export class TraditionInfo implements OnInit {
       return 'https://placehold.co/600x400/cccccc/333333?text=אין+תמונה'; // תמונת פלייס הולדר
     }
     // הנחה: API_URL הוא 'http://localhost:5000/api' והתמונות מוגשות מ- 'http://localhost:5000'
-    const baseUrl = 'http://localhost:5000';
+    const baseUrl = API_URL;
     if (relativeUrl.startsWith('http://') || relativeUrl.startsWith('https://')) {
       return relativeUrl; // אם זה כבר URL מלא
     }

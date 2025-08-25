@@ -1,2 +1,2 @@
-export const API_URL = 'minyan-server-dbhshrf7aehbhegb.ukwest-01.azurewebsites.net';
+export const API_URL = 'https://python-app-or3e.onrender.com';
 export const API = 'http://localhost:5000';

@@ -99,7 +99,7 @@ export class AuthService {
   }
 
  getAllUsers(): Observable<Object> {
-  return this.http.get(`http://localhost:5000/users`, { withCredentials: true });
+  return this.http.get(`${API_URL}/users`, { withCredentials: true });
 }
 
 }

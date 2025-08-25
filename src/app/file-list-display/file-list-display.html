@@ -43,7 +43,7 @@
   <ul class="file-list">
     <li *ngFor="let file of displayedFiles" class="file-item">
       <div class="file-details">
-        <a class="file-link" [href]="'http://localhost:5000/files/' + file.filename" target="_blank">
+        <a class="file-link" [href]="'https://python-app-or3e.onrender.com/files/' + file.filename" target="_blank">
           <span>{{ file.filename }}</span>
         </a>
         <div class="file-meta">
@@ -55,7 +55,7 @@
       </div>
 
       <div class="file-actions">
-        <a class="action-button view-button" [href]="'http://localhost:5000/files/' + file.filename"
+        <a class="action-button view-button" [href]="'https://python-app-or3e.onrender.com/files/' + file.filename"
           target="_blank">צפה</a>
         <button *ngIf="isAdmin" class="action-button delete-button" (click)="deleteFile(file.id)">מחק</button>
       </div>

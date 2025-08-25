@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { API_URL } from './url';
 
 export interface ContactFormData {
   name: string;
@@ -15,7 +16,7 @@ export interface ContactFormData {
   providedIn: 'root'
 })
 export class ContactService {
-  private apiUrl = 'http://localhost:5000/api'; // בסיס ה-API
+  private apiUrl = API_URL + '/api'; // בסיס ה-API
 
   constructor(private http: HttpClient) { }
 

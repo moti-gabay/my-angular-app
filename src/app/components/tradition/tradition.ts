@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router'; // <--- ייבוא RouterLink
 import { ChangeDetectorRef } from "@angular/core"
 import { AuthService } from '../../services/auth';
 import { map } from 'rxjs';
+import { API_URL } from '../../services/url';
 @Component({
   selector: 'app-tradition',
   standalone: true,
@@ -95,7 +96,7 @@ export class Tradition implements OnInit {
     if (!relativeUrl) {
       return 'https://placehold.co/600x400/cccccc/333333?text=אין+תמונה';
     }
-    const baseUrl = 'http://localhost:5000';
+    const baseUrl = API_URL;
     if (relativeUrl.startsWith('http://') || relativeUrl.startsWith('https://')) {
       return relativeUrl;
     }

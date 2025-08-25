@@ -65,7 +65,7 @@ export class NewsInfo implements OnInit {
       if (!relativeUrl) {
         return 'https://placehold.co/400x200/cccccc/333333?text=אין+תמונה'; // תמונת פלייס הולדר
       }
-      const baseUrl = 'http://localhost:5000'; // וודא שזה תואם ל-base URL של השרת שלך
+      const baseUrl = API_URL; // וודא שזה תואם ל-base URL של השרת שלך
       if (relativeUrl.startsWith('http://') || relativeUrl.startsWith('https://')) {
         return relativeUrl; // אם זה כבר URL מלא
       }
