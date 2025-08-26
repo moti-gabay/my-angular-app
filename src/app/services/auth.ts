@@ -52,7 +52,16 @@ export class AuthService {
   }
 
   login(userData: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, userData, { withCredentials: true }).pipe(
+    const loginData = {
+      email: userData.email,
+      password: userData.password
+    }
+
+
+    return this.http.post<any>(`${this.apiUrl}/login`, loginData, {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true
+    }).pipe(
       // tap(response =>console.log('AuthService: Login API response received', response)),
       // השתמש ב-switchMap כדי להחליף ל-Observable של checkInitialAuthStatus
       // זה מבטיח ש-checkInitialAuthStatus תסתיים לפני שה-Observable של login יסתיים.
@@ -98,8 +107,8 @@ export class AuthService {
     return throwError(() => new Error(errorMessage));
   }
 
- getAllUsers(): Observable<Object> {
-  return this.http.get(`${API_URL}/users`, { withCredentials: true });
-}
+  getAllUsers(): Observable<Object> {
+    return this.http.get(`${API_URL}/users`, { withCredentials: true });
+  }
 
 }
