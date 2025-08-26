@@ -7,7 +7,7 @@ import { API_URL } from './url'; // וודא שהנתיב ל-API_URL נכון
 
 // הגדרת ממשק EventRecord
 export interface EventRecord {
-  id?: number; // אופציונלי ליצירה
+  _id?: string; // אופציונלי ליצירה
   title: string;
   date?: string; // נשלח כמחרוזת ISO 8601, יכול להיות None
   time?: string; // חדש: זמן האירוע כמחרוזת (HH:MM:SS)
@@ -65,14 +65,19 @@ export class EventService {
   /**
    * מעדכן אירוע קיים (מנהלים בלבד).
    */
-  updateEvent(id: number, event: EventRecord): Observable<EventRecord> {
+  updateEvent(id: string, event: EventRecord): Observable<EventRecord> {
     return this.http.put<EventRecord>(`${this.apiUrl}/${id}`, event, { withCredentials: true });
   }
 
   /**
    * מודifies event's status (Admins only).
    */
-  approveEvent(id: number): Observable<any> {
+  approveEvent(id: string): Observable<any> {
+    if (!id) {
+      console.log(id)
+    console.error("approveEvent called with undefined eventId");
+  }
+
     return this.http.put(`${this.apiUrl}/${id}/approve`, {}, { withCredentials: true });
   }
 
@@ -85,7 +90,7 @@ export class EventService {
     return this.http.post(`${API_URL}/api/send-event-approved-email`, emailData, { withCredentials: true });
   }
 
-  unapproveEvent(id: number): Observable<any> {
+  unapproveEvent(id: string): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}/unapprove`, {}, { withCredentials: true });
   }
 
@@ -96,15 +101,15 @@ export class EventService {
   /**
    * מוחק אירוע (מנהלים בלבד).
    */
-  deleteEvent(id: number): Observable<any> {
+  deleteEvent(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`, { withCredentials: true });
   }
 
-  registerToEvent(eventId: number): Observable<any> {
+  registerToEvent(eventId: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/${eventId}/register`, {}, { withCredentials: true });
   }
 
-  unregisterToEvent(eventId: number): Observable<any> {
+  unregisterToEvent(eventId: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/${eventId}/unregister`, {}, { withCredentials: true });
   }
 

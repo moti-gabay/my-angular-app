@@ -64,8 +64,8 @@
       </div>
 
       <div class="event-actions">
-        <a [routerLink]="['/events/admin', ev.id]" class="edit-button">ערוך</a>
-        <button *ngIf="ev.id !== undefined" (click)="deleteEventFromList(ev.id!)" class="delete-button-small">
+        <a [routerLink]="['/events/admin', ev._id]" class="edit-button">ערוך</a>
+        <button *ngIf="ev._id !== undefined" (click)="deleteEventFromList(ev._id!)" class="delete-button-small">
           מחק
         </button>
       </div>

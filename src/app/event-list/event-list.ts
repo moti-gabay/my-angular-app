@@ -41,7 +41,7 @@ export class EventListComponent implements OnInit {
         if (this.currentUser && this.currentUser.role === 'admin') {
           // אם המנהל מחובר - הצג את כל האירועים
           this.events = data;
-          // console.log(data)
+          console.log(data)
         } else {
           // משתמש רגיל - הצג רק אירועים מאושרים
           this.events = data.filter(event =>
@@ -61,7 +61,8 @@ export class EventListComponent implements OnInit {
       }
     });
   }
-  approveEvent(eventId: number, event: EventRecord): void {
+  approveEvent(eventId: string, event: EventRecord): void {
+    console.log("eventId : " ,eventId)
     if (confirm('האם אתה בטוח שברצונך לאשר את האירוע?')) {
       this.eventService.approveEvent(eventId).subscribe({
         next: () => {
@@ -115,7 +116,7 @@ export class EventListComponent implements OnInit {
     }
   }
 
-  unapproveEvent(eventId: number): void {
+  unapproveEvent(eventId: string): void {
     if (confirm('האם אתה בטוח שברצונך לבטל את אישור האירוע?')) {
       this.eventService.unapproveEvent(eventId).subscribe({
         next: () => {
@@ -129,7 +130,7 @@ export class EventListComponent implements OnInit {
     }
   }
 
-  deleteEvent(eventId: number): void {
+  deleteEvent(eventId: string): void {
     if (confirm("אתה בטוח שברצונך למחוק את האירוע?")) {
       this.eventService.deleteEvent(eventId).subscribe({
         next: () => {

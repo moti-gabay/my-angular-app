@@ -55,7 +55,7 @@ export class ApprovedEventsComponent implements OnInit {
     });
   }
 
-  unapproveEvent(eventId: number): void {
+  unapproveEvent(eventId: string): void {
     if (confirm('האם אתה בטוח שברצונך לבטל את אישור הגעה לאירוע?')) {
       this.eventService.unapproveEvent(eventId).subscribe({
         next: () => this.fetchApprovedEvents(),
@@ -68,7 +68,7 @@ export class ApprovedEventsComponent implements OnInit {
     // console.log(event.registered_users.length)
 
   }
-  registerToEvent(eventId?: number): void {
+  registerToEvent(eventId?: string): void {
     if (eventId === undefined) {
       console.error('אירוע לא מוגדר');
       return;
@@ -88,7 +88,7 @@ export class ApprovedEventsComponent implements OnInit {
       });
     }
   }
-  unregisterToEvent(eventId?: number): void {
+  unregisterToEvent(eventId?: string): void {
     if (eventId === undefined) {
       console.error('אירוע לא מוגדר');
       return;
