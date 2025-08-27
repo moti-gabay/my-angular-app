@@ -47,7 +47,7 @@ export class TraditionAddComponent implements OnInit {
             image_url: ''
           });
           // ניתן לנווט לדף רשימת המסורת או לדף הפריט החדש
-          // this.router.navigate(['/tradition', newItem.id]); 
+          // this.router.navigate(['/tradition', newItem._id]); 
           // או:
           this.router.navigate(['/tradition']);
         },

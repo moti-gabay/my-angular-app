@@ -55,10 +55,10 @@
             </ng-container>
             <!-- כפתורי הרשמה/ביטול הרשמה למשתמשים רגילים (צריך להוסיף לוגיקה ב-TS) -->
             <!-- <ng-container *ngIf="currentUser?.role !== 'admin'">
-              <button *ngIf="event.is_approved && !isUserRegistered(event)" (click)="registerToEvent(event.id!)" class="action-button register-button">
+              <button *ngIf="event.is_approved && !isUserRegistered(event)" (click)="registerToEvent(event._id!)" class="action-button register-button">
                 הירשם
               </button>
-              <button *ngIf="event.is_approved && isUserRegistered(event)" (click)="unregisterToEvent(event.id!)" class="action-button unregister-button">
+              <button *ngIf="event.is_approved && isUserRegistered(event)" (click)="unregisterToEvent(event._id!)" class="action-button unregister-button">
                 הסר הרשמה
               </button>
             </ng-container> -->

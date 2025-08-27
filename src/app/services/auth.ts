@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { API_URL } from './url';
 
 export interface UserData {
-  id: number;
+  _id: number;
   full_name: string;
   tz: string;
   email: string;
@@ -57,7 +57,7 @@ export class AuthService {
       password: userData.password
     }
 
-
+    console.log(loginData)
     return this.http.post<any>(`${this.apiUrl}/login`, loginData, {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true

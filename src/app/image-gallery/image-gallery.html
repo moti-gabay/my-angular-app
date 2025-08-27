@@ -12,7 +12,7 @@
         <span class="upload-date">{{ img.uploaded_at | date:'short' }}</span>
       </div>
       <div class="image-actions">
-        <button *ngIf="isAdmin" (click)="deleteImage(img.id)" class="delete-button">מחק</button>
+        <button *ngIf="isAdmin" (click)="deleteImage(img._id)" class="delete-button">מחק</button>
       </div>
     </div>
   </div>

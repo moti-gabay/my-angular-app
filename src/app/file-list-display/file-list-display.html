@@ -57,7 +57,7 @@
       <div class="file-actions">
         <a class="action-button view-button" [href]="'http://localhost:5000/files/' + file.filename"
           target="_blank">צפה</a>
-        <button *ngIf="isAdmin" class="action-button delete-button" (click)="deleteFile(file.id)">מחק</button>
+        <button *ngIf="isAdmin" class="action-button delete-button" (click)="deleteFile(file._id)">מחק</button>
       </div>
     </li>
 
