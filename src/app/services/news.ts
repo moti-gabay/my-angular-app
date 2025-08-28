@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { API_URL } from './url'; // וודא שהנתיב ל-API_URL נכון
 
 export interface NewsItem {
@@ -19,6 +19,7 @@ export interface NewsItem {
   providedIn: 'root'
 })
 export class NewsService {
+   newsList: NewsItem[] = []
   private apiUrl = API_URL + '/news'; // הנחתי ש-API_URL הוא 'http://localhost:5000/'
 
   constructor(private http: HttpClient) { }
@@ -70,4 +71,11 @@ export class NewsService {
     console.error('NewsService: HTTP Error:', errorMessage, error);
     return throwError(() => new Error(errorMessage));
   }
+  // בתוך NewsService
+getNewsIds(): Observable<{ id: string }[]> {
+  return this.getNews().pipe(
+    map((newsList: any[]) => newsList.map(item => ({ id: item.id || item._id }))) // map לכל id
+  );
+}
+
 }

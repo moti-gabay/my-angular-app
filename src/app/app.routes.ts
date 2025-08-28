@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 import { roleGuard } from './auth/role.guard';
+import { NewsService } from './services/news';
+import { HttpClient } from '@angular/common/http';
+import { API_URL } from './services/url';
 
-// הגדרה של סוג מותאם ל־Route עם getPrerenderParams
-
-
-export const routes = [
+export const routes: Routes = [
   { path: 'login', loadComponent: () => import('./components/login-register/login-register').then(m => m.LoginRegisterComponent) },
 
   {
@@ -32,6 +32,7 @@ export const routes = [
     data: { roles: ['user', 'admin', 'member'] }
   },
 
+  // news routes
   {
     path: 'news',
     loadComponent: () => import('./components/news/news').then(m => m.News),
@@ -43,14 +44,30 @@ export const routes = [
     loadComponent: () => import('./components/news-info/news-info').then(m => m.NewsInfo),
     canActivate: [roleGuard],
     data: { roles: ['user', 'admin', 'member'] },
-    getPrerenderParams: async () => [{ id: '1' }, { id: '2' }, { id: '3' }]
+    getPrerenderParams: async () => {
+      // This is the new endpoint you just created
+      const res = await fetch(`${API_URL}/news/ids`);
+      const ids = await res.json();
+
+      // The endpoint now returns an array of strings (e.g., ["id1", "id2"])
+      // You need to map it to the expected format: [{ id: 'id1' }, { id: 'id2' }]
+      return ids.map((id: string) => ({ id }));
+    }
   } as any,
   {
     path: 'edit-news/:id',
     loadComponent: () => import('./components/news-edit/news-edit').then(m => m.NewsEditComponent),
     canActivate: [roleGuard],
     data: { roles: ['admin'] },
-    getPrerenderParams: async () => [{ id: '1' }, { id: '2' }, { id: '3' }]
+    getPrerenderParams:async () => {
+      // This is the new endpoint you just created
+      const res = await fetch(`${API_URL}/news/ids`);
+      const ids = await res.json();
+
+      // The endpoint now returns an array of strings (e.g., ["id1", "id2"])
+      // You need to map it to the expected format: [{ id: 'id1' }, { id: 'id2' }]
+      return ids.map((id: string) => ({ id }));
+    }
   } as any,
   {
     path: 'add-news',
@@ -59,6 +76,7 @@ export const routes = [
     data: { roles: ['admin'] }
   },
 
+  // tradition routes
   {
     path: 'tradition',
     loadComponent: () => import('./components/tradition/tradition').then(m => m.Tradition),
@@ -70,15 +88,31 @@ export const routes = [
     loadComponent: () => import('./components/tradition-info/tradition-info').then(m => m.TraditionInfo),
     canActivate: [roleGuard],
     data: { roles: ['user', 'admin', 'member'] },
-    getPrerenderParams: async () => [{ id: '1' }, { id: '2' }, { id: '3' }]
+    getPrerenderParams: async () => {
+      // This is the new endpoint you just created
+      const res = await fetch(`${API_URL}/tradition/ids`);
+      const ids = await res.json();
+
+      // The endpoint now returns an array of strings (e.g., ["id1", "id2"])
+      // You need to map it to the expected format: [{ id: 'id1' }, { id: 'id2' }]
+      return ids.map((id: string) => ({ id }));
+    }
   } as any,
   {
     path: 'edit-tradition/:id',
     loadComponent: () => import('./components/tradition-edit/tradition-edit').then(m => m.TraditionEditComponent),
     canActivate: [roleGuard],
     data: { roles: ['admin'] },
-    getPrerenderParams: async () => [{ id: '1' }, { id: '2' }, { id: '3' }]
-  } as any,
+    getPrerenderParams: async () => {
+      // This is the new endpoint you just created
+      const res = await fetch(`${API_URL}/tradition/ids`);
+      const ids = await res.json();
+
+      // The endpoint now returns an array of strings (e.g., ["id1", "id2"])
+      // You need to map it to the expected format: [{ id: 'id1' }, { id: 'id2' }]
+      return ids.map((id: string) => ({ id }));
+    }
+  },
   {
     path: 'add-tradition',
     loadComponent: () => import('./components/tradition-add/tradition-add').then(m => m.TraditionAddComponent),
@@ -86,6 +120,7 @@ export const routes = [
     data: { roles: ['admin'] }
   },
 
+  // events
   {
     path: 'events',
     loadComponent: () => import('./components/approved-events/approved-events').then(m => m.ApprovedEventsComponent),
@@ -98,6 +133,8 @@ export const routes = [
     canActivate: [roleGuard],
     data: { roles: ['admin'] }
   },
+
+  // contact / donation / add-event
   {
     path: 'contact',
     loadComponent: () => import('./components/contact/contact').then(m => m.ContactComponent),
@@ -117,7 +154,7 @@ export const routes = [
     data: { roles: ['user', 'admin', 'member'] }
   },
 
-{ path: '', redirectTo: '/login', pathMatch: 'full' as const },
-{ path: '**', redirectTo: '/login', pathMatch: 'full' as const }
-
+  // redirects
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];

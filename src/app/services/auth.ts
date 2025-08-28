@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError, of } from 'rxjs'; // ייבוא 'of'
-import { catchError, tap, switchMap, map } from 'rxjs/operators'; // ייבוא 'switchMap' ו-'map'
+import { catchError, tap, switchMap, map, take } from 'rxjs/operators'; // ייבוא 'switchMap' ו-'map'
 import { Router } from '@angular/router';
 import { API_URL } from './url';
 
@@ -27,7 +27,7 @@ export class AuthService {
   public isLoggedIn$: Observable<boolean> = this._isLoggedIn.asObservable();
 
   constructor(private http: HttpClient, private router: Router) {
-    this.checkInitialAuthStatus().subscribe(); // הפעל את הבדיקה הראשונית ב-constructor
+    this.checkInitialAuthStatus().pipe(take(1)).subscribe();
   }
 
   // שינוי: הפונקציה תחזיר Observable<UserData | null>
@@ -52,12 +52,12 @@ export class AuthService {
   }
 
   login(userData: any): Observable<any> {
+
     const loginData = {
       email: userData.email,
       password: userData.password
     }
 
-    console.log(loginData)
     return this.http.post<any>(`${this.apiUrl}/login`, loginData, {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true
