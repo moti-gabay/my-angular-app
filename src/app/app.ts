@@ -9,6 +9,7 @@ import { Footer } from './components/footer/footer';
 import { ContactComponent } from './components/contact/contact';
 import { f } from "../../node_modules/@angular/material/icon-module.d-COXCrhrh";
 import { MatIconModule } from '@angular/material/icon';
+import { API_URL } from './services/url';
 
 @Component({
   selector: 'app-root',

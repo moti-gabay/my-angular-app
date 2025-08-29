@@ -39,11 +39,10 @@ export class News implements OnInit { // שינוי שם הקלאס ל-NewsListC
 
     this.newsService.getNews().subscribe({
       next: (data) => {
-        this.news = data; // עדכן את מערך החדשות עם הנתונים שהתקבלו
-
+        this.news = data;
         this.loading = false; // סיים טעינה
         this.cdr.detectChanges()
-        // console.log('חדשות נטענו בהצלחה:', this.news);
+        console.log('חדשות נטענו בהצלחה:', this.news);
       },
       error: (err) => {
         this.error = 'שגיאה בטעינת החדשות. אנא נסה שוב מאוחר יותר.'; // הגדר הודעת שגיאה
@@ -53,7 +52,7 @@ export class News implements OnInit { // שינוי שם הקלאס ל-NewsListC
     });
   }
 
-  deleteNewsItem(id: number): void {
+  deleteNewsItem(id: string): void {
     if (confirm('האם אתה בטוח שברצונך למחוק כתבה זו?')) {
       this.newsService.deleteNewsItem(id).subscribe({
         next: () => {

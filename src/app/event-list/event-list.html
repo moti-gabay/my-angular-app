@@ -43,22 +43,22 @@
           <td class="actions-cell">
             <!-- כפתורי ניהול לאדמין -->
             <ng-container *ngIf="currentUser?.role === 'admin'">
-              <button *ngIf="!event.is_approved" (click)="approveEvent(event.id!, event)" class="action-button approve-button">
+              <button *ngIf="!event.is_approved" (click)="approveEvent(event._id!, event)" class="action-button approve-button">
                 אשר
               </button>
-              <button *ngIf="event.is_approved" (click)="unapproveEvent(event.id!)" class="action-button unapprove-button">
+              <button *ngIf="event.is_approved" (click)="unapproveEvent(event._id!)" class="action-button unapprove-button">
                 בטל אישור
               </button>
-              <button (click)="deleteEvent(event.id!)" class="action-button delete-button">
+              <button (click)="deleteEvent(event._id!)" class="action-button delete-button">
                 מחק
               </button>
             </ng-container>
             <!-- כפתורי הרשמה/ביטול הרשמה למשתמשים רגילים (צריך להוסיף לוגיקה ב-TS) -->
             <!-- <ng-container *ngIf="currentUser?.role !== 'admin'">
-              <button *ngIf="event.is_approved && !isUserRegistered(event)" (click)="registerToEvent(event.id!)" class="action-button register-button">
+              <button *ngIf="event.is_approved && !isUserRegistered(event)" (click)="registerToEvent(event._id!)" class="action-button register-button">
                 הירשם
               </button>
-              <button *ngIf="event.is_approved && isUserRegistered(event)" (click)="unregisterToEvent(event.id!)" class="action-button unregister-button">
+              <button *ngIf="event.is_approved && isUserRegistered(event)" (click)="unregisterToEvent(event._id!)" class="action-button unregister-button">
                 הסר הרשמה
               </button>
             </ng-container> -->

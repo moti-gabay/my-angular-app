@@ -37,7 +37,7 @@ export class FileListDisplayComponent implements OnInit, OnChanges {
     this.authService.getAllUsers().subscribe({
       next: (users: any) => { // אם ה-API שלך מחזיר מערך
         users.forEach((user: any) => {
-          this.userMap.set(user.id, user.full_name); // יצירת מפה של id לשם
+          this.userMap.set(user._id, user.full_name); // יצירת מפה של id לשם
         });
         this.cdr.detectChanges()
       },
@@ -84,7 +84,7 @@ export class FileListDisplayComponent implements OnInit, OnChanges {
     this.http.delete(`${API_URL}/files/${fileId}`, { withCredentials: true }).subscribe({
       next: () => {
         alert('הקובץ נמחק בהצלחה!');
-        this.allFiles = this.allFiles.filter(file => file.id !== fileId); // מעדכן את הרשימה המקומית
+        this.allFiles = this.allFiles.filter(file => file._id !== fileId); // מעדכן את הרשימה המקומית
         this.updateDisplayedFiles(); // מרענן את הרשימה המוצגת
         this.fileDeleted.emit(fileId); // אם ההורה צריך לדעת
       },

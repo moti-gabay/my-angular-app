@@ -6,7 +6,7 @@ import { API, API_URL } from './url';
 
 // הגדרת ממשק (interface) לתמונה, כפי שחוזר מהשרת
 export interface ImageRecord {
-  id: number;
+  _id: number;
   filename: string;
   url: string; // זה הנתיב היחסי: /images/<filename>
   uploaded_at: string; // יגיע כמחרוזת ISO

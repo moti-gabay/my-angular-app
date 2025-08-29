@@ -43,7 +43,7 @@ export class ImageUploaderComponent {
       next: (res) => {
         this.uploading = false;
         this.uploadedImageUrl = `${API_URL}${res.url}`;
-        this.imageUploaded.emit({ url: this.uploadedImageUrl, id: res.id, filename: res.filename });
+        this.imageUploaded.emit({ url: this.uploadedImageUrl, id: res._id, filename: res.filename });
         // console.log('Image uploaded successfully:', res);
         this.selectedFile = undefined;
         this.cdr.detectChanges()

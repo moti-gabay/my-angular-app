@@ -34,7 +34,7 @@ export class NewsEditComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
-        this.newsService.getNewsItemById(parseInt(id, 10)).subscribe({
+        this.newsService.getNewsItemById(id).subscribe({
           next: (data) => {
             this.newsItem = data;
             this.loading = false;

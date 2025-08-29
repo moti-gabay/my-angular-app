@@ -7,7 +7,7 @@ import { API_URL } from './url'; // וודא שהנתיב ל-API_URL נכון
 
 // ממשק עבור פריט מסורת (TraditionItem)
 export interface TraditionItem {
-  id?: number; // אופציונלי ליצירה
+  id?: string; // אופציונלי ליצירה
   title: string;
   short_description?: string;
   full_content: string;
@@ -38,7 +38,7 @@ export class TraditionService {
   /**
    * מקבל פריט מסורת בודד לפי ID.
    */
-  getTraditionItemById(id: number): Observable<TraditionItem> {
+  getTraditionItemById(id: string): Observable<TraditionItem> {
     return this.http.get<TraditionItem>(`${this.apiUrl}/${id}`, { withCredentials: true }).pipe(
       // tap(data => console.log(`Fetched tradition item ${id}:`, data)),
       catchError(this.handleError)
@@ -58,7 +58,7 @@ export class TraditionService {
   /**
    * מעדכן פריט מסורת קיים (דורש הרשאת אדמין).
    */
-  updateTraditionItem(id: number, item: TraditionItem): Observable<TraditionItem> {
+  updateTraditionItem(id: string, item: TraditionItem): Observable<TraditionItem> {
     return this.http.put<TraditionItem>(`${this.apiUrl}/${id}`, item, { withCredentials: true }).pipe(
       // tap(data => console.log(`Updated tradition item ${id}:`, data)),
       catchError(this.handleError)
@@ -68,7 +68,7 @@ export class TraditionService {
   /**
    * מוחק פריט מסורת (דורש הרשאת אדמין).
    */
-  deleteTraditionItem(id: number): Observable<any> {
+  deleteTraditionItem(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`, { withCredentials: true }).pipe(
       // tap(() => console.log(`Deleted tradition item ${id}`)),
       catchError(this.handleError)

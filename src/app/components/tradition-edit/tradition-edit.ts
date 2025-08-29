@@ -33,7 +33,7 @@ export class TraditionEditComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
-        this.traditionService.getTraditionItemById(parseInt(id, 10)).subscribe({
+        this.traditionService.getTraditionItemById(id).subscribe({
           next: (data) => {
             this.traditionItem = data;
             this.loading = false;

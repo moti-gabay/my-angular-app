@@ -2,11 +2,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { API_URL } from './url'; // וודא שהנתיב ל-API_URL נכון
 
 export interface NewsItem {
-  id?: number; // אופציונלי ליצירה/עדכון
+  id?: string; // אופציונלי ליצירה/עדכון
   title: string;
   description: string; // תיאור קצר / תקציר
   full_content: string; // תוכן הכתבה המלא
@@ -19,18 +19,18 @@ export interface NewsItem {
   providedIn: 'root'
 })
 export class NewsService {
-  private apiUrl = API_URL + '/news'; // הנחתי ש-API_URL הוא 'http://localhost:5000/api'
+   newsList: NewsItem[] = []
+  private apiUrl = API_URL + '/news'; // הנחתי ש-API_URL הוא 'http://localhost:5000/'
 
   constructor(private http: HttpClient) { }
 
   getNews(): Observable<NewsItem[]> {
-    return this.http.get<NewsItem[]>(this.apiUrl, { withCredentials: true }).pipe(
-      // tap(),
-      catchError(this.handleError)
-    );
+    return this.http.get<NewsItem[]>(this.apiUrl, { withCredentials: true })
+      .pipe(catchError(this.handleError));
+
   }
 
-  getNewsItemById(id: number): Observable<NewsItem> {
+  getNewsItemById(id: string): Observable<NewsItem> {
     return this.http.get<NewsItem>(`${this.apiUrl}/${id}`, { withCredentials: true }).pipe(
       // tap(data => console.log(`Fetched news item ${id}:`, data)),
       catchError(this.handleError)
@@ -46,7 +46,7 @@ export class NewsService {
   }
 
   // פונקציה חדשה: עדכון פריט חדשות קיים
-  updateNewsItem(id: number, item: NewsItem): Observable<NewsItem> {
+  updateNewsItem(id: string, item: NewsItem): Observable<NewsItem> {
     return this.http.put<NewsItem>(`${this.apiUrl}/${id}`, item, { withCredentials: true }).pipe(
       // tap(data => console.log(`Updated news item ${id}:`, data)),
       catchError(this.handleError)
@@ -54,7 +54,7 @@ export class NewsService {
   }
 
   // פונקציה חדשה: מחיקת פריט חדשות
-  deleteNewsItem(id: number): Observable<any> {
+  deleteNewsItem(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`, { withCredentials: true }).pipe(
       // tap(() => console.log(`Deleted news item ${id}`)),
       catchError(this.handleError)
@@ -71,4 +71,11 @@ export class NewsService {
     console.error('NewsService: HTTP Error:', errorMessage, error);
     return throwError(() => new Error(errorMessage));
   }
+  // בתוך NewsService
+getNewsIds(): Observable<{ id: string }[]> {
+  return this.getNews().pipe(
+    map((newsList: any[]) => newsList.map(item => ({ id: item.id || item._id }))) // map לכל id
+  );
+}
+
 }

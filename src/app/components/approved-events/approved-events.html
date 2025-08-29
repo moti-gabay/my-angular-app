@@ -4,7 +4,7 @@
         <h2>לוח אירועים</h2>
 
         <div *ngFor="let event of approvedEvents" class="event-item" (click)="selectEvent(event)"
-            [ngClass]="{'approved-event-card': true, 'active': selectedEvent?.id === event.id}">
+            [ngClass]="{'approved-event-card': true, 'active': selectedEvent?._id === event._id}">
             
             <strong>{{ event.title }}</strong>
             <span>{{ event.location }}</span>
@@ -24,9 +24,9 @@
         </div>
 
         <div class="response-buttons">
-            <button (click)="unregisterToEvent(selectedEvent!.id)">לא אוכל להגיע</button>
+            <button (click)="unregisterToEvent(selectedEvent!._id)">לא אוכל להגיע</button>
             <button>אעדכן בהמשך</button>
-            <button (click)="registerToEvent(selectedEvent!.id)">אני אגיע!</button>
+            <button (click)="registerToEvent(selectedEvent!._id)">אני אגיע!</button>
         </div>
 
         <div class="confirmation" *ngIf="confirmationMessage">
