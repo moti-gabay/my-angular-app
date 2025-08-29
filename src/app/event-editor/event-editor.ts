@@ -94,7 +94,7 @@ export class EventEditorComponent implements OnInit {
 
   onSubmit(): void {
     if (this.isEditMode) {
-      this.eventService.updateEvent(this.event.id!, this.event).subscribe({
+      this.eventService.updateEvent(this.event._id!, this.event).subscribe({
         next: (res) => {
           this.showMessage('האירוע עודכן בהצלחה!', 'success');
           // console.log('Event updated:', res);
@@ -113,7 +113,7 @@ export class EventEditorComponent implements OnInit {
           this.resetForm();
           this.fetchEventsForAdmin(); // רענן רשימה
           // אופציונלי: נווט לעמוד העריכה של האירוע החדש
-          this.router.navigate(['/events/admin', res.id]);
+          this.router.navigate(['/events/admin', res._id]);
         },
         error: (err) => {
           this.showMessage('שגיאה ביצירת האירוע: ' + (err.error?.message || err.message), 'error');
@@ -124,8 +124,8 @@ export class EventEditorComponent implements OnInit {
   }
 
   deleteEvent(): void {
-    if (this.event.id && confirm('האם אתה בטוח שברצונך למחוק אירוע זה?')) { // השתמש ב-confirm זמני
-      this.eventService.deleteEvent(this.event.id).subscribe({
+    if (this.event._id && confirm('האם אתה בטוח שברצונך למחוק אירוע זה?')) { // השתמש ב-confirm זמני
+      this.eventService.deleteEvent(this.event._id).subscribe({
         next: () => {
           this.showMessage('האירוע נמחק בהצלחה!', 'success');
           // console.log('Event deleted.');
@@ -139,7 +139,7 @@ export class EventEditorComponent implements OnInit {
     }
   }
 
-  deleteEventFromList(eventId: number): void {
+  deleteEventFromList(eventId: string): void {
     if (confirm('האם אתה בטוח שברצונך למחוק אירוע זה מהרשימה?')) {
       this.eventService.deleteEvent(eventId).subscribe({
         next: () => {

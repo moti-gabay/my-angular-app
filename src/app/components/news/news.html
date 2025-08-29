@@ -1,9 +1,10 @@
 <!-- src/app/news-list/news-list.component.html -->
 <div class="news-page-container">
   <h2 class="news-title">חדשות ופרסומים</h2>
+  <!-- <pre>{{ news | json }}</pre> -->
 
   <div class="news-item" *ngFor="let item of news">
-    
+
     <img [src]="getFullImageUrl(item.image_url)" alt="תמונה" class="news-image"> <!-- שינוי: item.imageUrl -->
 
     <div class="news-content">
@@ -12,8 +13,10 @@
       <div class="news-footer">
         <span class="news-time">{{ item.timeAgo }}</span> <!-- שינוי: item.timeAgo -->
         <a [routerLink]="['/news', item.id]" class="news-link">לכתבה המלאה &rarr;</a>
-        <a *ngIf="isAdmin" [routerLink]="['/edit-news', item.id]" class="news-link"> לעריכת הכתבה &rarr;</a>
+        <a *ngIf="isAdmin" [routerLink]="['/edit-news', item.id]" class="action-button edit-button">עריכת הכתבה
+          &rarr;</a>
         <button *ngIf="isAdmin" (click)="deleteNewsItem(item.id!)" class="action-button delete-button">מחק</button>
+
         <!-- <--- כפתור מחיקה -->
 
       </div>

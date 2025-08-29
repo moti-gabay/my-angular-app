@@ -32,7 +32,7 @@ export class TraditionInfo implements OnInit {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id'); // קבלת ה-ID מכתובת ה-URL
       if (id) {
-        this.traditionService.getTraditionItemById(parseInt(id, 10)).subscribe({
+        this.traditionService.getTraditionItemById(id).subscribe({
           next: (data) => {
             this.traditionItem = data;
             // אם full_content מכיל HTML, סמן אותו כבטוח
