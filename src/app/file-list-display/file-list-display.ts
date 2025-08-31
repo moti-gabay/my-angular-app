@@ -16,7 +16,7 @@ import { ChangeDetectorRef } from "@angular/core"
 export class FileListDisplayComponent implements OnInit, OnChanges {
   @Input() allFiles: any[] = [];
   @Output() fileDeleted = new EventEmitter<number>();
-  apiUrl = API_URL + "/files"
+  apiUrl = API_URL + "/files/"
   displayedFiles: any[] = [];
 
   filterCategory: string = '';
