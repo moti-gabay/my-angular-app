@@ -61,7 +61,7 @@ export class NewsInfo implements OnInit {
   }
 
    getFullImageUrl(relativeUrl: string | undefined): string {
-      console.log(`${relativeUrl}`)
+      // console.log(`${relativeUrl}`)
       if (!relativeUrl) {
         return 'https://placehold.co/400x200/cccccc/333333?text=אין+תמונה'; // תמונת פלייס הולדר
       }

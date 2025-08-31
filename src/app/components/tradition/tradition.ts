@@ -47,7 +47,7 @@ export class Tradition implements OnInit {
       next: (data) => {
         this.traditionItems = data;
         this.loading = false;
-        console.log('פריטי מסורת נטענו בהצלחה:', this.traditionItems);
+        // console.log('פריטי מסורת נטענו בהצלחה:', this.traditionItems);
         this.cdr.detectChanges()
         if (this.traditionItems.length > 0) {
           // this.selectTopic(this.traditionItems[0]._id!);

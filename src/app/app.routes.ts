@@ -17,7 +17,7 @@ export const routes: Routes = [
     path: 'homepage',
     loadComponent: () => import('./components/home-page/home-page').then(m => m.HomePage),
     canActivate: [roleGuard],
-    data: { roles: ['admin', 'member'] }
+    data: { roles: ['admin', 'member','user'] }
   },
   {
     path: 'images',
