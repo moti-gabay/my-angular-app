@@ -74,7 +74,7 @@ export class EventService {
    */
   approveEvent(id: string): Observable<any> {
     if (!id) {
-      console.log(id)
+      // console.log(id)
     console.error("approveEvent called with undefined eventId");
   }
 

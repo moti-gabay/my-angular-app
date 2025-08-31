@@ -33,7 +33,7 @@ export class NewsAddComponent implements OnInit {
   }
 
   onSubmit(form: NgForm): void {
-console.log('News item added:', this.formData);
+// console.log('News item added:', this.formData);
     if (form.valid) {
       this.message = ''; // נקה הודעות קודמות
       this.newsService.createNewsItem(this.formData).subscribe({

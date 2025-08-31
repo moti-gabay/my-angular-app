@@ -59,7 +59,7 @@ export class SidebarNavComponent implements OnInit, AfterViewInit {
 
   toggleSidebar() {
     this.isOpen = !this.isOpen;
-    console.log('Sidebar toggled. Now:', this.isOpen);
+    // console.log('Sidebar toggled. Now:', this.isOpen);
   }
 
   onLogoutClick(): void {
